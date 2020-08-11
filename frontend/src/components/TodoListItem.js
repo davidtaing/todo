@@ -2,8 +2,9 @@ import React from 'react';
 
 const TodoListItem = () => { 
     return (
-        <div className="list-item">
-            <p>Item</p>
+        <div className="listitem">
+            <input type="checkbox" />
+            <h className="listitem-text">Item</h>
         </div>
     )
 };
