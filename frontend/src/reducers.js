@@ -1,8 +1,8 @@
-import { TOGGLE_TODO_COMPLETED } from './actions';
+import { toggleTodoCompleted } from './actions';
 
-const intitialState = { isLoading: false, data: [] };
+const initialState = { isLoading: false, data: [] };
 
-export const todos = (state = initialState, action) => {
+export const todosReducer = (state = initialState, action) => {
     const { type, payload } = action;
     
     switch(type) {
