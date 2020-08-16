@@ -1,8 +1,8 @@
-const TOGGLE_TODO = "TOGGLE_TODO";
+const TOGGLE_TODO_COMPLETED = "TOGGLE_TODO_COMPLETED";
 
-export const toggleTodo = (id) => {
+export const toggleTodoCompleted = (id) => {
     return {
-        type: TOGGLE_TODO,
+        type: TOGGLE_TODO_COMPLETED,
         payload: {
             id
         }
