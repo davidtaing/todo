@@ -4,6 +4,9 @@ export const todosReducer = (state = initialState, action) => {
     const { type, payload } = action;
     
     switch(type) {
+        case "LOAD_TODOS":
+            const { todos } = payload;
+            return { ...state, todos: todos };
         case "TOGGLE_TODO_COMPLETED":
             // map through array and flip the completed field of the target task
             return state.todo.map(
