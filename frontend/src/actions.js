@@ -8,3 +8,14 @@ export const toggleTodoCompleted = (id) => {
         }
     }
 };
+
+const LOAD_TODOS = "LOAD_TODOS";
+
+export const loadTodos = (todos) => {
+    return {
+        type: LOAD_TODOS,
+        payload: {
+            todos
+        }
+    }
+}

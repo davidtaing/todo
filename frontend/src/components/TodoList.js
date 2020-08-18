@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleTodoCompleted } from '../actions';
+import { loadTodos, toggleTodoCompleted } from '../actions';
 
 import TodoListItem from './TodoListItem';
 
@@ -46,6 +46,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        initTodos: (todos) => dispatch(loadTodos(todos)),
         toggleTodo: (id) => dispatch(toggleTodoCompleted(id)),
     }
 };

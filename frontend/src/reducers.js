@@ -1,5 +1,3 @@
-import { toggleTodoCompleted } from './actions';
-
 const initialState = { isLoading: false, todos: [] };
 
 export const todosReducer = (state = initialState, action) => {
