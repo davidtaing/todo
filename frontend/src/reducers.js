@@ -1,6 +1,6 @@
 import { toggleTodoCompleted } from './actions';
 
-const initialState = { isLoading: false, data: [] };
+const initialState = { isLoading: false, todos: [] };
 
 export const todosReducer = (state = initialState, action) => {
     const { type, payload } = action;
@@ -8,7 +8,7 @@ export const todosReducer = (state = initialState, action) => {
     switch(type) {
         case "TOGGLE_TODO_COMPLETED":
             // map through array and flip the completed field of the target task
-            return state.map(
+            return state.todo.map(
                 (todo) => 
                     todo.id === payload.id ?
                         { ...todo, completed: !todo.completed} :

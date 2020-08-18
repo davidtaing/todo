@@ -1,13 +1,53 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { toggleTodoCompleted } from '../actions';
 
 import TodoListItem from './TodoListItem';
 
-const TodoList = ({todos}) => {
+const todos = [
+    {
+    id: "123",
+    text: "text",
+    completed: false,
+    },
+    {
+    id: "123",
+    text: "second task",
+    completed: false,
+    },
+    {
+    id: "123",
+    text: "third task",
+    completed: false,
+    },
+];
+
+const TodoList = ({todos, toggleTodo}) => {
     return (
         <div className="todo-list-container">
-            {   todos.map(todo => ( <TodoListItem todoListItem={todo} /> )) }
+            {   todos ?
+                todos.map(todo => ( 
+                    <TodoListItem 
+                        todoListItem={todo} 
+                        toggleTodo={toggleTodo}
+                    /> 
+                )) :
+                <h1>Loading</h1>
+            }
         </div>
     );
 };
 
-export default TodoList;
+const mapStateToProps = state => {
+    return {
+        todos: state.todos,
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        toggleTodo: (id) => dispatch(toggleTodoCompleted(id)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
