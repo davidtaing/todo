@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loadTodos, toggleTodoCompleted } from '../actions';
 
 import TodoListItem from './TodoListItem';
 
-const todos = [
+const database = [
     {
     id: "123",
     text: "text",
@@ -22,7 +22,11 @@ const todos = [
     },
 ];
 
-const TodoList = ({todos, toggleTodo}) => {
+const TodoList = ({todos, initTodos, toggleTodo}) => {
+    useEffect(() => {
+        initTodos(database)
+    }, []);
+
     return (
         <div className="todo-list-container">
             {   todos ?
