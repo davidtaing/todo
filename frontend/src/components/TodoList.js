@@ -6,53 +6,51 @@ import TodoListItem from './TodoListItem';
 
 const database = [
     {
-    id: "123",
-    text: "text",
-    completed: false,
+        id: "123",
+        text: "text",
+        completed: false,
     },
     {
-    id: "123",
-    text: "second task",
-    completed: false,
+        id: "13",
+        text: "second task",
+        completed: false,
     },
     {
-    id: "123",
-    text: "third task",
-    completed: false,
+        id: "400",
+        text: "third task",
+        completed: false,
     },
 ];
 
-const TodoList = ({todos, initTodos, toggleTodo}) => {
+const TodoList = ({ todos, initTodos, toggleTodo, isLoading }) => {
     useEffect(() => {
-        initTodos(database)
+        initTodos(database);
     }, []);
 
     return (
         <div className="todo-list-container">
-            {   todos ?
-                todos.map(todo => ( 
-                    <TodoListItem 
-                        todoListItem={todo} 
-                        toggleTodo={toggleTodo}
-                    /> 
-                )) :
-                <h1>Loading</h1>
+            {
+                isLoading ?
+                    <h1>Loading</h1> :
+                    todos.map(todo => (
+                        <TodoListItem
+                            todoListItem={todo}
+                            toggleTodo={toggleTodo}
+                        />
+                    ))
             }
         </div>
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        todos: state.todos,
-    }
-};
+const mapStateToProps = state => ({
+    isLoading: state.isLoading,
+    todos: state.todos,
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        initTodos: (todos) => dispatch(loadTodos(todos)),
-        toggleTodo: (id) => dispatch(toggleTodoCompleted(id)),
-    }
-};
+const mapDispatchToProps = dispatch => ({
+    initTodos: (todos) => dispatch(loadTodos(todos)),
+    toggleTodo: (id) => dispatch(toggleTodoCompleted(id)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

@@ -1,14 +1,14 @@
 import React from 'react';
 
 const TodoListItem = ({todoListItem, toggleTodo}) => { 
-    const { text, completed } = todoListItem;
+    const { id, text, completed } = todoListItem;
 
     return (
-        <div className="listitem">
-            <input type="checkbox" onClick={toggleTodo}/>
-            <h className="listitem-text">
+        <div className="listitem" key={id}>
+            <input type="checkbox" id="checkbox" onClick={toggleTodo}/>
+            <label htmlFor="checkbox">
                 { completed ? <strike>{text}</strike> : text}
-            </h>
+            </label><br />
         </div>
     )
 };
