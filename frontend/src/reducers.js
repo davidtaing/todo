@@ -1,4 +1,4 @@
-const initialState = { isLoading: false, todos: [] };
+const initialState = { isLoading: true, todos: [] };
 
 export const todosReducer = (state = initialState, action) => {
     const { type, payload } = action;
@@ -6,16 +6,19 @@ export const todosReducer = (state = initialState, action) => {
     switch(type) {
         case "LOAD_TODOS":
             const { todos } = payload;
-            return { ...state, todos: todos };
+            return { ...state, isLoading: false, todos: todos };
         case "TOGGLE_TODO_COMPLETED":
             // map through array and flip the completed field of the target task
-            return state.todo.map(
-                (todo) => 
-                    todo.id === payload.id ?
-                        { ...todo, completed: !todo.completed} :
-                        todo
-            );
+            return {
+                ...state,
+                todos: state.todos.map(
+                    (todo) => 
+                        todo.id === payload.id ?
+                            { ...todo, completed: !todo.completed} :
+                            todo
+                )
+            }
         default:
-            return initialState;
+            return state;
     } 
 }
