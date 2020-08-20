@@ -5,7 +5,15 @@ const TodoListItem = ({todoListItem, toggleTodo}) => {
 
     return (
         <div className="listitem" key={id}>
-            <input type="checkbox" id="checkbox" onClick={toggleTodo}/>
+            <input 
+                type="checkbox" 
+                id="checkbox" 
+                onClick={
+                    (e) => {
+                        toggleTodo(id);
+                    }
+                }
+            />
             <label htmlFor="checkbox">
                 { completed ? <strike>{text}</strike> : text}
             </label><br />
