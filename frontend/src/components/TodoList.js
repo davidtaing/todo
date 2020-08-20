@@ -50,7 +50,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     initTodos: (todos) => dispatch(loadTodos(todos)),
-    toggleTodo: (id) => dispatch(toggleTodoCompleted(id)),
+    toggleTodo: (id, completed) => dispatch(toggleTodoCompleted(id, completed)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

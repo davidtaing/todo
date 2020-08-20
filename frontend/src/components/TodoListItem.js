@@ -8,7 +8,8 @@ const TodoListItem = ({todoListItem, toggleTodo}) => {
             <input 
                 type="checkbox" 
                 id="checkbox" 
-                onClick={(e) => toggleTodo(id, e.target.value)}
+                checked={completed}
+                onClick={(e) => toggleTodo(id, e.target.checked)}
             />
             <label htmlFor="checkbox">
                 { completed ? <strike>{text}</strike> : text}
