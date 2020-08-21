@@ -35,6 +35,13 @@ export const todosReducer = (state = initialState, action) => {
                 todos: state.todos.concat(newTodo),
             }
         }
+        case "DELETE_TODO": {
+            const { id } = payload;
+            return {
+                ...state,
+                todos: state.todos.filter(todo => todo.id != id)
+            }
+        }
         default:
             return initialState;
     } 

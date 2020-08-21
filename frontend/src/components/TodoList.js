@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { loadTodos, toggleTodoCompleted, addTodo } from '../actions';
+import { loadTodos, toggleTodoCompleted, addTodo, deleteTodo } from '../actions';
 
 import TodoListItem from './TodoListItem';
 import AddTodo from './AddTodo';
@@ -23,7 +23,7 @@ const database = [
     },
 ];
 
-const TodoList = ({ todos, initTodos, toggleTodo, addTodo, isLoading }) => {
+const TodoList = ({ todos, initTodos, toggleTodo, addTodo, deleteTodo, isLoading }) => {
     useEffect(() => {
         initTodos(database);
     }, []);
@@ -37,6 +37,7 @@ const TodoList = ({ todos, initTodos, toggleTodo, addTodo, isLoading }) => {
                         <TodoListItem
                             todoListItem={todo}
                             toggleTodo={toggleTodo}
+                            deleteTodo={deleteTodo}
                         />
                     ))
             }
@@ -54,6 +55,7 @@ const mapDispatchToProps = dispatch => ({
     initTodos: (todos) => dispatch(loadTodos(todos)),
     toggleTodo: (id, completed) => dispatch(toggleTodoCompleted(id, completed)),
     addTodo: (text) => dispatch(addTodo(text)),
+    deleteTodo: (id) => dispatch(deleteTodo(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

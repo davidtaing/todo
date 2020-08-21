@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TodoListItem = ({todoListItem, toggleTodo}) => { 
+const TodoListItem = ({todoListItem, toggleTodo, deleteTodo}) => { 
     const { id, text, completed } = todoListItem;
 
     return (
@@ -8,14 +8,21 @@ const TodoListItem = ({todoListItem, toggleTodo}) => {
             <form>
                 <input 
                     type="checkbox" 
-                    name="checkbox" 
+                    name="completed-checkbox" 
                     checked={completed}
                     onClick={(e) => toggleTodo(id, e.target.checked)}
                     readOnly
                 />
-                <label htmlFor="checkbox">
+                <label>
                     { completed ? <strike>{text}</strike> : text}
-                </label><br />
+                </label>
+                <input 
+                    type="checkbox" 
+                    name="delete-checkbox" 
+                    checked={completed}
+                    onClick={() => deleteTodo(id)}
+                />
+                <br />
             </form>
         </div>
     )
