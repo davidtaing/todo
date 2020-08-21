@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { loadTodos, toggleTodoCompleted } from '../actions';
 
 import TodoListItem from './TodoListItem';
+import AddTodo from './AddTodo';
 
 const database = [
     {
@@ -39,6 +40,7 @@ const TodoList = ({ todos, initTodos, toggleTodo, isLoading }) => {
                         />
                     ))
             }
+            <AddTodo />
         </div>
     );
 };
