@@ -27,11 +27,7 @@ export const addTodo = (text) => {
     return {
         type: ADD_TODO,
         payload: { 
-            todo: {
-                id: "111",
-                text,
-                completed: false,
-            }
+            text
         }
     }
 }
