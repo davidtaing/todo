@@ -10,6 +10,7 @@ const TodoListItem = ({todoListItem, toggleTodo}) => {
                 id="checkbox" 
                 checked={completed}
                 onClick={(e) => toggleTodo(id, e.target.checked)}
+                readOnly
             />
             <label htmlFor="checkbox">
                 { completed ? <strike>{text}</strike> : text}
