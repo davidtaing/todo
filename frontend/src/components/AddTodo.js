@@ -12,7 +12,7 @@ const AddTodo = ({addTodo}) => {
                 }
             }}>
                 <input 
-                    name="todo-text"
+                    className="todo-text"
                     type="text"
                     value={text}
                     placeholder="Next todo" 

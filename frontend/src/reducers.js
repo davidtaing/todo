@@ -21,6 +21,13 @@ export const todosReducer = (state = initialState, action) => {
                 )
             };
         }
+        case "ADD_TODO": {
+            const { todo } = payload
+            return {
+                ...state,
+                todos: state.todos.concat(todo),
+            }
+        }
         default:
             return initialState;
     } 

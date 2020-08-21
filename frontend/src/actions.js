@@ -20,3 +20,18 @@ export const loadTodos = (todos) => {
         }
     }
 }
+
+const ADD_TODO = "ADD_TODO";
+
+export const addTodo = (text) => {
+    return {
+        type: ADD_TODO,
+        payload: { 
+            todo: {
+                id: "111",
+                text,
+                completed: false,
+            }
+        }
+    }
+}
