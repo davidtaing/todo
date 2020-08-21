@@ -5,16 +5,18 @@ const TodoListItem = ({todoListItem, toggleTodo}) => {
 
     return (
         <div className="listitem" key={id}>
-            <input 
-                type="checkbox" 
-                id="checkbox" 
-                checked={completed}
-                onClick={(e) => toggleTodo(id, e.target.checked)}
-                readOnly
-            />
-            <label htmlFor="checkbox">
-                { completed ? <strike>{text}</strike> : text}
-            </label><br />
+            <form>
+                <input 
+                    type="checkbox" 
+                    name="checkbox" 
+                    checked={completed}
+                    onClick={(e) => toggleTodo(id, e.target.checked)}
+                    readOnly
+                />
+                <label htmlFor="checkbox">
+                    { completed ? <strike>{text}</strike> : text}
+                </label><br />
+            </form>
         </div>
     )
 };
