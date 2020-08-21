@@ -6,7 +6,7 @@ export const toggleTodoCompleted = (id, completed) => {
         payload: {
             id,
             completed,
-        }
+        },
     }
 };
 
@@ -17,9 +17,9 @@ export const loadTodos = (todos) => {
         type: LOAD_TODOS,
         payload: {
             todos
-        }
+        },
     }
-}
+};
 
 const ADD_TODO = "ADD_TODO";
 
@@ -28,6 +28,6 @@ export const addTodo = (text) => {
         type: ADD_TODO,
         payload: { 
             text
-        }
+        },
     }
-}
+};
