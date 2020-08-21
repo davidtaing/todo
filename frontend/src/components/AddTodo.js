@@ -9,6 +9,7 @@ const AddTodo = ({addTodo}) => {
                 e.preventDefault();
                 if (text) { 
                     addTodo(text);
+                    setText('');
                 }
             }}>
                 <input 
