@@ -1,28 +1,34 @@
 import React from 'react';
 
-const TodoListItem = ({todoListItem, toggleTodo, deleteTodo}) => { 
+const TodoListItem = ({ todoListItem, toggleTodo, deleteTodo }) => {
     const { id, text, completed } = todoListItem;
 
     return (
         <div className="listitem" key={id}>
             <form>
-                <input 
-                    type="checkbox" 
-                    name="completed-checkbox" 
+                <input
+                    type="checkbox"
+                    className="completed-checkbox"
                     checked={completed}
                     onClick={(e) => toggleTodo(id, e.target.checked)}
                     readOnly
                 />
-                <label>
-                    { completed ? <strike>{text}</strike> : text}
-                </label>
-                <input 
-                    type="checkbox" 
-                    name="delete-checkbox" 
-                    checked={completed}
-                    onClick={() => deleteTodo(id)}
-                />
-                <br />
+                {
+                    completed ?
+                        [
+                            <label>
+                                <strike>{text}</strike>
+                            </label>,
+                            <input
+                                type="checkbox"
+                                className="delete-checkbox"
+                                onClick={() => deleteTodo(id)}
+                            />
+                        ] :
+                        <label>
+                            {text}
+                        </label>
+                }
             </form>
         </div>
     )
