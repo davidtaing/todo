@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { loadTodosRequest } from '../thunks';
 import { loadTodos, toggleTodoCompleted, addTodo, deleteTodo } from '../actions';
 
 import TodoListItem from './TodoListItem';
@@ -52,7 +53,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    initTodos: (todos) => dispatch(loadTodos(todos)),
+    initTodos: () => dispatch(loadTodosRequest()),
     toggleTodo: (id, completed) => dispatch(toggleTodoCompleted(id, completed)),
     addTodo: (text) => dispatch(addTodo(text)),
     deleteTodo: (id) => dispatch(deleteTodo(id)),
