@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TodoListItem = ({ todoListItem, toggleTodo, deleteTodo }) => {
-    const { id, text, completed } = todoListItem;
+    const { id, title, completed } = todoListItem;
 
     return (
         <div className="listitem" key={id}>
@@ -17,7 +17,7 @@ const TodoListItem = ({ todoListItem, toggleTodo, deleteTodo }) => {
                     completed ?
                         [
                             <label>
-                                <strike>{text}</strike>
+                                <strike>{title}</strike>
                             </label>,
                             <input
                                 type="checkbox"
@@ -26,7 +26,7 @@ const TodoListItem = ({ todoListItem, toggleTodo, deleteTodo }) => {
                             />
                         ] :
                         <label>
-                            {text}
+                            {title}
                         </label>
                 }
             </form>

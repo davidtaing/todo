@@ -6,27 +6,9 @@ import { loadTodos, toggleTodoCompleted, addTodo, deleteTodo } from '../actions'
 import TodoListItem from './TodoListItem';
 import AddTodo from './AddTodo';
 
-const database = [
-    {
-        id: "123",
-        text: "text",
-        completed: false,
-    },
-    {
-        id: "13",
-        text: "second task",
-        completed: false,
-    },
-    {
-        id: "400",
-        text: "third task",
-        completed: false,
-    },
-];
-
 const TodoList = ({ todos, initTodos, toggleTodo, addTodo, deleteTodo, isLoading }) => {
     useEffect(() => {
-        initTodos(database);
+        initTodos();
     }, []);
 
     return (
