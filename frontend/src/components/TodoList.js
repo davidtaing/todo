@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loadTodosRequest } from '../thunks';
-import { loadTodos, toggleTodoCompleted, addTodo, deleteTodo } from '../actions';
+import { toggleTodoCompleted, addTodo, deleteTodo } from '../actions';
 
 import TodoListItem from './TodoListItem';
 import AddTodo from './AddTodo';
