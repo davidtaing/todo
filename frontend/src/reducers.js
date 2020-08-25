@@ -24,10 +24,10 @@ export const todosReducer = (state = initialState, action) => {
             };
         }
         case "ADD_TODO": {
-            const { text } = payload;
+            const { title } = payload;
             const newTodo = {
                 id: uuidv4(),
-                text,
+                title,
                 completed: false,
             }
             return {

@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 
 const AddTodo = ({addTodo}) => {
-    const [text, setText] = useState('');
+    const [title, setTitle] = useState('');
     
     return (
         <div className="add-todo-container">
             <form onSubmit={(e) => {
                 e.preventDefault();
-                if (text) { 
-                    addTodo(text);
-                    setText('');
+                if (title) { 
+                    addTodo(title);
+                    setTitle('');
                 }
             }}>
                 <input 
-                    className="todo-text"
-                    type="text"
-                    value={text}
+                    className="todo-title"
+                    type="title"
+                    value={title}
                     placeholder="Next todo" 
-                    onChange={(e) => setText(e.target.value)} />
+                    onChange={(e) => setTitle(e.target.value)} />
                 <button 
                     className="add-button"
                     type="submit" >

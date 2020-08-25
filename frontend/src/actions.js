@@ -23,11 +23,11 @@ export const loadTodos = (todos) => {
 
 const ADD_TODO = "ADD_TODO";
 
-export const addTodo = (text) => {
+export const addTodo = (title) => {
     return {
         type: ADD_TODO,
         payload: { 
-            text
+            title
         },
     }
 };
