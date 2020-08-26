@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-const database = [
+var database = [
     {
         id: "1",
         title: "Finish this project",
@@ -25,6 +25,20 @@ router.get(('/todos'), (req, res, next) => {
 });
 
 // POST Todo
+router.post(('/todo'), (req, res, next) => {
+    try {
+        const payload = { id: '1234', title: 'Hello World', completed: false };
+
+        console.log(payload);
+        console.log(database);
+        database = database.concat(payload);
+        console.log(database);
+
+        res.status(200).json(database);
+    } catch (e) {
+        res.status(400).send(e);
+    }
+});
 
 // PUT Todo
 
