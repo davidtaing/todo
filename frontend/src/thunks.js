@@ -5,7 +5,7 @@ import { loadTodos, addTodoSuccess } from './actions';
 // TODO
 export const loadTodosRequest = () => (dispatch) => {
     // api call
-    axios.get('https://jsonplaceholder.typicode.com/todos')
+    axios.get('http://localhost:3001/todos')
         .then(res => {
             if (res.status = 200) {
                 dispatch(loadTodos(res.data));
