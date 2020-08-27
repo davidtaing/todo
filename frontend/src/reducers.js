@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 const initialState = { isLoading: false, todos: [] };
 
 export const todosReducer = (state = initialState, action) => {
@@ -23,16 +21,11 @@ export const todosReducer = (state = initialState, action) => {
                 )
             };
         }
-        case "ADD_TODO": {
-            const { title } = payload;
-            const newTodo = {
-                id: uuidv4(),
-                title,
-                completed: false,
-            }
+        case "ADD_TODO_SUCCESS": {
+            const { todo } = payload;
             return {
                 ...state,
-                todos: state.todos.concat(newTodo),
+                todos: state.todos.concat(todo),
             }
         }
         case "DELETE_TODO": {

@@ -21,13 +21,13 @@ export const loadTodos = (todos) => {
     }
 };
 
-const ADD_TODO = "ADD_TODO";
+const ADD_TODO_SUCCESS = "ADD_TODO_SUCCESS";
 
-export const addTodo = (title) => {
+export const addTodoSuccess = (todo) => {
     return {
-        type: ADD_TODO,
+        type: ADD_TODO_SUCCESS,
         payload: { 
-            title
+            todo,
         },
     }
 };

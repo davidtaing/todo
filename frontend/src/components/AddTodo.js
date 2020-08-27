@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddTodo = ({addTodo}) => {
+const AddTodo = ({addTodoRequest}) => {
     const [title, setTitle] = useState('');
     
     return (
@@ -8,7 +8,7 @@ const AddTodo = ({addTodo}) => {
             <form onSubmit={(e) => {
                 e.preventDefault();
                 if (title) { 
-                    addTodo(title);
+                    addTodoRequest(title);
                     setTitle('');
                 }
             }}>

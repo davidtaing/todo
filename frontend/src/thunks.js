@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { loadTodos, addTodo } from './actions';
+import { v4 as uuidv4 } from 'uuid';
+import { loadTodos, addTodoSuccess } from './actions';
 
 // TODO
 export const loadTodosRequest = () => (dispatch) => {
@@ -18,10 +19,22 @@ export const loadTodosRequest = () => (dispatch) => {
 };
 
 // TODO
-//export const toggleTodo = () => () => { };
+export const addTodoRequest = (title) => (dispatch) => { 
+    axios.post('http://localhost:3001/todo', {
+        id: uuidv4(),
+        title,
+        completed: false,
+    })
+        .then(res => {
+            if (res.status === 201) {
+                dispatch(addTodoSuccess(res.data));
+            }
+        });
+};
+
 
 // TODO
-//export const addTodos = () => () => { };
+//export const toggleTodo = () => () => { };
 
 // TODO
 //export const deleteTodos = () => () => { };
