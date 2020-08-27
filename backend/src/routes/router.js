@@ -27,10 +27,16 @@ router.get(('/todos'), (req, res, next) => {
 // POST Todo
 router.post(('/todo'), (req, res, next) => {
     try {
-        const payload = { id: '1234', title: 'Hello World', completed: false };
-        database = database.concat(payload);
+        const payload = req.body;
+        const newTodo = {
+            id: payload.id, 
+            title: payload.title,
+            completed: payload.completed
+        };
 
-        res.status(201).json(payload);
+        database = database.concat(newTodo);
+
+        res.status(201).json(newTodo);
     } catch (e) {
         res.status(400).send(e);
     }
