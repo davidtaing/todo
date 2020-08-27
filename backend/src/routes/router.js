@@ -28,13 +28,9 @@ router.get(('/todos'), (req, res, next) => {
 router.post(('/todo'), (req, res, next) => {
     try {
         const payload = { id: '1234', title: 'Hello World', completed: false };
-
-        console.log(payload);
-        console.log(database);
         database = database.concat(payload);
-        console.log(database);
 
-        res.status(200).json(database);
+        res.status(201).json(payload);
     } catch (e) {
         res.status(400).send(e);
     }
