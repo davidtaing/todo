@@ -39,7 +39,7 @@ export const todosReducer = (state = initialState, action) => {
             const { id } = payload;
             return {
                 ...state,
-                todos: state.todos.filter(todo => todo.id != id)
+                todos: state.todos.filter(todo => todo.id !== id)
             }
         }
         default:
