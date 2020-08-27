@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { loadTodosSuccess, addTodoSuccess } from './actions';
 
 // TODO
-export const loadTodosRequest = () => (dispatch) => {
+export const loadTodosRequest = () => async (dispatch) => {
     // api call
     axios.get('http://localhost:3001/todos')
         .then(res => {
@@ -19,7 +19,7 @@ export const loadTodosRequest = () => (dispatch) => {
 };
 
 // TODO
-export const addTodoRequest = (title) => (dispatch) => { 
+export const addTodoRequest = (title) => async (dispatch) => { 
     axios.post('http://localhost:3001/todo', {
         id: uuidv4(),
         title,
@@ -34,7 +34,7 @@ export const addTodoRequest = (title) => (dispatch) => {
 
 
 // TODO
-//export const toggleTodo = () => () => { };
+//export const toggleTodoRequest = () => async () => { };
 
 // TODO
-//export const deleteTodos = () => () => { };
+//export const deleteTodoRequest = () => async () => { };
