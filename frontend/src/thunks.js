@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { loadTodos, addTodoSuccess } from './actions';
+import { loadTodosSuccess, addTodoSuccess } from './actions';
 
 // TODO
 export const loadTodosRequest = () => (dispatch) => {
@@ -8,7 +8,7 @@ export const loadTodosRequest = () => (dispatch) => {
     axios.get('http://localhost:3001/todos')
         .then(res => {
             if (res.status = 200) {
-                dispatch(loadTodos(res.data));
+                dispatch(loadTodosSuccess(res.data));
             } else {
                 throw `Something went wrong. Status code: ${res.status}`;
             }

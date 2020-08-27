@@ -10,11 +10,11 @@ export const toggleTodoCompleted = (id, completed) => {
     }
 };
 
-const LOAD_TODOS = "LOAD_TODOS";
+const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";
 
-export const loadTodos = (todos) => {
+export const loadTodosSuccess = (todos) => {
     return {
-        type: LOAD_TODOS,
+        type: LOAD_TODOS_SUCCESS,
         payload: {
             todos
         },

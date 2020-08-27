@@ -4,7 +4,7 @@ export const todosReducer = (state = initialState, action) => {
     const { type, payload } = action;
     
     switch(type) {
-        case "LOAD_TODOS": {
+        case "LOAD_TODOS_SUCCESS": {
             const { todos } = payload;
             return { ...state, todos: todos };
         }
