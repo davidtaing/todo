@@ -21,6 +21,14 @@ export const loadTodosSuccess = (todos) => {
     }
 };
 
+const LOAD_TODOS_FAILURE = "todo/loadTodosFailure";
+
+export const loadTodosFailure = () => {
+    return {
+        type: LOAD_TODOS_FAILURE,
+    };
+}
+
 const ADD_TODO_SUCCESS = "todo/addTodoSuccess";
 
 export const addTodoSuccess = (todo) => {
