@@ -28,7 +28,7 @@ export const todosReducer = (state = initialState, action) => {
                 todos: state.todos.concat(todo),
             }
         }
-        case "DELETE_TODO": {
+        case "todo/deleteTodoSuccess": {
             const { id } = payload;
             return {
                 ...state,
