@@ -19,7 +19,7 @@ export const loadTodosRequest = () => async (dispatch) => {
 };
 
 // TODO
-export const addTodoRequest = (title) => async (dispatch) => { 
+export const addTodoRequest = (title) => async (dispatch) => {
     axios.post('http://localhost:3001/todo', {
         id: uuidv4(),
         title,
@@ -27,8 +27,14 @@ export const addTodoRequest = (title) => async (dispatch) => {
     })
         .then(res => {
             if (res.status === 201) {
+                alert(`Successfully added new todo: ${res.data}`);
                 dispatch(addTodoSuccess(res.data));
             }
+        })
+        .catch(error => {
+            // Request failure logic
+            // dispatch(addTodoFailure())
+            console.log(error.toJSON());
         });
 };
 
@@ -38,3 +44,4 @@ export const addTodoRequest = (title) => async (dispatch) => {
 
 // TODO
 //export const deleteTodoRequest = () => async () => { };
+
