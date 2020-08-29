@@ -21,7 +21,7 @@ export const todosReducer = (state = initialState, action) => {
                 )
             };
         }
-        case "ADD_TODO_SUCCESS": {
+        case "todo/addTodoSuccess": {
             const { todo } = payload;
             return {
                 ...state,

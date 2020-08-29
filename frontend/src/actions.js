@@ -21,7 +21,7 @@ export const loadTodosSuccess = (todos) => {
     }
 };
 
-const ADD_TODO_SUCCESS = "ADD_TODO_SUCCESS";
+const ADD_TODO_SUCCESS = "todo/addTodoSuccess";
 
 export const addTodoSuccess = (todo) => {
     return {
