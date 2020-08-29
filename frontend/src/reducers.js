@@ -8,6 +8,9 @@ export const todosReducer = (state = initialState, action) => {
             const { todos } = payload;
             return { ...state, isLoading: false , todos: todos };
         }
+        case "todo/loadTodosFailure": {
+            return { ...state, isLoading: false };
+        }
         case "todo/toggleTodoSuccess": {
             // map through array and flip the completed field of the target task
             const { id, completed } = payload;
