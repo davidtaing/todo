@@ -21,6 +21,14 @@ export const loadTodosSuccess = (todos) => {
     }
 };
 
+const LOAD_TODOS_FAILURE = "todo/loadTodosFailure";
+
+export const loadTodosFailure = () => {
+    return {
+        type: LOAD_TODOS_FAILURE,
+    };
+}
+
 const ADD_TODO_SUCCESS = "todo/addTodoSuccess";
 
 export const addTodoSuccess = (todo) => {
@@ -34,7 +42,7 @@ export const addTodoSuccess = (todo) => {
 
 const DELETE_TODO_SUCCESS = "todo/deleteTodoSuccess";
 
-export const deleteTodo = (id) => {
+export const deleteTodoSuccess = (id) => {
     return {
         type: DELETE_TODO_SUCCESS,
         payload: {
