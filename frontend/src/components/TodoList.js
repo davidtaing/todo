@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loadTodosRequest, addTodoRequest } from '../thunks';
-import { toggleTodoCompleted, deleteTodo } from '../actions';
+import { toggleTodoSuccess, deleteTodo } from '../actions';
 
 import TodoListItem from './TodoListItem';
 import AddTodo from './AddTodo';
@@ -36,7 +36,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     initTodos: () => dispatch(loadTodosRequest()),
-    toggleTodo: (id, completed) => dispatch(toggleTodoCompleted(id, completed)),
+    toggleTodo: (id, completed) => dispatch(toggleTodoSuccess(id, completed)),
     addTodoRequest: (title) => dispatch(addTodoRequest(title)),
     deleteTodo: (id) => dispatch(deleteTodo(id)),
 });
