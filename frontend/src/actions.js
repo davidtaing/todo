@@ -10,7 +10,7 @@ export const toggleTodoCompleted = (id, completed) => {
     }
 };
 
-const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";
+const LOAD_TODOS_SUCCESS = "todo/loadTodosSuccess";
 
 export const loadTodosSuccess = (todos) => {
     return {
