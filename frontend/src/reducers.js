@@ -1,4 +1,4 @@
-const initialState = { isLoading: false, todos: [] };
+const initialState = { isLoading: true, todos: [] };
 
 export const todosReducer = (state = initialState, action) => {
     const { type, payload } = action;
