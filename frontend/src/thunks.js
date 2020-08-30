@@ -6,10 +6,13 @@ import {
     loadTodosFailure,
     addTodoRequested,
     addTodoSuccess,
+    addTodoFailure,
     toggleTodoRequested,
     toggleTodoSuccess,
+    toggleTodoFailure,
     deleteTodoRequested,
-    deleteTodoSuccess
+    deleteTodoSuccess,
+    toggleTodoFailure
 } from './actions';
 
 export const loadTodosRequest = () => async (dispatch) => {
@@ -45,8 +48,8 @@ export const addTodoRequest = (title) => async (dispatch) => {
         })
         .catch(error => {
             // Request failure logic
-            // dispatch(addTodoFailure())
             console.log(error.toJSON());
+            dispatch(addTodoFailure());
         });
 };
 
@@ -62,6 +65,7 @@ export const toggleTodoRequest = (id) => async (dispatch) => {
         })
         .catch(error => {
             console.log(error.toJSON());
+            dispatch(toggleTodoFailure());
         });
 };
 
@@ -76,6 +80,6 @@ export const deleteTodoRequest = (id) => async (dispatch) => {
         })
         .catch(error => {
             console.log(error.toJSON());
-            //dispatch(deleteTodoFailure);
+            dispatch(deleteTodoFailure());
         });
 };
