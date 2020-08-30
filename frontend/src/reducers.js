@@ -46,9 +46,6 @@ export const todosReducer = (state = initialState, action) => {
                 todos: state.todos.filter(todo => todo.id !== deletedTodo.id)
             }
         }
-        case "todo/addTodoRequested":
-        case "todo/deleteTodoRequested":
-        case "todo/toggleTodoRequested":
         default:
             return state;
     } 
