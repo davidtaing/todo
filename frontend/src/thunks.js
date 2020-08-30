@@ -44,4 +44,6 @@ export const addTodoRequest = (title) => async (dispatch) => {
 //export const toggleTodoRequest = () => async () => { };
 
 // TODO
-//export const deleteTodoRequest = () => async () => { };
+export const deleteTodoRequest = () => async (dispatch) => { 
+    
+};
