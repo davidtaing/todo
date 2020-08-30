@@ -42,11 +42,11 @@ export const addTodoSuccess = (todo) => {
 
 const DELETE_TODO_SUCCESS = "todo/deleteTodoSuccess";
 
-export const deleteTodoSuccess = (id) => {
+export const deleteTodoSuccess = (todo) => {
     return {
         type: DELETE_TODO_SUCCESS,
         payload: {
-            id
+            todo,
         },
     }
 };

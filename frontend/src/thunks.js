@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { loadTodosSuccess, addTodoSuccess, loadTodosFailure } from './actions';
+import { loadTodosSuccess, addTodoSuccess, loadTodosFailure, deleteTodoSuccess } from './actions';
 
 export const loadTodosRequest = () => async (dispatch) => {
     // api call
@@ -46,7 +46,7 @@ export const deleteTodoRequest = (id) => async (dispatch) => {
     axios.delete(`http://localhost:3001/todo/${id}`)
         .then(res => {
             if (res.status === 200) {
-                //dispatch(deleteTodoSuccess(res.data));
+                dispatch(deleteTodoSuccess(res.data));
             }
         })
         .catch(error => {

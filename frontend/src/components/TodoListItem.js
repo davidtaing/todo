@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TodoListItem = ({ todoListItem, toggleTodo, deleteTodo }) => {
+const TodoListItem = ({ todoListItem, toggleTodo, deleteTodoRequest }) => {
     const { id, title, completed } = todoListItem;
 
     return (
@@ -22,7 +22,7 @@ const TodoListItem = ({ todoListItem, toggleTodo, deleteTodo }) => {
                             <input
                                 type="checkbox"
                                 className="delete-checkbox"
-                                onClick={() => deleteTodo(id)}
+                                onClick={() => deleteTodoRequest(id)}
                             />
                         ] :
                         <label>
