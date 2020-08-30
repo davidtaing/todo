@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { loadTodosSuccess, addTodoSuccess } from './actions';
+import { loadTodosSuccess, addTodoSuccess, loadTodosFailure } from './actions';
 
 // TODO
 export const loadTodosRequest = () => async (dispatch) => {
@@ -15,6 +15,7 @@ export const loadTodosRequest = () => async (dispatch) => {
         })
         .catch((e) => {
             alert(e);
+            dispatch(loadTodosFailure());
         })
 };
 
