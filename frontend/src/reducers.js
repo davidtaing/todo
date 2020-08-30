@@ -4,7 +4,7 @@ export const todosReducer = (state = initialState, action) => {
     const { type, payload } = action;
     
     switch(type) {
-        case "todo/loadTodosRequest": {
+        case "todo/loadTodosRequested": {
             return { ...state, isLoading: true };
         }
         case "todo/loadTodosSuccess": {
@@ -46,9 +46,9 @@ export const todosReducer = (state = initialState, action) => {
                 todos: state.todos.filter(todo => todo.id !== deletedTodo.id)
             }
         }
-        case "todo/addTodoRequest":
-        case "todo/deleteTodoRequest":
-        case "todo/toggleTodoRequest":
+        case "todo/addTodoRequested":
+        case "todo/deleteTodoRequested":
+        case "todo/toggleTodoRequested":
         default:
             return state;
     } 

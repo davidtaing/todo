@@ -1,20 +1,20 @@
-const TOGGLE_TODO_REQUEST = "todo/toggleTodoRequest";
+const TOGGLE_TODO_REQUESTED = "todo/toggleTodoRequested";
 const TOGGLE_TODO_SUCCESS = "todo/toggleTodoSuccess";
 
-const LOAD_TODOS_REQUEST = "todo/loadTodosRequest";
+const LOAD_TODOS_REQUESTED = "todo/loadTodosRequested";
 const LOAD_TODOS_SUCCESS = "todo/loadTodosSuccess";
 const LOAD_TODOS_FAILURE = "todo/loadTodosFailure";
 
-const ADD_TODO_REQUEST = "todo/addTodoRequest";
+const ADD_TODO_REQUESTED = "todo/addTodoRequested";
 const ADD_TODO_SUCCESS = "todo/addTodoSuccess";
 const ADD_TODO_FAILURE = "todo/addTodoFailure";
 
-const DELETE_TODO_REQUEST = "todo/deleteTodoRequest";
+const DELETE_TODO_REQUESTED = "todo/deleteTodoRequested";
 const DELETE_TODO_SUCCESS = "todo/deleteTodoSuccess";
 
-export const toggleTodoRequest = () => {
+export const toggleTodoRequested = () => {
     return {
-        type: TOGGLE_TODO_REQUEST,
+        type: TOGGLE_TODO_REQUESTED,
     }
 };
 
@@ -28,9 +28,9 @@ export const toggleTodoSuccess = ({id, completed}) => {
     }
 };
 
-export const loadTodosRequest = () => {
+export const loadTodosRequested = () => {
     return {
-        type: LOAD_TODOS_REQUEST,
+        type: LOAD_TODOS_REQUESTED,
     }
 }
 
@@ -49,9 +49,9 @@ export const loadTodosFailure = () => {
     };
 };
 
-export const addTodoRequest = () => {
+export const addTodoRequested = () => {
     return {
-        type: ADD_TODO_REQUEST,
+        type: ADD_TODO_REQUESTED,
     }
 };
 
@@ -64,9 +64,9 @@ export const addTodoSuccess = (todo) => {
     }
 };
 
-export const deleteTodoRequest = () => {
+export const deleteTodoRequested = () => {
     return {
-        type: DELETE_TODO_REQUEST,
+        type: DELETE_TODO_REQUESTED,
     }
 };
 
