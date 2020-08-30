@@ -45,20 +45,17 @@ router.post(('/todo'), (req, res, next) => {
 // Update Todo
 router.put('/todo/:id/toggle', (req, res, next) => {
     try {
-        // take id and completed flag from req
         const { id } = req.params;
-        const { title, completed } = req.body;
-        const updatedTodo = {
-            id,
-            title,
-            completed,
-        };
-
-        // find item
-        let todoIndex = database.findIndex(todo => todo.id === id);
+        const todoIndex = database.findIndex(todo => todo.id === id);
 
         if (todoIndex !== -1) {
+            let todoToToggle = database[todoIndex];
+            let updatedTodo = {
+                ...todoToToggle,
+                completed: !todoToToggle.completed,
+            }
             database.splice(todoIndex, 1, updatedTodo);
+
             res.status(200).json(updatedTodo);
         } else {
             res.status(404);
