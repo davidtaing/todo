@@ -21,6 +21,7 @@ const TodoListItem = ({ todoListItem, toggleTodoRequest, deleteTodoRequest }) =>
                             </label>,
                             <button 
                                 className="delete-button"
+                                type="button"
                                 onClick={() => deleteTodoRequest(id)}
                             >
                                 Delete
