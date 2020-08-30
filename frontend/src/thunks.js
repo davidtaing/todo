@@ -24,7 +24,7 @@ export const loadTodosRequest = () => async (dispatch) => {
             if (res.status === 200) {
                 dispatch(loadTodosSuccess(res.data));
             } else {
-                throw `Something went wrong. Status code: ${res.status}`;
+                throw Error(`Something went wrong. Status code: ${res.status}`);
             }
         })
         .catch((e) => {
