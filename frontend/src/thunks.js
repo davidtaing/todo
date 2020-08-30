@@ -12,7 +12,7 @@ import {
     toggleTodoFailure,
     deleteTodoRequested,
     deleteTodoSuccess,
-    toggleTodoFailure
+    deleteTodoFailure,
 } from './actions';
 
 export const loadTodosRequest = () => async (dispatch) => {
@@ -21,7 +21,7 @@ export const loadTodosRequest = () => async (dispatch) => {
     // api call
     axios.get('http://localhost:3001/todos')
         .then(res => {
-            if (res.status = 200) {
+            if (res.status === 200) {
                 dispatch(loadTodosSuccess(res.data));
             } else {
                 throw `Something went wrong. Status code: ${res.status}`;
