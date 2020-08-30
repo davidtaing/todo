@@ -45,5 +45,19 @@ router.post(('/todo'), (req, res, next) => {
 // PUT Todo
 
 // DELETE Todo
+router.delete(('/todo'), (req, res, next) => {
+    try {
+        const todoToDelete = database.find(todo => todo.id === req.body.id);
+
+        if (todoToDelete) {
+            database = database.filter(todo => todo.id !== todoToDelete.id);
+            res.status(200).json(todoToDelete);
+        } else {
+            res.status(404).send("Todo not found");
+        }
+    } catch (e) {
+        res.status(500);
+    }
+});
 
 export default router;
