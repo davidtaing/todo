@@ -26,7 +26,6 @@ export const addTodoRequest = (title) => async (dispatch) => {
     })
         .then(res => {
             if (res.status === 201) {
-                alert(`Successfully added new todo: ${res.data}`);
                 dispatch(addTodoSuccess(res.data));
             }
         })
