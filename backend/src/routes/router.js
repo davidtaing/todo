@@ -47,7 +47,8 @@ router.post(('/todo'), (req, res, next) => {
 // DELETE Todo
 router.delete(('/todo'), (req, res, next) => {
     try {
-        const todoToDelete = database.find(todo => todo.id === req.body.id);
+        console.log(req.query);
+        const todoToDelete = database.find(todo => todo.id === req.query.id);
 
         if (todoToDelete) {
             database = database.filter(todo => todo.id !== todoToDelete.id);
