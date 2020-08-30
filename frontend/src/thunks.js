@@ -42,7 +42,7 @@ export const addTodoRequest = (title) => async (dispatch) => {
 //export const toggleTodoRequest = () => async () => { };
 
 // TODO
-export const deleteTodoRequest = () => async (dispatch) => { 
+export const deleteTodoRequest = (id) => async (dispatch) => { 
     axios.delete('http://localhost:3001/todo', { id })
         .then(res => {
             if (res.status === 200) {
