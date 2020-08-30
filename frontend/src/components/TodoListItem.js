@@ -19,11 +19,12 @@ const TodoListItem = ({ todoListItem, toggleTodoRequest, deleteTodoRequest }) =>
                             <label>
                                 <strike>{title}</strike>
                             </label>,
-                            <input
-                                type="checkbox"
-                                className="delete-checkbox"
+                            <button 
+                                className="delete-button"
                                 onClick={() => deleteTodoRequest(id)}
-                            />
+                            >
+                                Delete
+                            </button>
                         ] :
                         <label>
                             {title}
