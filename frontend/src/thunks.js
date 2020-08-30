@@ -43,7 +43,7 @@ export const addTodoRequest = (title) => async (dispatch) => {
 
 // TODO
 export const deleteTodoRequest = (id) => async (dispatch) => { 
-    axios.delete('http://localhost:3001/todo', { id })
+    axios.delete(`http://localhost:3001/todo/${id}`)
         .then(res => {
             if (res.status === 200) {
                 //dispatch(deleteTodoSuccess(res.data));
