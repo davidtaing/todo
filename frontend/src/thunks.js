@@ -1,8 +1,20 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { loadTodosSuccess, addTodoSuccess, loadTodosFailure, deleteTodoSuccess, toggleTodoSuccess } from './actions';
+import {  
+    loadTodosRequested,
+    loadTodosSuccess,
+    loadTodosFailure,
+    addTodoRequested,
+    addTodoSuccess,
+    toggleTodoRequested,
+    toggleTodoSuccess,
+    deleteTodoRequested,
+    deleteTodoSuccess
+} from './actions';
 
 export const loadTodosRequest = () => async (dispatch) => {
+    dispatch(loadTodosRequested());
+    
     // api call
     axios.get('http://localhost:3001/todos')
         .then(res => {
@@ -19,6 +31,8 @@ export const loadTodosRequest = () => async (dispatch) => {
 };
 
 export const addTodoRequest = (title) => async (dispatch) => {
+    dispatch(addTodoRequested());
+
     axios.post('http://localhost:3001/todo', {
         id: uuidv4(),
         title,
@@ -37,8 +51,9 @@ export const addTodoRequest = (title) => async (dispatch) => {
 };
 
 
-// TODO
 export const toggleTodoRequest = (id) => async (dispatch) => { 
+    dispatch(toggleTodoRequested());
+
     axios.put(`http://localhost:3001/todo/${id}/toggle`)
         .then(res => {
             if (res.status === 200) {
@@ -50,8 +65,9 @@ export const toggleTodoRequest = (id) => async (dispatch) => {
         });
 };
 
-// TODO
 export const deleteTodoRequest = (id) => async (dispatch) => { 
+    dispatch(deleteTodoRequested());
+
     axios.delete(`http://localhost:3001/todo/${id}`)
         .then(res => {
             if (res.status === 200) {
