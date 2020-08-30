@@ -14,12 +14,17 @@ export const todosReducer = (state = initialState, action) => {
         case "todo/toggleTodoSuccess": {
             // map through array and flip the completed field of the target task
             const { id, completed } = payload;
+
             return {
                 ...state,
                 todos: state.todos.map(
                 (todo) => 
                     todo.id === id && todo.completed !== completed ?
-                        { ...todo, completed} :
+                        {
+                            id,
+                            title: todo.title,
+                            completed,
+                        } :
                         todo
                 )
             };

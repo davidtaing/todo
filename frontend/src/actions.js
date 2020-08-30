@@ -1,11 +1,11 @@
 const TOGGLE_TODO_SUCCESS = "todo/toggleTodoSuccess";
 
-export const toggleTodoSuccess = (id, completed) => {
+export const toggleTodoSuccess = ({id, completed}) => {
     return {
         type: TOGGLE_TODO_SUCCESS,
         payload: {
             id,
-            completed,
+            completed
         },
     }
 };

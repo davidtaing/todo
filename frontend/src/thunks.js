@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { loadTodosSuccess, addTodoSuccess, loadTodosFailure, deleteTodoSuccess } from './actions';
+import { loadTodosSuccess, addTodoSuccess, loadTodosFailure, deleteTodoSuccess, toggleTodoSuccess } from './actions';
 
 export const loadTodosRequest = () => async (dispatch) => {
     // api call
@@ -39,7 +39,17 @@ export const addTodoRequest = (title) => async (dispatch) => {
 
 
 // TODO
-//export const toggleTodoRequest = () => async () => { };
+export const toggleTodoRequest = (id) => async (dispatch) => { 
+    axios.put(`http://localhost:3001/todo/${id}/toggle`)
+        .then(res => {
+            if (res.status === 200) {
+                dispatch(toggleTodoSuccess(res.data));
+            }
+        })
+        .catch(error => {
+            console.log(error.toJSON());
+        });
+};
 
 // TODO
 export const deleteTodoRequest = (id) => async (dispatch) => { 

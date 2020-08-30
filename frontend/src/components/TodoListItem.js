@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TodoListItem = ({ todoListItem, toggleTodo, deleteTodoRequest }) => {
+const TodoListItem = ({ todoListItem, toggleTodoRequest, deleteTodoRequest }) => {
     const { id, title, completed } = todoListItem;
 
     return (
@@ -10,7 +10,7 @@ const TodoListItem = ({ todoListItem, toggleTodo, deleteTodoRequest }) => {
                     type="checkbox"
                     className="completed-checkbox"
                     checked={completed}
-                    onClick={(e) => toggleTodo(id, e.target.checked)}
+                    onClick={(e) => toggleTodoRequest(id)}
                     readOnly
                 />
                 {
