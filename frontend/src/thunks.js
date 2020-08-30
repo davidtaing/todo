@@ -2,7 +2,6 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { loadTodosSuccess, addTodoSuccess, loadTodosFailure } from './actions';
 
-// TODO
 export const loadTodosRequest = () => async (dispatch) => {
     // api call
     axios.get('http://localhost:3001/todos')
@@ -19,7 +18,6 @@ export const loadTodosRequest = () => async (dispatch) => {
         })
 };
 
-// TODO
 export const addTodoRequest = (title) => async (dispatch) => {
     axios.post('http://localhost:3001/todo', {
         id: uuidv4(),
@@ -45,5 +43,14 @@ export const addTodoRequest = (title) => async (dispatch) => {
 
 // TODO
 export const deleteTodoRequest = () => async (dispatch) => { 
-    
+    axios.delete('http://localhost:3001/todo', { id })
+        .then(res => {
+            if (res.status === 200) {
+                //dispatch(deleteTodoSuccess(res.data));
+            }
+        })
+        .catch(error => {
+            console.log(error.toJSON());
+            //dispatch(deleteTodoFailure);
+        });
 };
