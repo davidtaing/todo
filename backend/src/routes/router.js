@@ -42,7 +42,31 @@ router.post(('/todo'), (req, res, next) => {
     }
 });
 
-// PUT Todo
+// Update Todo
+router.put('/todo/:id/toggle', (req, res, next) => {
+    try {
+        // take id and completed flag from req
+        const { id } = req.params;
+        const { title, completed } = req.body;
+        const updatedTodo = {
+            id,
+            title,
+            completed,
+        };
+
+        // find item
+        let todoIndex = database.findIndex(todo => todo.id === id);
+
+        if (todoIndex !== -1) {
+            database.splice(todoIndex, 1, updatedTodo);
+            res.status(200).json(updatedTodo);
+        } else {
+            res.status(404);
+        }
+    } catch (e) {
+        res.status(500);
+    }
+})
 
 // DELETE Todo
 router.delete(('/todo/:id'), (req, res, next) => {
