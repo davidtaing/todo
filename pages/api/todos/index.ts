@@ -1,5 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(500).json({message: "Internal Server Error."});
+  res
+    .status(200)
+    .json({
+      user: "ssss",
+      todos: ["Have dinner at 6 pm", "Go to sleep at 3 am"],
+    });
 }
