@@ -12,6 +12,6 @@ const firebaseConfig = {
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 }
 
-const app : FirebaseApp = initializeApp(firebaseConfig);
+const firebaseApp : FirebaseApp = initializeApp(firebaseConfig);
 
-export default app;
+export default firebaseApp;
