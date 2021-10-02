@@ -17,7 +17,7 @@ const {
 const auth: Auth = getAuth(firebaseApp);
 
 // Connect to Emulator if running development or test env.
-if (NODE_ENV === "development" || NODE_ENV === "test") {
+if (NODE_ENV !== "production") {
   if (!localhost || !localhostPort) {
     throw Error("Failed to load Firebase Auth Emulator");
   }
