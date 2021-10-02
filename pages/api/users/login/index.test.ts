@@ -36,36 +36,6 @@ describe("/users", () => {
       },
     });
 
-    describe("GET /users", () => {
-      test("Respond with 405 Status", async () => {
-        req._setMethod("GET");
-
-        await handler(req, res);
-        expect(res._getStatusCode()).toBe(405);
-        expect(res._isJSON()).toBeTruthy();
-      });
-    });
-
-    describe("PUT /users", () => {
-      test("Respond with 405 Status", async () => {
-        req._setMethod("PUT");
-
-        await handler(req, res);
-        expect(res._getStatusCode()).toBe(405);
-        expect(res._isJSON()).toBeTruthy();
-      });
-    });
-
-    describe("PATCH /users", () => {
-      test("Respond with 405 Status", async () => {
-        req._setMethod("PATCH");
-
-        await handler(req, res);
-        expect(res._getStatusCode()).toBe(405);
-        expect(res._isJSON()).toBeTruthy();
-      });
-    });
-
     describe("DELETE /users", () => {
       test("Respond with 405 Status", async () => {
         req._setMethod("DELETE");
