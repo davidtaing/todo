@@ -1,4 +1,5 @@
 import type { Auth } from "firebase/auth";
+import firebaseApp from "./firebase";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
 
 const {
@@ -7,7 +8,7 @@ const {
   FIREBASE_AUTH_EMULATOR_PORT: localhostPort,
 } = process.env;
 
-const auth: Auth = getAuth();
+const auth: Auth = getAuth(firebaseApp);
 
 // Connect to Emulator if running development or test env.
 if (NODE_ENV === "development" || NODE_ENV === "test") {

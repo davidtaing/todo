@@ -1,4 +1,5 @@
 import type { Database } from "firebase/database";
+import firebaseApp from "./firebase";
 import { getDatabase, connectDatabaseEmulator } from "firebase/database";
 
 const {
@@ -7,7 +8,7 @@ const {
   FIREBASE_DATABASE_EMULATOR_PORT: localhostPort,
 } = process.env;
 
-const db: Database = getDatabase();
+const db: Database = getDatabase(firebaseApp);
 
 // Connect to Emulator if running development or test env.
 if (NODE_ENV === "development" || NODE_ENV === "test") {
