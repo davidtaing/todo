@@ -1,6 +1,8 @@
-import type { Auth } from "firebase/auth";
+import type { Auth } from "@firebase/auth";
+import { getAuth, connectAuthEmulator } from "@firebase/auth";
+
+// Local Firebase App Object
 import firebaseApp from "./firebase";
-import { getAuth, connectAuthEmulator } from "firebase/auth";
 
 const {
   NODE_ENV,
