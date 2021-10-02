@@ -15,8 +15,8 @@ if (NODE_ENV === "development" || NODE_ENV === "test") {
   if (!localhost || !localhostPort) {
     throw Error("Failed to load Firebase Auth Emulator");
   }
+  const url = `http://${localhost}:${localhostPort}/`;
   
-  const url = `${localhost}:${localhostPort}`;
   connectAuthEmulator(auth, url);
 }
 
