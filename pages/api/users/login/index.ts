@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { signInWithEmailAndPassword } from "@firebase/auth";
 
 // Local Firebase Auth Object
-import auth from "../../../../src/api/firebase/auth";
+import { auth, signInWithEmailAndPassword } from "../../../../src/api/firebase/auth";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
