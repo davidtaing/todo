@@ -21,7 +21,7 @@ export function postHandler(req: NextApiRequest, res: NextApiResponse): void {
   } else {
     try {
       const userCredential = signInWithEmailAndPassword(auth, email, password);
-      res.status(501).json({ message: "Not Yet Implemented" });
+      res.status(303).json({ userCredential });
     } catch (err) {
       res.status(501).json({ message: "Not Yet Implemented" });
     }
