@@ -16,7 +16,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export async function postHandler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
+export async function postHandler(
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> {
   const { email, password } = req?.body;
 
   if (!email || !password) {
@@ -32,8 +35,23 @@ export async function postHandler(req: NextApiRequest, res: NextApiResponse): Pr
 
     console.log(userCredential);
     res.status(303).json({ userCredential });
-  } catch (err) {
-    console.error(err);
-    res.status(501).json({ message: "Not Yet Implemented" });
+  } catch (err: any) {
+    switch (err.code) {
+      case "auth/user-not-found":
+      case "auth/wrong-password":
+      case "auth/invalid-email":
+        return res
+          .status(401)
+          .json({
+            status: 401,
+            message: "Unauthorized: Invalid Email or Password.",
+          });
+      case "auth/missing-email":
+        return res.status(400).json({ status: 400, message: "Bad Request" });
+      default:
+        return res
+          .status(500)
+          .json({ status: 500, message: "Interal Server Error" });
+    }
   }
 }
