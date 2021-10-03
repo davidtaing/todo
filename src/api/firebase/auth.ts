@@ -17,10 +17,13 @@ const {
 const auth: Auth = initAuth();
 
 function initAuth(): Auth {
-  let auth = getAuth(firebaseApp);
+  let auth: Auth = getAuth(firebaseApp);
 
-  // Connect to Emulator if running development or test env.
-  if (NODE_ENV !== "production") {
+  /** 
+   *  Connect to Emulator not if running in prod env.
+   *  Also checks canInitEmulator to stop reconnect after Next.js hot reload.
+   */
+  if (NODE_ENV !== "production" && auth._canInitEmulator) {
     const emulatorUrl = `http://${localhost}:${localhostPort}/`;
     connectAuthEmulator(auth, emulatorUrl);
   }
