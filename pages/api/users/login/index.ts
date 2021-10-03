@@ -12,7 +12,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (method !== "POST") {
     res.status(405).json({ message: "Method Not Allowed" });
   } else {
-    postHandler(req, res);
+    return postHandler(req, res);
   }
 }
 
@@ -23,7 +23,7 @@ export async function postHandler(
   const { email, password } = req?.body;
 
   if (!email || !password) {
-    res.status(400).json({ message: "Bad Request" });
+    return res.status(400).json({ message: "Bad Request" });
   }
 
   try {
@@ -33,7 +33,7 @@ export async function postHandler(
       password
     );
 
-    res.status(303).json({ userCredential });
+    return res.status(303).json({ userCredential });
   } catch (err: any) {
     switch (err.code) {
       case "auth/user-not-found":

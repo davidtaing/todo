@@ -14,24 +14,18 @@ const {
   FIREBASE_AUTH_EMULATOR_PORT: localhostPort,
 } = process.env;
 
-const auth: Auth = getAuth(firebaseApp);
+const auth: Auth = initAuth();
 
+function initAuth(): Auth {
+  let auth = getAuth(firebaseApp);
 
-// Connect to Emulator if running development or test env.
-if (NODE_ENV !== "production") {
-  if (!localhost || !localhostPort) {
-    throw Error(
-      "Failed to load Firebase Auth Emulator. Please check if your configs are missing."
-    );
+  // Connect to Emulator if running development or test env.
+  if (NODE_ENV !== "production") {
+    const emulatorUrl = `http://${localhost}:${localhostPort}/`;
+    connectAuthEmulator(auth, emulatorUrl);
   }
 
-  const url = `http://${localhost}:${localhostPort}/`;
-
-  try {
-    connectAuthEmulator(auth, url);
-  } catch (err) {
-    console.error(err);
-  }
+  return auth;
 }
 
 // Re-export Auth functions so we can mock them in testing
