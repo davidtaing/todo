@@ -33,7 +33,6 @@ export async function postHandler(
       password
     );
 
-    console.log(userCredential);
     res.status(303).json({ userCredential });
   } catch (err: any) {
     switch (err.code) {
