@@ -17,7 +17,7 @@ const {
 const auth: Auth = initAuth();
 
 function initAuth(): Auth {
-  let auth: Auth = getAuth(firebaseApp);
+  let auth: any = getAuth(firebaseApp);
 
   /** 
    *  Connect to Emulator not if running in prod env.
