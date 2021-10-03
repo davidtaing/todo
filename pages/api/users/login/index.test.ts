@@ -3,28 +3,30 @@ import handler from "./index";
 
 jest.mock("../../../../src/api/firebase/auth", () => {
   return {
-    auth: jest.fn().mockReturnThis(),
+    auth: jest.fn(),
     signInWithEmailAndPassword: jest.fn(),
-  }
-})
+  };
+});
 
 describe("/users", () => {
-  describe("POST /users", () => {
-    const { req, res } = createMocks({
-      method: "POST",
-      body: {
-        email: "1@1.com",
-        password: "12345678",
-      },
-    });
+  describe("Supported Methods", () => {
+    describe("POST /users", () => {
+      const { req, res } = createMocks({
+        method: "POST",
+        body: {
+          email: "1@1.com",
+          password: "12345678",
+        },
+      });
 
-    beforeAll(async () => {
-      await handler(req, res);
-    });
+      beforeAll(async () => {
+        await handler(req, res);
+      });
 
-    test("Respond with 303 Status", () => {
-      expect(res._getStatusCode()).toBe(303);
-      expect(res._isJSON()).toBeTruthy();
+      test("Respond with 303 Status", () => {
+        expect(res._getStatusCode()).toBe(303);
+        expect(res._isJSON()).toBeTruthy();
+      });
     });
   });
 
