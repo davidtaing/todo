@@ -3,6 +3,7 @@ import {
   getAuth,
   connectAuthEmulator,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
 } from "@firebase/auth";
 
 // Local Firebase App Object
@@ -27,4 +28,4 @@ if (NODE_ENV !== "production" && (auth as any)._canInitEmulator) {
 }
 
 // Re-export Auth functions so we can mock them in testing
-export { auth, signInWithEmailAndPassword };
+export { auth, signInWithEmailAndPassword, createUserWithEmailAndPassword };
