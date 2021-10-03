@@ -8,6 +8,10 @@ jest.mock("../../../../src/api/firebase/auth", () => {
   };
 });
 
+afterAll(() => {
+  jest.resetModules();
+});
+
 describe("/users", () => {
   describe("Supported Methods", () => {
     describe("POST /users", () => {
