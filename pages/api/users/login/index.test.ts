@@ -14,7 +14,7 @@ describe("/users", () => {
       const { req, res } = createMocks({
         method: "POST",
         body: {
-          email: "1@1.com",
+          email: "test@test.com",
           password: "12345678",
         },
       });
@@ -33,7 +33,7 @@ describe("/users", () => {
   describe("Unsupported Methods", () => {
     const { req, res } = createMocks({
       body: {
-        email: "1@1.com",
+        email: "test@test.com",
         password: "12345678",
       },
     });
