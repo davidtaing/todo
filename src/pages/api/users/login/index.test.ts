@@ -12,24 +12,26 @@ afterAll(() => {
   jest.resetModules();
 });
 
-describe("/users", () => {
+describe("/users/login", () => {
   describe("Supported Methods", () => {
-    describe("POST /users", () => {
-      const { req, res } = createMocks({
-        method: "POST",
-        body: {
-          email: "test@test.com",
-          password: "12345678",
-        },
-      });
+    describe("POST /users/login", () => {
+      describe("Success Response", () => {
+        const { req, res } = createMocks({
+          method: "POST",
+          body: {
+            email: "test@test.com",
+            password: "12345678",
+          },
+        });
 
-      beforeAll(async () => {
-        await handler(req, res);
-      });
+        beforeAll(async () => {
+          await handler(req, res);
+        });
 
-      test("Respond with 303 Status", () => {
-        expect(res._getStatusCode()).toBe(303);
-        expect(res._isJSON()).toBeTruthy();
+        test("Respond with 303 Status", () => {
+          expect(res._getStatusCode()).toBe(303);
+          expect(res._isJSON()).toBeTruthy();
+        });
       });
     });
   });
@@ -42,7 +44,7 @@ describe("/users", () => {
       },
     });
 
-    describe("DELETE /users", () => {
+    describe("DELETE /users/login", () => {
       test("Respond with 405 Status", async () => {
         req._setMethod("DELETE");
 

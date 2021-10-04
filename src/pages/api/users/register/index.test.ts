@@ -16,57 +16,60 @@ afterAll(() => {
 describe("/users/register", () => {
   describe("Supported Methods", () => {
     describe("POST /users/register", () => {
-      const { req, res } = createMocks({
-        method: "POST",
-        body: {
-          fullname: "John Citizen",
-          email: "test@test.com",
-          password: "12345678",
-          confirmPassword: "12345678",
-        },
+      describe("Success Response", () => {
+        const { req, res } = createMocks({
+          method: "POST",
+          body: {
+            fullname: "John Citizen",
+            email: "test@test.com",
+            password: "12345678",
+            confirmPassword: "12345678",
+          },
+        });
+
+        beforeAll(async () => {
+          await handler(req, res);
+        });
+
+        test("Respond with 200 Status", () => {
+          expect(res._getStatusCode()).toBe(200);
+        });
+
+        test("Return JSON", () => {
+          expect(res._isJSON()).toBeTruthy();
+        });
       });
 
-      beforeAll(async () => {
-        await handler(req, res);
-      });
+      describe("Error Response: Passwords Do Not Match", () => {
+        const { req, res } = createMocks({
+          method: "POST",
+          body: {
+            fullname: "John Citizen",
+            email: "test@test.com",
+            password: "12345678",
+            confirmPassword: "1234",
+          },
+        });
 
-      test("Respond with 200 Status", () => {
-        expect(res._getStatusCode()).toBe(200);
-      });
+        beforeAll(async () => {
+          await handler(req, res);
+        });
 
-      test("Return JSON", () => {
-        expect(res._isJSON()).toBeTruthy();
-      });
-    });
+        test("Respond with 403 Status", () => {
+          expect(res._getStatusCode()).toBe(403);
+        });
 
-    describe("POST /users/register - Passwords Do Not Match", () => {
-      const { req, res } = createMocks({
-        method: "POST",
-        body: {
-          fullname: "John Citizen",
-          email: "test@test.com",
-          password: "12345678",
-          confirmPassword: "1234",
-        },
-      });
+        test("Return JSON", () => {
+          expect(res._isJSON()).toBeTruthy();
+        });
 
-      beforeAll(async () => {
-        await handler(req, res);
-      });
+        test(`Respond with message: "${usersErrorCodes.PASSWORDS_DO_NOT_MATCH.message}"`, () => {
+          const { message: expectMessage } =
+            usersErrorCodes.PASSWORDS_DO_NOT_MATCH;
+          const { message: actualMessage } = res._getJSONData();
 
-      test("Respond with 403 Status", () => {
-        expect(res._getStatusCode()).toBe(403);
-      });
-
-      test("Return JSON", () => {
-        expect(res._isJSON()).toBeTruthy();
-      });
-
-      test(`Respond with message: "${usersErrorCodes.PASSWORDS_DO_NOT_MATCH.message}"`, () => {
-        const { message: expectMessage } = usersErrorCodes.PASSWORDS_DO_NOT_MATCH;
-        const { message: actualMessage } = res._getJSONData();
-
-        expect(actualMessage).toBe(expectMessage);
+          expect(actualMessage).toBe(expectMessage);
+        });
       });
     });
   });
