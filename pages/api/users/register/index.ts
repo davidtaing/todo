@@ -7,6 +7,13 @@ import {
 } from "../../../../src/api/firebase/auth";
 import ApiError from "../../../../src/api/utils/ApiError";
 
+const RESPONSES = new Map([
+  ["SUCCESS", { status: 200, message: "A link to activate your account has been emailed to the address provided"}],
+  ["ERROR/BAD_REQUEST", { status: 400, message: "Bad Request"}],
+  ["ERROR/INTERNAL_SERVER_ERROR", { status: 500, message: "Internal Server Error"}],
+  ["ERROR/PASSWORDS_DO_NOT_MATCH", { status: 403, message: "Password and Confirm Password do not match"}],
+])
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
 
@@ -67,3 +74,4 @@ export async function postHandler(
 function errorHandler(req: NextApiRequest, res: NextApiResponse, error: ApiError) {
   res.status(error.httpStatus).json({message: error.message});
 }
+
