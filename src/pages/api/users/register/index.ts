@@ -31,7 +31,6 @@ export async function postHandler(
 ): Promise<void> {
   const { fullname, email, password, confirmPassword } = req?.body;
   try {
-    // Throws Error if invalid
     validateInput(fullname, email, password, confirmPassword);
 
     const userCredential = await createUserWithEmailAndPassword(

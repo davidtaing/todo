@@ -32,6 +32,7 @@ export async function postHandler(
   const { email, password } = req?.body;
 
   try {
+    // Throws error if invalid
     validateInput(email, password);
 
     const userCredential = await signInWithEmailAndPassword(
@@ -40,6 +41,7 @@ export async function postHandler(
       password
     );
 
+    // TODO Return something more appropiate
     return res.status(303).json({ userCredential });
   } catch (err: any) {
     // Handle validateInput Errors
