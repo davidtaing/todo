@@ -43,7 +43,6 @@ export async function postHandler(
     );
 
     return res.status(200).json({
-      status: 200,
       message:
         "A link to activate your account has been emailed to the address provided.",
     });
@@ -53,7 +52,6 @@ export async function postHandler(
       // Respond with '200 OK' to prevent exposing existing accounts to attackers
       case "auth/email-already-in-use":
         return res.status(200).json({
-          status: 200,
           message:
             "A link to activate your account has been emailed to the address provided.",
         });
