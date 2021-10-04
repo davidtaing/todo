@@ -4,10 +4,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 import {
   auth,
   createUserWithEmailAndPassword,
-} from "../../../../src/api/firebase/auth";
+} from "../../../../api/firebase/auth";
 
-import ApiError from "../../../../src/api/utils/ApiError";
-import { createApiError, createUsersApiError } from "../../../../src/api/errors";
+
+import ApiError from "../../../../api/utils/ApiError";
+import { createApiError, createUsersApiError } from "../../../../api/errors";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;

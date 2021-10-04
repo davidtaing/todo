@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import {
   auth,
   signInWithEmailAndPassword,
-} from "../../../../src/api/firebase/auth";
+} from "../../../../api/firebase/auth";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
