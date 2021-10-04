@@ -1,7 +1,7 @@
 import { createMocks } from "node-mocks-http";
 import handler from "./index";
 
-jest.mock("../../../../src/api/firebase/auth", () => {
+jest.mock("../../../../api/firebase/auth", () => {
   return {
     auth: jest.fn(),
     signInWithEmailAndPassword: jest.fn(),
