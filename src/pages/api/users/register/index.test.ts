@@ -1,6 +1,6 @@
 import { createMocks } from "node-mocks-http";
 import handler from "./index";
-import { errorCodes } from "../../../../api/errors";
+import { httpErrorCodes } from "../../../../api/errors";
 
 jest.mock("../../../../api/firebase/auth", () => {
   return {
@@ -64,8 +64,8 @@ describe("/users/register", () => {
         expect(res._isJSON()).toBeTruthy();
       });
 
-      test(`Respond with message: "${errorCodes.METHOD_NOT_ALLOWED.message}"`, () => {
-        const { message: expectMessage } = errorCodes.METHOD_NOT_ALLOWED;
+      test(`Respond with message: "${httpErrorCodes.METHOD_NOT_ALLOWED.message}"`, () => {
+        const { message: expectMessage } = httpErrorCodes.METHOD_NOT_ALLOWED;
         const { message: actualMessage } = res._getJSONData();
 
         expect(actualMessage).toBe(expectMessage);

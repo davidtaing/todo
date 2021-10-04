@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import errorHandler from "../../../../api/middlewares/error";
 
 // Local Firebase Auth Object
 import {
@@ -7,9 +6,9 @@ import {
   createUserWithEmailAndPassword,
 } from "../../../../api/firebase/auth";
 
-
-import { errorCodes, createUsersApiError } from "../../../../api/errors";
-import ErrorFactory from "../../../../api/ErrorFactory";
+import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
+import ErrorFactory from "../../../../api/utils/ErrorFactory";
+import errorHandler from "../../../../api/middlewares/error";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
@@ -18,7 +17,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (method === "POST") {
       return postHandler(req, res);
     } else {
-      throw ErrorFactory(errorCodes.METHOD_NOT_ALLOWED);
+      throw ErrorFactory(httpErrorCodes.METHOD_NOT_ALLOWED);
     }
   } catch (err: any) {
     errorHandler(req, res, err);
@@ -56,17 +55,17 @@ export async function postHandler(
         });
       case "auth/invalid-email":
       case "auth/weak-password":
-      throw ErrorFactory(errorCodes.BAD_REQUEST);
+      throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
       default:
-      throw ErrorFactory(errorCodes.INTERNAL_SERVER_ERROR);
+      throw ErrorFactory(httpErrorCodes.INTERNAL_SERVER_ERROR);
     }
   }
 
   function validateInput() {
     if (!fullname || !email || !password || !confirmPassword) {
-      throw ErrorFactory(errorCodes.BAD_REQUEST);
+      throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
     } else if (password !== confirmPassword) {
-      throw createUsersApiError.PASSWORDS_DO_NOT_MATCH();
+      throw ErrorFactory(usersErrorCodes.PASSWORDS_DO_NOT_MATCH);
     }
   }
 }
