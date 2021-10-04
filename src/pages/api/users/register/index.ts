@@ -47,7 +47,7 @@ export async function postHandler(
   } catch (err: any) {
     // Rethrow validateInput() error
     if (err instanceof ApiError) {
-      throw err;
+      return errorHandler(req, res, err);
     }
 
     // Handle Firebase Auth Errors from createUserWIthEmailAndPassword()
