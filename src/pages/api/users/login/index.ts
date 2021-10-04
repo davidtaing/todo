@@ -32,7 +32,7 @@ export async function postHandler(
   const { email, password } = req?.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: "Bad Request" });
+    throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
   }
 
   try {
@@ -48,18 +48,11 @@ export async function postHandler(
       case "auth/user-not-found":
       case "auth/wrong-password":
       case "auth/invalid-email":
-        return res
-          .status(401)
-          .json({
-            status: 401,
-            message: "Unauthorized: Invalid Email or Password.",
-          });
+        throw ErrorFactory(usersErrorCodes.UNAUTHORIZED_INVALID_EMAIL_OR_PASSWORD);
       case "auth/missing-email":
-        return res.status(400).json({ status: 400, message: "Bad Request" });
+        throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
       default:
-        return res
-          .status(500)
-          .json({ status: 500, message: "Interal Server Error" });
+        throw ErrorFactory(httpErrorCodes.INTERNAL_SERVER_ERROR);
     }
   }
 }
