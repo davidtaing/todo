@@ -6,5 +6,5 @@ export default function errorHandler(
   res: NextApiResponse,
   error: ApiError
 ) {
-  res.status(error.httpStatus).json({ message: error.message });
+  res.status(error.status).json({ message: error.message });
 }

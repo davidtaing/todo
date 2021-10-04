@@ -8,8 +8,8 @@ import {
 } from "../../../../api/firebase/auth";
 
 
-import ApiError from "../../../../api/utils/ApiError";
-import { createApiError, createUsersApiError } from "../../../../api/errors";
+import { errorCodes, createUsersApiError } from "../../../../api/errors";
+import ErrorFactory from "../../../../api/ErrorFactory";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
@@ -18,7 +18,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (method === "POST") {
       return postHandler(req, res);
     } else {
-      throw createApiError.METHOD_NOT_ALLOWED();
+      throw ErrorFactory(errorCodes.METHOD_NOT_ALLOWED);
     }
   } catch (err: any) {
     errorHandler(req, res, err);
@@ -56,15 +56,15 @@ export async function postHandler(
         });
       case "auth/invalid-email":
       case "auth/weak-password":
-        throw createApiError.BAD_REQUEST();
+      throw ErrorFactory(errorCodes.BAD_REQUEST);
       default:
-        throw createApiError.INTERNAL_SERVER_ERROR();
+      throw ErrorFactory(errorCodes.INTERNAL_SERVER_ERROR);
     }
   }
 
   function validateInput() {
     if (!fullname || !email || !password || !confirmPassword) {
-      throw createApiError.BAD_REQUEST();
+      throw ErrorFactory(errorCodes.BAD_REQUEST);
     } else if (password !== confirmPassword) {
       throw createUsersApiError.PASSWORDS_DO_NOT_MATCH();
     }

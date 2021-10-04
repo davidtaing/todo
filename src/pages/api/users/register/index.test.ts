@@ -1,6 +1,6 @@
 import { createMocks } from "node-mocks-http";
 import handler from "./index";
-import { createApiError, createUsersApiError } from "../../../../api/errors";
+import { errorCodes } from "../../../../api/errors";
 
 jest.mock("../../../../api/firebase/auth", () => {
   return {
@@ -51,7 +51,6 @@ describe("/users/register", () => {
           confirmPassword: "12345678",
         },
       });
-      const { message: expectMessage } = createApiError.METHOD_NOT_ALLOWED();
 
       beforeAll(async () => {
         await handler(req, res);
@@ -65,8 +64,10 @@ describe("/users/register", () => {
         expect(res._isJSON()).toBeTruthy();
       });
 
-      test(`Respond with message: "${expectMessage}"`, () => {
+      test(`Respond with message: "${errorCodes.METHOD_NOT_ALLOWED.message}"`, () => {
+        const { message: expectMessage } = errorCodes.METHOD_NOT_ALLOWED;
         const { message: actualMessage } = res._getJSONData();
+
         expect(actualMessage).toBe(expectMessage);
       });
     });
