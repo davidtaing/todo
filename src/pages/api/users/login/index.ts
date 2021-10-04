@@ -32,7 +32,7 @@ export async function postHandler(
   const { email, password } = req?.body;
 
   try {
-    validateInput();
+    validateInput(email, password);
 
     const userCredential = await signInWithEmailAndPassword(
       auth,
@@ -57,10 +57,10 @@ export async function postHandler(
         throw ErrorFactory(httpErrorCodes.INTERNAL_SERVER_ERROR);
     }
   }
+}
 
-  function validateInput() {
-    if (!email || !password) {
-      throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
-    }
+function validateInput(email: string, password: string) {
+  if (!email || !password) {
+    throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
   }
 }
