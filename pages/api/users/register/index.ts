@@ -5,22 +5,9 @@ import {
   auth,
   createUserWithEmailAndPassword,
 } from "../../../../src/api/firebase/auth";
-import ApiError from "../../../../src/api/utils/ApiError";
 
-const CreateApiError = {
-  BAD_REQUEST: () => {
-    return new ApiError(403, "Bad Request");
-  },
-  INTERNAL_SERVER_ERROR: () => {
-    return new ApiError(403, "Internal Server Error");
-  },
-  PASSWORDS_DO_NOT_MATCH: () => {
-    return new ApiError(403, "Password and Confirm Password do not match");
-  },
-  METHOD_NOT_ALLOWED: () => {
-    return new ApiError(405, "Method Not Allowed");
-  },
-};
+import ApiError from "../../../../src/api/utils/ApiError";
+import { createApiError, createUsersApiError } from "../../../../src/api/errors";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
@@ -29,7 +16,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (method === "POST") {
       return postHandler(req, res);
     } else {
-      throw CreateApiError.METHOD_NOT_ALLOWED();
+      throw createApiError.METHOD_NOT_ALLOWED();
     }
   } catch (err: any) {
     errorHandler(req, res, err);
@@ -45,9 +32,9 @@ export async function postHandler(
   // TODO Refactor
   // Validate Input
   if (!fullname || !email || !password || !confirmPassword) {
-    throw CreateApiError.BAD_REQUEST();
+    throw createApiError.BAD_REQUEST();
   } else if (password !== confirmPassword) {
-    throw CreateApiError.PASSWORDS_DO_NOT_MATCH();
+    throw createUsersApiError.PASSWORDS_DO_NOT_MATCH();
   }
 
   try {
@@ -72,9 +59,9 @@ export async function postHandler(
         });
       case "auth/invalid-email":
       case "auth/weak-password":
-        throw CreateApiError.BAD_REQUEST();
+        throw createApiError.BAD_REQUEST();
       default:
-        throw CreateApiError.INTERNAL_SERVER_ERROR();
+        throw createApiError.INTERNAL_SERVER_ERROR();
     }
   }
 }
