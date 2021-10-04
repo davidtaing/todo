@@ -9,6 +9,7 @@ import {
 import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
 import ErrorFactory from "../../../../api/utils/ErrorFactory";
 import errorHandler from "../../../../api/middlewares/error";
+import ApiError from "../../../../api/utils/ApiError";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
@@ -29,14 +30,10 @@ export async function postHandler(
   res: NextApiResponse
 ): Promise<void> {
   const { fullname, email, password, confirmPassword } = req?.body;
-  // Throws Error if invalid
   try {
+    // Throws Error if invalid
     validateInput();
-  } catch (err: any) {
-    return errorHandler(req, res, err);
-  }
 
-  try {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -48,6 +45,11 @@ export async function postHandler(
         "A link to activate your account has been emailed to the address provided.",
     });
   } catch (err: any) {
+    // Rethrow validateInput() error
+    if (err instanceof ApiError) {
+      throw err;
+    }
+
     // Handle Firebase Auth Errors from createUserWIthEmailAndPassword()
     switch (err.code) {
       // Respond with '200 OK' to prevent exposing existing accounts to attackers
