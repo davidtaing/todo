@@ -28,11 +28,9 @@ export async function postHandler(
   const { fullname, email, password, confirmPassword } = req?.body;
 
   if (!fullname || !email || !password || !confirmPassword) {
-    return res.status(400).json({ message: "Bad Request" });
+    throw new ApiError("Bad Request", 400);
   } else if (password !== confirmPassword) {
-    return res
-      .status(403)
-      .json({ message: "Password and Confirm Password do not match." });
+    throw new ApiError("Password and Confirm Password do not match.", 403);
   }
 
   try {
@@ -48,7 +46,9 @@ export async function postHandler(
         "A link to activate your account has been emailed to the address provided.",
     });
   } catch (err: any) {
+    // Handle Firebase Auth Errors from createUserWIthEmailAndPassword()
     switch (err.code) {
+      // Respond with '200 OK' to prevent exposing existing accounts to attackers
       case "auth/email-already-in-use":
         return res.status(200).json({
           status: 200,
@@ -57,11 +57,9 @@ export async function postHandler(
         });
       case "auth/invalid-email":
       case "auth/weak-password":
-        return res.status(400).json({ status: 400, message: "Bad Request" });
+        throw new ApiError("Bad Request", 400);
       default:
-        return res
-          .status(500)
-          .json({ status: 500, message: "Interal Server Error" });
+        throw new ApiError();
     }
   }
 }
