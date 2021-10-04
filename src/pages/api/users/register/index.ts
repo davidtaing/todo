@@ -32,11 +32,7 @@ export async function postHandler(
 
   // TODO Refactor
   // Validate Input
-  if (!fullname || !email || !password || !confirmPassword) {
-    throw createApiError.BAD_REQUEST();
-  } else if (password !== confirmPassword) {
-    throw createUsersApiError.PASSWORDS_DO_NOT_MATCH();
-  }
+  validateInput();
 
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -65,6 +61,12 @@ export async function postHandler(
         throw createApiError.INTERNAL_SERVER_ERROR();
     }
   }
+
+  function validateInput() {
+    if (!fullname || !email || !password || !confirmPassword) {
+      throw createApiError.BAD_REQUEST();
+    } else if (password !== confirmPassword) {
+      throw createUsersApiError.PASSWORDS_DO_NOT_MATCH();
 }
 
 function errorHandler(
