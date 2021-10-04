@@ -27,6 +27,8 @@ export async function postHandler(
 ): Promise<void> {
   const { fullname, email, password, confirmPassword } = req?.body;
 
+  // TODO Refactor
+  // Validate Input
   if (!fullname || !email || !password || !confirmPassword) {
     throw new ApiError("Bad Request", 400);
   } else if (password !== confirmPassword) {
