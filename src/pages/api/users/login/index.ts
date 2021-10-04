@@ -14,10 +14,14 @@ import errorHandler from "../../../../api/middlewares/error";
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
 
-  if (method === "POST") {
-    return postHandler(req, res);
-  } else {
-    errorHandler(req, res, ErrorFactory(httpErrorCodes.METHOD_NOT_ALLOWED));
+  try {
+    if (method === "POST") {
+      return postHandler(req, res);
+    } else {
+      throw ErrorFactory(httpErrorCodes.METHOD_NOT_ALLOWED);
+    }
+  } catch (err: any) {
+    errorHandler(req, res, err);
   }
 }
 
