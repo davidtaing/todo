@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import errorHandler from "../../../../api/middlewares/error";
 
 // Local Firebase Auth Object
 import {
@@ -30,7 +31,6 @@ export async function postHandler(
 ): Promise<void> {
   const { fullname, email, password, confirmPassword } = req?.body;
 
-  // TODO Refactor
   // Validate Input
   validateInput();
 
@@ -67,12 +67,6 @@ export async function postHandler(
       throw createApiError.BAD_REQUEST();
     } else if (password !== confirmPassword) {
       throw createUsersApiError.PASSWORDS_DO_NOT_MATCH();
-}
-
-function errorHandler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-  error: ApiError
-) {
-  res.status(error.httpStatus).json({ message: error.message });
+    }
+  }
 }
