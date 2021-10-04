@@ -32,7 +32,7 @@ export async function postHandler(
   const { fullname, email, password, confirmPassword } = req?.body;
   try {
     // Throws Error if invalid
-    validateInput();
+    validateInput(fullname, email, password, confirmPassword);
 
     const userCredential = await createUserWithEmailAndPassword(
       auth,
@@ -65,12 +65,17 @@ export async function postHandler(
         throw ErrorFactory(httpErrorCodes.INTERNAL_SERVER_ERROR);
     }
   }
+}
 
-  function validateInput() {
-    if (!fullname || !email || !password || !confirmPassword) {
-      throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
-    } else if (password !== confirmPassword) {
-      throw ErrorFactory(usersErrorCodes.PASSWORDS_DO_NOT_MATCH);
-    }
+function validateInput(
+  fullname: string,
+  email: string,
+  password: string,
+  confirmPassword: string
+) {
+  if (!fullname || !email || !password || !confirmPassword) {
+    throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
+  } else if (password !== confirmPassword) {
+    throw ErrorFactory(usersErrorCodes.PASSWORDS_DO_NOT_MATCH);
   }
 }
