@@ -29,9 +29,12 @@ export async function postHandler(
   res: NextApiResponse
 ): Promise<void> {
   const { fullname, email, password, confirmPassword } = req?.body;
-
-  // Validate Input
-  validateInput();
+  // Throws Error if invalid
+  try {
+    validateInput();
+  } catch (err: any) {
+    return errorHandler(req, res, err);
+  }
 
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -55,9 +58,9 @@ export async function postHandler(
         });
       case "auth/invalid-email":
       case "auth/weak-password":
-      throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
+        throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
       default:
-      throw ErrorFactory(httpErrorCodes.INTERNAL_SERVER_ERROR);
+        throw ErrorFactory(httpErrorCodes.INTERNAL_SERVER_ERROR);
     }
   }
 
