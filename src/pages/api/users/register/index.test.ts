@@ -1,6 +1,6 @@
 import { createMocks } from "node-mocks-http";
 import handler from "./index";
-import { httpErrorCodes } from "../../../../api/errors";
+import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
 
 jest.mock("../../../../api/firebase/auth", () => {
   return {
@@ -36,6 +36,37 @@ describe("/users/register", () => {
 
       test("Return JSON", () => {
         expect(res._isJSON()).toBeTruthy();
+      });
+    });
+
+    describe("POST /users/register - Passwords Do Not Match", () => {
+      const { req, res } = createMocks({
+        method: "POST",
+        body: {
+          fullname: "John Citizen",
+          email: "test@test.com",
+          password: "12345678",
+          confirmPassword: "1234",
+        },
+      });
+
+      beforeAll(async () => {
+        await handler(req, res);
+      });
+
+      test("Respond with 403 Status", () => {
+        expect(res._getStatusCode()).toBe(403);
+      });
+
+      test("Return JSON", () => {
+        expect(res._isJSON()).toBeTruthy();
+      });
+
+      test(`Respond with message: "${usersErrorCodes.PASSWORDS_DO_NOT_MATCH.message}"`, () => {
+        const { message: expectMessage } = usersErrorCodes.PASSWORDS_DO_NOT_MATCH;
+        const { message: actualMessage } = res._getJSONData();
+
+        expect(actualMessage).toBe(expectMessage);
       });
     });
   });
