@@ -2,8 +2,8 @@ class ApiError extends Error {
   httpStatus: number;
 
   constructor(
-    message: string = "Internal Server Error",
     httpStatus: number = 500,
+    message: string = "Internal Server Error",
   ) {
     super(message);
     this.httpStatus = httpStatus;

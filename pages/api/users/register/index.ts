@@ -7,12 +7,20 @@ import {
 } from "../../../../src/api/firebase/auth";
 import ApiError from "../../../../src/api/utils/ApiError";
 
-const RESPONSES = new Map([
-  ["SUCCESS", { status: 200, message: "A link to activate your account has been emailed to the address provided"}],
-  ["ERROR/BAD_REQUEST", { status: 400, message: "Bad Request"}],
-  ["ERROR/INTERNAL_SERVER_ERROR", { status: 500, message: "Internal Server Error"}],
-  ["ERROR/PASSWORDS_DO_NOT_MATCH", { status: 403, message: "Password and Confirm Password do not match"}],
-])
+const CreateApiError = {
+  BAD_REQUEST: () => {
+    return new ApiError(403, "Bad Request");
+  },
+  INTERNAL_SERVER_ERROR: () => {
+    return new ApiError(403, "Internal Server Error");
+  },
+  PASSWORDS_DO_NOT_MATCH: () => {
+    return new ApiError(403, "Password and Confirm Password do not match");
+  },
+  METHOD_NOT_ALLOWED: () => {
+    return new ApiError(405, "Method Not Allowed");
+  },
+};
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
@@ -21,7 +29,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (method === "POST") {
       return postHandler(req, res);
     } else {
-      throw new ApiError("Method Not Allowed", 405);
+      throw CreateApiError.METHOD_NOT_ALLOWED();
     }
   } catch (err: any) {
     errorHandler(req, res, err);
@@ -37,9 +45,9 @@ export async function postHandler(
   // TODO Refactor
   // Validate Input
   if (!fullname || !email || !password || !confirmPassword) {
-    throw new ApiError("Bad Request", 400);
+    throw CreateApiError.BAD_REQUEST();
   } else if (password !== confirmPassword) {
-    throw new ApiError("Password and Confirm Password do not match.", 403);
+    throw CreateApiError.PASSWORDS_DO_NOT_MATCH();
   }
 
   try {
@@ -64,14 +72,17 @@ export async function postHandler(
         });
       case "auth/invalid-email":
       case "auth/weak-password":
-        throw new ApiError("Bad Request", 400);
+        throw CreateApiError.BAD_REQUEST();
       default:
-        throw new ApiError();
+        throw CreateApiError.INTERNAL_SERVER_ERROR();
     }
   }
 }
 
-function errorHandler(req: NextApiRequest, res: NextApiResponse, error: ApiError) {
-  res.status(error.httpStatus).json({message: error.message});
+function errorHandler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  error: ApiError
+) {
+  res.status(error.httpStatus).json({ message: error.message });
 }
-
