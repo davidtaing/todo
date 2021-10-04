@@ -31,11 +31,9 @@ export async function postHandler(
 ): Promise<void> {
   const { email, password } = req?.body;
 
-  if (!email || !password) {
-    throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
-  }
-
   try {
+    validateInput();
+
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
@@ -44,6 +42,10 @@ export async function postHandler(
 
     return res.status(303).json({ userCredential });
   } catch (err: any) {
+    // Handle validateInput Errors
+    if (err instanceof ApiError)
+      return errorHandler(req, res, err);
+
     switch (err.code) {
       case "auth/user-not-found":
       case "auth/wrong-password":
@@ -53,6 +55,12 @@ export async function postHandler(
         throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
       default:
         throw ErrorFactory(httpErrorCodes.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  function validateInput() {
+    if (!email || !password) {
+      throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
     }
   }
 }
