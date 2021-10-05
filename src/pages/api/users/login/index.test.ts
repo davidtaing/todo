@@ -54,6 +54,7 @@ describe("/users/login", () => {
             password: "12345678",
           },
         });
+
         beforeAll(async () => {
           mockResponse = () => {
             throw new FirebaseError(
@@ -90,9 +91,9 @@ describe("/users/login", () => {
         },
       });
 
-      beforeAll(async() => {
+      beforeAll(async () => {
         await handler(req, res);
-      })
+      });
 
       test("Respond with 405 Status", async () => {
         expect(res._getStatusCode()).toBe(405);
