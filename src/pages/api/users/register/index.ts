@@ -10,6 +10,7 @@ import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
 import ErrorFactory from "../../../../api/utils/ErrorFactory";
 import errorHandler from "../../../../api/middlewares/error";
 import ApiError from "../../../../api/utils/ApiError";
+import { FirebaseError } from "@firebase/util";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
@@ -44,25 +45,26 @@ export async function postHandler(
         "A link to activate your account has been emailed to the address provided.",
     });
   } catch (err: any) {
-    // Rethrow validateInput() error
-    if (err instanceof ApiError) {
-      return errorHandler(req, res, err);
-    }
-
+    let responseError = err;
     // Handle Firebase Auth Errors from createUserWIthEmailAndPassword()
-    switch (err.code) {
-      // Respond with '200 OK' to prevent exposing existing accounts to attackers
-      case "auth/email-already-in-use":
-        return res.status(200).json({
-          message:
-            "A link to activate your account has been emailed to the address provided.",
-        });
-      case "auth/invalid-email":
-      case "auth/weak-password":
-        throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
-      default:
-        throw ErrorFactory(httpErrorCodes.INTERNAL_SERVER_ERROR);
+    if (err instanceof FirebaseError) {
+      switch (err.code) {
+        // Respond with '200 OK' to prevent exposing existing accounts to attackers
+        case "auth/email-already-in-use":
+          return res.status(200).json({
+            message:
+              "A link to activate your account has been emailed to the address provided.",
+          });
+        case "auth/invalid-email":
+        case "auth/weak-password":
+          ErrorFactory(httpErrorCodes.BAD_REQUEST);
+          break;
+        default:
+          ErrorFactory(httpErrorCodes.INTERNAL_SERVER_ERROR);
+          break;
+      }
     }
+    return errorHandler(req, res, err);
   }
 }
 
