@@ -57,9 +57,6 @@ describe("/users/register", () => {
           await handler(req, res);
         });
 
-        const { message: expectMessage } =
-          usersErrorCodes.PASSWORDS_DO_NOT_MATCH;
-
         test("Respond with 403 Status", () => {
           expect(res._getStatusCode()).toBe(403);
         });
@@ -68,9 +65,9 @@ describe("/users/register", () => {
           expect(res._isJSON()).toBeTruthy();
         });
 
-        test(`Respond with message: "${expectMessage}"`, () => {
+        test(`Respond with message: "Password and Confirm Password do not match"`, () => {
           const { message: actualMessage } = res._getJSONData();
-          expect(actualMessage).toBe(expectMessage);
+          expect(actualMessage).toBe("Password and Confirm Password do not match");
         });
       });
     });

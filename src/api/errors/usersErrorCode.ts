@@ -5,7 +5,7 @@ const usersErrorCodes = {
   },
   UNAUTHORIZED_INVALID_EMAIL_OR_PASSWORD: {
     status: 401,
-    message: "Unauthorized: Invalid Email or Password.",
+    message: "Unauthorized: Invalid Email or Password",
   },
 };
 

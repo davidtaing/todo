@@ -1,7 +1,5 @@
 import { FirebaseError } from "@firebase/util";
 import { createMocks } from "node-mocks-http";
-import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
-import ErrorFactory from "../../../../api/utils/ErrorFactory";
 import handler from "./index";
 
 let mockResponse = () => ({});
@@ -66,9 +64,6 @@ describe("/users/login", () => {
           await handler(req, res);
         });
 
-        const { message: expectMessage } =
-          usersErrorCodes.UNAUTHORIZED_INVALID_EMAIL_OR_PASSWORD;
-
         test("Respond with 401 Status", () => {
           expect(res._getStatusCode()).toBe(401);
         });
@@ -77,9 +72,9 @@ describe("/users/login", () => {
           expect(res._isJSON()).toBeTruthy();
         });
 
-        test(`Return Error Message: ${expectMessage}`, () => {
+        test(`Return Error Message: "Unauthorized: Invalid Email or Password"`, () => {
           const { message: actualMessage } = res._getJSONData();
-          expect(actualMessage).toBe(expectMessage);
+          expect(actualMessage).toBe("Unauthorized: Invalid Email or Password");
         });
       });
     });
@@ -99,9 +94,6 @@ describe("/users/login", () => {
         await handler(req, res);
       })
 
-      const { message: expectMessage } =
-        httpErrorCodes.METHOD_NOT_ALLOWED;
-
       test("Respond with 405 Status", async () => {
         expect(res._getStatusCode()).toBe(405);
       });
@@ -110,9 +102,9 @@ describe("/users/login", () => {
         expect(res._isJSON()).toBeTruthy();
       });
 
-      test(`Return Error Message: ${expectMessage}`, () => {
+      test(`Return Error Message: "Method Not Allowed"}`, () => {
         const { message: actualMessage } = res._getJSONData();
-        expect(actualMessage).toBe(expectMessage);
+        expect(actualMessage).toBe("Method Not Allowed");
       });
     });
   });
