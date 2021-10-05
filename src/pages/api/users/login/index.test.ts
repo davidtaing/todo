@@ -60,7 +60,6 @@ describe("/users/login", () => {
         });
 
         test("Respond with 401 Status", () => {
-          console.log(res._getJSONData());
           expect(res._getStatusCode()).toBe(401);
           expect(res._isJSON()).toBeTruthy();
         });

@@ -6,8 +6,7 @@ import {
   signInWithEmailAndPassword,
 } from "../../../../api/firebase/auth";
 
-import ApiError from "../../../../api/utils/ApiError";
-import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
+import { httpErrorCodes } from "../../../../api/errors";
 import ErrorFactory from "../../../../api/utils/ErrorFactory";
 import errorHandler from "../../../../api/middlewares/error";
 import { FirebaseError } from "@firebase/util";
@@ -36,10 +35,9 @@ export async function postHandler(
   try {
     // Throws error if invalid
     validateInput(email, password);
-
     const { user } = await signInWithEmailAndPassword(auth, email, password);
     const { stsTokenManager } = user as any;
-    // TODO Return something more appropiate
+
     return res.status(303).json({ stsTokenManager });
   } catch (err: any) {
     if (err instanceof FirebaseError)
