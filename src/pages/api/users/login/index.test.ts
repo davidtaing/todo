@@ -86,15 +86,15 @@ describe("/users/login", () => {
   });
 
   describe("Unsupported Methods", () => {
-    const { req, res } = createMocks({
-      method: "POST",
-      body: {
-        email: "test@test.com",
-        password: "12345678",
-      },
-    });
-
     describe("DELETE /users/login", () => {
+      const { req, res } = createMocks({
+        method: "DELETE",
+        body: {
+          email: "test@test.com",
+          password: "12345678",
+        },
+      });
+
       beforeAll(async() => {
         await handler(req, res);
       })
