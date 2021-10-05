@@ -1,16 +1,18 @@
 import { createMocks } from "node-mocks-http";
+import { usersErrorCodes } from "../../../../api/errors";
+import ErrorFactory from "../../../../api/utils/ErrorFactory";
 import handler from "./index";
+
+let mockResponse = () => ({
+  user: {
+    stsTokenManager: "token",
+  },
+});
 
 jest.mock("../../../../api/firebase/auth", () => {
   return {
     auth: jest.fn(),
-    signInWithEmailAndPassword: jest.fn(() => {
-      return {
-        user: {
-          stsTokenManager: "token"
-        }
-      }
-    }),
+    signInWithEmailAndPassword: jest.fn(() => mockResponse()),
   };
 });
 
@@ -36,6 +38,31 @@ describe("/users/login", () => {
 
         test("Respond with 303 Status", () => {
           expect(res._getStatusCode()).toBe(303);
+          expect(res._isJSON()).toBeTruthy();
+        });
+      });
+
+      describe("Failure Response", () => {
+        const { req, res } = createMocks({
+          method: "POST",
+          body: {
+            email: "test@test.com",
+            password: "12345678",
+          },
+        });
+
+        beforeAll(async () => {
+          mockResponse = () => {
+            throw ErrorFactory(
+              usersErrorCodes.UNAUTHORIZED_INVALID_EMAIL_OR_PASSWORD
+            );
+          };
+          await handler(req, res);
+        });
+
+        test("Respond with 401 Status", () => {
+          console.log(res._getJSONData());
+          expect(res._getStatusCode()).toBe(401);
           expect(res._isJSON()).toBeTruthy();
         });
       });
