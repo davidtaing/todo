@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { FirebaseError } from "@firebase/util";
 
 // Local Firebase Auth Object
 import {
@@ -9,8 +10,7 @@ import {
 import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
 import ErrorFactory from "../../../../api/utils/ErrorFactory";
 import errorHandler from "../../../../api/middlewares/error";
-import ApiError from "../../../../api/utils/ApiError";
-import { FirebaseError } from "@firebase/util";
+import authErrorConverter from "../../../../api/firebase/auth/errors";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
@@ -33,7 +33,6 @@ export async function postHandler(
   const { fullname, email, password, confirmPassword } = req?.body;
   try {
     validateInput(fullname, email, password, confirmPassword);
-
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -45,26 +44,19 @@ export async function postHandler(
         "A link to activate your account has been emailed to the address provided.",
     });
   } catch (err: any) {
-    let responseError = err;
-    // Handle Firebase Auth Errors from createUserWIthEmailAndPassword()
+    let errorResponse = err;
     if (err instanceof FirebaseError) {
-      switch (err.code) {
-        // Respond with '200 OK' to prevent exposing existing accounts to attackers
-        case "auth/email-already-in-use":
-          return res.status(200).json({
-            message:
-              "A link to activate your account has been emailed to the address provided.",
-          });
-        case "auth/invalid-email":
-        case "auth/weak-password":
-          ErrorFactory(httpErrorCodes.BAD_REQUEST);
-          break;
-        default:
-          ErrorFactory(httpErrorCodes.INTERNAL_SERVER_ERROR);
-          break;
+      // Respond with '200 OK' to prevent exposing existing accounts to attackers
+      if (err.code === "auth/email-already-in-use") {
+        return res.status(200).json({
+          message:
+            "A link to activate your account has been emailed to the address provided.",
+        });
+      } else {
+        errorResponse = authErrorConverter(err);
       }
     }
-    return errorHandler(req, res, err);
+    return errorHandler(req, res, errorResponse);
   }
 }
 

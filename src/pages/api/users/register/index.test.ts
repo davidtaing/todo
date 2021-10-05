@@ -40,6 +40,11 @@ describe("/users/register", () => {
         test("Return JSON", () => {
           expect(res._isJSON()).toBeTruthy();
         });
+
+        test(`Responds with: "A link to activate your account has been emailed to the address provided."`, () => {
+          const { message: actualMessage } = res._getJSONData();
+          expect(actualMessage).toBe("A link to activate your account has been emailed to the address provided.");
+        });
       });
 
       describe("Error Response: Passwords Do Not Match", () => {
