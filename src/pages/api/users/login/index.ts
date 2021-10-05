@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { FirebaseError } from "@firebase/util";
 
 // Local Firebase Auth Object
 import {
@@ -7,9 +8,8 @@ import {
 } from "../../../../api/firebase/auth";
 
 import { httpErrorCodes } from "../../../../api/errors";
-import ErrorFactory from "../../../../api/utils/ErrorFactory";
 import errorHandler from "../../../../api/middlewares/error";
-import { FirebaseError } from "@firebase/util";
+import ApiErrorFactory from "../../../../api/utils/ApiErrorFactory";
 import authErrorConverter from "../../../../api/firebase/auth/errors";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -19,7 +19,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (method === "POST") {
       return postHandler(req, res);
     } else {
-      throw ErrorFactory(httpErrorCodes.METHOD_NOT_ALLOWED);
+      throw ApiErrorFactory(httpErrorCodes.METHOD_NOT_ALLOWED);
     }
   } catch (err: any) {
     errorHandler(req, res, err);
@@ -47,8 +47,14 @@ export async function postHandler(
   }
 }
 
+
+/**
+ * @param email 
+ * @param password 
+ * @remarks Fails with an error if the input is invalid.
+ */
 function validateInput(email: string, password: string) {
   if (!email || !password) {
-    throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
+    throw ApiErrorFactory(httpErrorCodes.BAD_REQUEST);
   }
 }

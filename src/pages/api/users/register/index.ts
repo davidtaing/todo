@@ -8,9 +8,10 @@ import {
 } from "../../../../api/firebase/auth";
 
 import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
-import ErrorFactory from "../../../../api/utils/ErrorFactory";
+import ApiErrorFactory from "../../../../api/utils/ApiErrorFactory";
 import errorHandler from "../../../../api/middlewares/error";
 import authErrorConverter from "../../../../api/firebase/auth/errors";
+
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
@@ -19,12 +20,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (method === "POST") {
       return postHandler(req, res);
     } else {
-      throw ErrorFactory(httpErrorCodes.METHOD_NOT_ALLOWED);
+      throw ApiErrorFactory(httpErrorCodes.METHOD_NOT_ALLOWED);
     }
   } catch (err: any) {
     errorHandler(req, res, err);
   }
 }
+
 
 export async function postHandler(
   req: NextApiRequest,
@@ -60,6 +62,13 @@ export async function postHandler(
   }
 }
 
+/**
+ * @param fullname: string
+ * @param email: string 
+ * @param password: string 
+ * @param confirmPassword: string 
+ * @remarks Fails with an error if the input is invalid.
+ */
 function validateInput(
   fullname: string,
   email: string,
@@ -67,8 +76,8 @@ function validateInput(
   confirmPassword: string
 ) {
   if (!fullname || !email || !password || !confirmPassword) {
-    throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
+    throw ApiErrorFactory(httpErrorCodes.BAD_REQUEST);
   } else if (password !== confirmPassword) {
-    throw ErrorFactory(usersErrorCodes.PASSWORDS_DO_NOT_MATCH);
+    throw ApiErrorFactory(usersErrorCodes.PASSWORDS_DO_NOT_MATCH);
   }
 }
