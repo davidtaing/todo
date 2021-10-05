@@ -48,7 +48,7 @@ describe("/users/login", () => {
       });
 
       // TODO: Refactor test to authErrorConverter tests.
-      describe("Failure Response", () => {
+      describe("Handle Firebase auth/wrong-password error", () => {
         const { req, res } = createMocks({
           method: "POST",
           body: {
