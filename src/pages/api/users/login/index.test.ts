@@ -1,3 +1,4 @@
+import { FirebaseError } from "@firebase/util";
 import { createMocks } from "node-mocks-http";
 import { usersErrorCodes } from "../../../../api/errors";
 import ErrorFactory from "../../../../api/utils/ErrorFactory";
@@ -38,6 +39,29 @@ describe("/users/login", () => {
 
         test("Respond with 303 Status", () => {
           expect(res._getStatusCode()).toBe(303);
+          expect(res._isJSON()).toBeTruthy();
+        });
+      });
+
+      describe("Failure Response", () => {
+        const { req, res } = createMocks({
+          method: "POST",
+          body: {
+            email: "test@test.com",
+            password: "12345678",
+          },
+        });
+
+        beforeAll(async () => {
+          mockResponse = () => {
+            throw new FirebaseError("auth/wrong-password", "mocked firebase error");
+          };
+          await handler(req, res);
+        });
+
+        test("Respond with 401 Status", () => {
+          console.log(res._getJSONData());
+          expect(res._getStatusCode()).toBe(401);
           expect(res._isJSON()).toBeTruthy();
         });
       });

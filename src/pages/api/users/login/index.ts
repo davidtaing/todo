@@ -47,6 +47,7 @@ export async function postHandler(
     // Handle validateInput Errors
     if (err instanceof ApiError) return errorHandler(req, res, err);
 
+    // it is rethrowing, but thrown errors are not caught.
     switch (err.code) {
       case "auth/user-not-found":
       case "auth/wrong-password":
