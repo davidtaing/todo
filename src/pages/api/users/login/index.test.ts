@@ -4,7 +4,13 @@ import handler from "./index";
 jest.mock("../../../../api/firebase/auth", () => {
   return {
     auth: jest.fn(),
-    signInWithEmailAndPassword: jest.fn(),
+    signInWithEmailAndPassword: jest.fn(() => {
+      return {
+        user: {
+          stsTokenManager: "token"
+        }
+      }
+    }),
   };
 });
 

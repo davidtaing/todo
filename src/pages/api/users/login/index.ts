@@ -35,24 +35,25 @@ export async function postHandler(
     // Throws error if invalid
     validateInput(email, password);
 
-    const userCredential = await signInWithEmailAndPassword(
+    const { user } = await signInWithEmailAndPassword(
       auth,
       email,
       password
     );
-
+    const { stsTokenManager } = user as any;
     // TODO Return something more appropiate
-    return res.status(303).json({ userCredential });
+    return res.status(303).json({ stsTokenManager });
   } catch (err: any) {
     // Handle validateInput Errors
-    if (err instanceof ApiError)
-      return errorHandler(req, res, err);
+    if (err instanceof ApiError) return errorHandler(req, res, err);
 
     switch (err.code) {
       case "auth/user-not-found":
       case "auth/wrong-password":
       case "auth/invalid-email":
-        throw ErrorFactory(usersErrorCodes.UNAUTHORIZED_INVALID_EMAIL_OR_PASSWORD);
+        throw ErrorFactory(
+          usersErrorCodes.UNAUTHORIZED_INVALID_EMAIL_OR_PASSWORD
+        );
       case "auth/missing-email":
         throw ErrorFactory(httpErrorCodes.BAD_REQUEST);
       default:
