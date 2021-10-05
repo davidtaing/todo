@@ -9,11 +9,12 @@ const authErrorConverter = (err: FirebaseError): ApiError => {
   switch (err.code) {
     case "auth/user-not-found":
     case "auth/wrong-password":
-    case "auth/invalid-email":
       apiError = ErrorFactory(
         usersErrorCodes.UNAUTHORIZED_INVALID_EMAIL_OR_PASSWORD
       );
       break;
+    case "auth/invalid-email":
+    case "auth/weak-password":
     case "auth/missing-email":
       apiError = ErrorFactory(httpErrorCodes.BAD_REQUEST);
       break;
