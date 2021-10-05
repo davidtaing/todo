@@ -140,11 +140,9 @@ describe("/users/register", () => {
         expect(res._isJSON()).toBeTruthy();
       });
 
-      test(`Respond with message: "${httpErrorCodes.METHOD_NOT_ALLOWED.message}"`, () => {
-        const { message: expectMessage } = httpErrorCodes.METHOD_NOT_ALLOWED;
+      test(`Respond with message: "Method Not Allowed"`, () => {
         const { message: actualMessage } = res._getJSONData();
-
-        expect(actualMessage).toBe(expectMessage);
+        expect(actualMessage).toBe("Method Not Allowed");
       });
     });
   });
