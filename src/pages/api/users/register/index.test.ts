@@ -81,8 +81,10 @@ describe("/users/register", () => {
         const { req, res } = createMocks({
           method: "POST",
           body: {
+            fullname: "John Citizen",
             email: "test@test.com",
             password: "12345678",
+            confirmPassword: "12345678",
           },
         });
 
