@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "tuCaZAz8vpfAvcb0gokPOJ7LSQw1": {
+        "uid": "tuCaZAz8vpfAvcb0gokPOJ7LSQw1",
+        "todos": [
+          {
+            "id": 1,
+            "status": "done",
+            "category": "Sleep",
+            "title": "Go to sleep at 12AM"
+          },
+          {
+            "id": 2,
+            "status": "pending",
+            "category": "Excercise",
+            "title": "Walk the dog"
+          },
+          {
+            "id": 4,
+            "status": "pending",
+            "category": "Exercise",
+            "title": "Do 10 push ups"
+          }
+        ]
+      }
+    },
+    {
+      "RtMbilhva4bMHEAjvj2X1A0ki683": {
+        "uid": "RtMbilhva4bMHEAjvj2X1A0ki683",
+        "todos": [
+          {
+            "id": 3,
+            "status": "done",
+            "category": "Uncategorized",
+            "title": "Study for 3 hours this week."
+          },
+          {
+            "id": 5,
+            "status": "pending",
+            "category": "Diet",
+            "title": "Eat an apple today."
+          },
+          {
+            "id": 6,
+            "status": "pending",
+            "category": "Exercise",
+            "title": "Do 10 push ups"
+          }
+        ]
+      }
+    }
+  ]
+}
