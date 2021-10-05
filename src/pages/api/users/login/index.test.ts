@@ -1,3 +1,4 @@
+import { FirebaseError } from "@firebase/util";
 import { createMocks } from "node-mocks-http";
 import { usersErrorCodes } from "../../../../api/errors";
 import ErrorFactory from "../../../../api/utils/ErrorFactory";
@@ -53,9 +54,7 @@ describe("/users/login", () => {
 
         beforeAll(async () => {
           mockResponse = () => {
-            throw ErrorFactory(
-              usersErrorCodes.UNAUTHORIZED_INVALID_EMAIL_OR_PASSWORD
-            );
+            throw new FirebaseError("auth/wrong-password", "mocked firebase error");
           };
           await handler(req, res);
         });
