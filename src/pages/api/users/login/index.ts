@@ -11,6 +11,7 @@ import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
 import ErrorFactory from "../../../../api/utils/ErrorFactory";
 import errorHandler from "../../../../api/middlewares/error";
 import { FirebaseError } from "@firebase/util";
+import authErrorConverter from "../../../../api/firebase/auth/errors";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req?.method;
@@ -41,26 +42,10 @@ export async function postHandler(
     // TODO Return something more appropiate
     return res.status(303).json({ stsTokenManager });
   } catch (err: any) {
-    let responseError = err;
-    // Handle validateInput Errors
-    if (err instanceof FirebaseError) {
-      switch (err.code) {
-        case "auth/user-not-found":
-        case "auth/wrong-password":
-        case "auth/invalid-email":
-          responseError = ErrorFactory(
-            usersErrorCodes.UNAUTHORIZED_INVALID_EMAIL_OR_PASSWORD
-          );
-          break;
-        case "auth/missing-email":
-          responseError = ErrorFactory(httpErrorCodes.BAD_REQUEST);
-          break;
-        default:
-          responseError = ErrorFactory(httpErrorCodes.INTERNAL_SERVER_ERROR);
-          break;
-      }
-    }
-    return errorHandler(req, res, responseError);
+    if (err instanceof FirebaseError)
+      return errorHandler(req, res, authErrorConverter(err));
+
+    return errorHandler(req, res, err);
   }
 }
 
