@@ -41,31 +41,6 @@ describe("/users/login", () => {
           expect(res._isJSON()).toBeTruthy();
         });
       });
-
-      describe("Failure Response", () => {
-        const { req, res } = createMocks({
-          method: "POST",
-          body: {
-            email: "test@test.com",
-            password: "12345678",
-          },
-        });
-
-        beforeAll(async () => {
-          mockResponse = () => {
-            throw ErrorFactory(
-              usersErrorCodes.UNAUTHORIZED_INVALID_EMAIL_OR_PASSWORD
-            );
-          };
-          await handler(req, res);
-        });
-
-        test("Respond with 401 Status", () => {
-          console.log(res._getJSONData());
-          expect(res._getStatusCode()).toBe(401);
-          expect(res._isJSON()).toBeTruthy();
-        });
-      });
     });
   });
 
