@@ -2,10 +2,12 @@ import { createMocks } from "node-mocks-http";
 import handler from "./index";
 import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
 
+let mockResponse = () => ({});
+
 jest.mock("../../../../api/firebase/auth", () => {
   return {
     auth: jest.fn(),
-    createUserWithEmailAndPassword: jest.fn(),
+    createUserWithEmailAndPassword: jest.fn(() => mockResponse()),
   };
 });
 
@@ -55,6 +57,9 @@ describe("/users/register", () => {
           await handler(req, res);
         });
 
+        const { message: expectMessage } =
+          usersErrorCodes.PASSWORDS_DO_NOT_MATCH;
+
         test("Respond with 403 Status", () => {
           expect(res._getStatusCode()).toBe(403);
         });
@@ -63,11 +68,8 @@ describe("/users/register", () => {
           expect(res._isJSON()).toBeTruthy();
         });
 
-        test(`Respond with message: "${usersErrorCodes.PASSWORDS_DO_NOT_MATCH.message}"`, () => {
-          const { message: expectMessage } =
-            usersErrorCodes.PASSWORDS_DO_NOT_MATCH;
+        test(`Respond with message: "${expectMessage}"`, () => {
           const { message: actualMessage } = res._getJSONData();
-
           expect(actualMessage).toBe(expectMessage);
         });
       });
