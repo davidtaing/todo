@@ -1,5 +1,5 @@
 import { FirebaseError } from "@firebase/util";
-import { httpErrorCodes, usersErrorCodes } from "../../errors";
+import { httpErrorCodes, usersErrorCodes } from "../../utils/errors/codes";
 import ApiError from "../../utils/ApiError";
 import ApiErrorFactory from "../../utils/ApiErrorFactory";
 

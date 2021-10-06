@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword,
 } from "../../../../api/firebase/auth";
 
-import { httpErrorCodes } from "../../../../api/errors";
+import { httpErrorCodes } from "../../../../api/utils/errors/codes";
 import errorHandler from "../../../../api/middlewares/errorHandler";
 import ApiErrorFactory from "../../../../api/utils/ApiErrorFactory";
 import authErrorConverter from "../../../../api/firebase/auth/errors";

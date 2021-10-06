@@ -7,7 +7,7 @@ import {
   createUserWithEmailAndPassword,
 } from "../../../../api/firebase/auth";
 
-import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
+import { httpErrorCodes, usersErrorCodes } from "../../../../api/utils/errors/codes";
 import ApiErrorFactory from "../../../../api/utils/ApiErrorFactory";
 import errorHandler from "../../../../api/middlewares/errorHandler";
 import authErrorConverter from "../../../../api/firebase/auth/errors";
