@@ -1,20 +1,31 @@
 import { createMocks } from "node-mocks-http";
 import handler from "./index";
 
-describe("GET /todos", () => {
-  const { req, res } = createMocks({
-    method: "GET",
-  });
+let mockedResponse = () => ({});
 
-  beforeAll(async () => {
-    await handler(req, res);
-  })
+// jest.mock();
 
-  test("Status Code: 200",  () => {
-    expect(res._getStatusCode()).toBe(200);
-  });
+describe("/todos", () => {
+  describe("GET /todos", () => {
+    const { req, res } = createMocks({
+      method: "GET",
+    });
 
-  test("Returns JSON", () => {
-    expect(res._isJSON()).toBeTruthy();
+    beforeAll(async () => {
+      await handler(req, res);
+    });
+
+    test("Status Code: 200", () => {
+      expect(res._getStatusCode()).toBe(200);
+    });
+
+    test("Returns JSON", () => {
+      expect(res._isJSON()).toBeTruthy();
+    });
+
+    test("Returns Todos Array", () => {
+      const { todos } = res._getJSONData()
+      expect(Array.isArray(todos)).toBeTruthy();
+    });
   });
-})
+});
