@@ -1,54 +1,43 @@
 {
-  "users": [
-    {
-      "tuCaZAz8vpfAvcb0gokPOJ7LSQw1": {
-        "uid": "tuCaZAz8vpfAvcb0gokPOJ7LSQw1",
-        "todos": [
-          {
-            "id": 1,
-            "status": "done",
-            "category": "Sleep",
-            "title": "Go to sleep at 12AM"
-          },
-          {
-            "id": 2,
-            "status": "pending",
-            "category": "Excercise",
-            "title": "Walk the dog"
-          },
-          {
-            "id": 4,
-            "status": "pending",
-            "category": "Exercise",
-            "title": "Do 10 push ups"
-          }
-        ]
-      }
-    },
-    {
-      "RtMbilhva4bMHEAjvj2X1A0ki683": {
-        "uid": "RtMbilhva4bMHEAjvj2X1A0ki683",
-        "todos": [
-          {
-            "id": 3,
-            "status": "done",
-            "category": "Uncategorized",
-            "title": "Study for 3 hours this week."
-          },
-          {
-            "id": 5,
-            "status": "pending",
-            "category": "Diet",
-            "title": "Eat an apple today."
-          },
-          {
-            "id": 6,
-            "status": "pending",
-            "category": "Exercise",
-            "title": "Do 10 push ups"
-          }
-        ]
-      }
+  "users" : [ {
+    "tuCaZAz8vpfAvcb0gokPOJ7LSQw1" : {
+      "fullname" : "John Citizen",
+      "todos" : [ {
+        "category" : "Sleep",
+        "id" : 1,
+        "status" : "done",
+        "title" : "Go to sleep at 12AM"
+      }, {
+        "category" : "Excercise",
+        "id" : 2,
+        "status" : "pending",
+        "title" : "Walk the dog"
+      }, {
+        "category" : "Exercise",
+        "id" : 4,
+        "status" : "pending",
+        "title" : "Do 10 push ups"
+      } ]
     }
-  ]
+  }, {
+    "RtMbilhva4bMHEAjvj2X1A0ki683" : {
+      "fullname" : "David Taing",
+      "todos" : [ {
+        "category" : "Uncategorized",
+        "id" : 3,
+        "status" : "done",
+        "title" : "Study for 3 hours this week."
+      }, {
+        "category" : "Diet",
+        "id" : 5,
+        "status" : "pending",
+        "title" : "Eat an apple today."
+      }, {
+        "category" : "Exercise",
+        "id" : 6,
+        "status" : "pending",
+        "title" : "Do 10 push ups"
+      } ]
+    }
+  } ]
 }
