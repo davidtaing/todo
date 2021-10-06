@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import ApiError from "../utils/ApiError";
+import ApiError from "../utils/errors/ApiError";
 
 /**
  * @description Default error handler
