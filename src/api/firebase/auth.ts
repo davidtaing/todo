@@ -7,7 +7,7 @@ import {
 } from "@firebase/auth";
 
 // Local Firebase App Object
-import firebaseApp from "./firebase";
+import getFirebaseApp from "./firebase";
 
 const {
   NODE_ENV,
@@ -15,7 +15,7 @@ const {
   FIREBASE_AUTH_EMULATOR_PORT: localhostPort,
 } = process.env;
 
-const auth: Auth = getAuth(firebaseApp);
+const auth: Auth = getAuth(getFirebaseApp());
 
 /**
  *  Connect to Emulator not if running in prod env.

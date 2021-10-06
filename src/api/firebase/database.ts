@@ -1,5 +1,5 @@
 import type { Database } from "firebase/database";
-import firebaseApp from "./firebase";
+import getFirebaseApp from "./firebase";
 import { getDatabase, connectDatabaseEmulator } from "firebase/database";
 
 const {
@@ -8,10 +8,11 @@ const {
   FIREBASE_DATABASE_EMULATOR_PORT: localhostPort,
 } = process.env;
 
-const db: Database = getDatabase(firebaseApp);
+const db: Database = getDatabase(getFirebaseApp());
 
 // Connect to Emulator if running development or test env.
-if (NODE_ENV === "development" || NODE_ENV === "test") {
+// Check ._instanceStarted (Next.js hot-reloads causes re-init & re-emulation) 
+if (NODE_ENV !== "production" && (db as any)._instanceStarted == false) {
   if (!localhost || !localhostPort) {
     throw Error("Failed to load Firebase Database Emulator");
   }
