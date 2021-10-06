@@ -1,3 +1,6 @@
+/**
+ * @description Custom error class with added http status
+ */
 class ApiError extends Error {
   status: number;
 
