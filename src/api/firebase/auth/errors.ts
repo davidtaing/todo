@@ -1,7 +1,7 @@
 import { FirebaseError } from "@firebase/util";
 import { httpErrorCodes, usersErrorCodes } from "../../utils/errors/codes";
 import ApiError from "../../utils/ApiError";
-import ApiErrorFactory from "../../utils/ApiErrorFactory";
+import ApiErrorFactory from "../../utils/errors/ApiErrorFactory";
 
 /**
  * @description Converts Firebase Auth Errors into ApiErrors
