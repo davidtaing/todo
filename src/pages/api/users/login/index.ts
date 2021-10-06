@@ -8,7 +8,7 @@ import {
 } from "../../../../api/firebase/auth";
 
 import { httpErrorCodes } from "../../../../api/errors";
-import errorHandler from "../../../../api/middlewares/error";
+import errorHandler from "../../../../api/middlewares/errorHandler";
 import ApiErrorFactory from "../../../../api/utils/ApiErrorFactory";
 import authErrorConverter from "../../../../api/firebase/auth/errors";
 

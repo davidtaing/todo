@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { ref, get } from "firebase/database";
 import db from "../../../api/firebase/database";
 
-import errorHandler from "../../../api/middlewares/error";
+import errorHandler from "../../../api/middlewares/errorHandler";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {

@@ -9,7 +9,7 @@ import {
 
 import { httpErrorCodes, usersErrorCodes } from "../../../../api/errors";
 import ApiErrorFactory from "../../../../api/utils/ApiErrorFactory";
-import errorHandler from "../../../../api/middlewares/error";
+import errorHandler from "../../../../api/middlewares/errorHandler";
 import authErrorConverter from "../../../../api/firebase/auth/errors";
 
 
