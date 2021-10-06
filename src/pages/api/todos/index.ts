@@ -1,10 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res
-    .status(200)
-    .json({
-      user: "ssss",
-      todos: ["Have dinner at 6 pm", "Go to sleep at 3 am"],
-    });
+  switch (req.method) {
+    case "GET":
+      return getHandler(req, res);
+    default:
+      return res.status(400).json({ message: "Bad Request" });
+  }
+}
+
+async function getHandler(req: NextApiRequest, res: NextApiResponse) {
+  return res.status(501).json({ message: "Not implemented" });
 }
