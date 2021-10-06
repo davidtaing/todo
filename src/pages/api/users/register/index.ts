@@ -10,7 +10,7 @@ import {
 import { httpErrorCodes, usersErrorCodes } from "../../../../api/utils/errors/codes";
 import ApiErrorFactory from "../../../../api/utils/errors/ApiErrorFactory";
 import errorHandler from "../../../../api/middlewares/errorHandler";
-import authErrorConverter from "../../../../api/firebase/auth/errors";
+import authErrorConverter from "../../../../api/firebase/authErrors";
 
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
