@@ -1,4 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { ref, get } from "firebase/database";
+import db from "../../../api/firebase/database";
+
+import errorHandler from "../../../api/middlewares/error";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
@@ -10,5 +14,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function getHandler(req: NextApiRequest, res: NextApiResponse) {
-  return res.status(501).json({ message: "Not implemented" });
+  // interact with the repository
+  const { uid } = req.body;
+  const resourcePath = `/users/${uid}/`;
+  console.log(resourcePath);
+
+  const dbRef = ref(db, resourcePath);
+  const data = (await get(dbRef)).val();
+
+  console.log(data);
+  // get the data
+  return res.status(200).json({
+    data: data,
+  });
 }
