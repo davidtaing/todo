@@ -8,7 +8,7 @@ class TodoRepository {
   }
 
   async getAll(uid: string) {
-    return this.datasource.getAllTodos(uid);
+    return await this.datasource.getAllTodos(uid);
   }
 }
 
