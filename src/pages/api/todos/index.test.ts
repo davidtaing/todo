@@ -14,8 +14,6 @@ describe("api/todos", () => {
 
     test("Returns An Array of Todos", () => {
       const result = res._getJSONData();
-      console.log(result)
-
       expect(Array.isArray(result)).toBeTruthy();
     });
   });
