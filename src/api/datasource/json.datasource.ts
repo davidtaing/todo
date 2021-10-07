@@ -1,3 +1,5 @@
+import { Todo, TodoStatus } from "../models";
+
 const data = new Map([
   [
     "gKl5yZeYDXzQ6mYzRZsIfq7JqNta", {
@@ -6,19 +8,19 @@ const data = new Map([
         {
           category: "Sleep",
           id: 1,
-          status: "done",
+          done: true,
           title: "Go to sleep at 12AM",
         },
         {
           category: "Excercise",
           id: 2,
-          status: "pending",
+          done: false,
           title: "Walk the dog",
         },
         {
           category: "Exercise",
           id: 4,
-          status: "pending",
+          done: false,
           title: "Do 10 push ups",
         },
       ],
@@ -31,19 +33,19 @@ const data = new Map([
         {
           category: "Uncategorized",
           id: 3,
-          status: "done",
+          done: false,
           title: "Study for 3 hours this week.",
         },
         {
           category: "Diet",
           id: 5,
-          status: "pending",
+          done: true,
           title: "Eat an apple today.",
         },
         {
           category: "Exercise",
           id: 6,
-          status: "pending",
+          done: false,
           title: "Do 10 push ups",
         },
       ],
@@ -52,9 +54,21 @@ const data = new Map([
 ]);
 
 export class JSONDatasource {
-  async getAllTodos(uid: string) {
-    const user = data.get(uid);
+  async getAllTodos(uid: string): Promise<Todo[]> {
+    const user = await data.get(uid);
+    if (!user?.todos) {
+      throw Error("Failed to get todos");
+    }
 
-    return user?.todos;
+    const todos = user.todos.map(item => {
+      return new Todo(
+        item.id,
+        item.title,
+        item.category,
+        item.done
+      )
+    })
+
+    return todos;
   };
 }
