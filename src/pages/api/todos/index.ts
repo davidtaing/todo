@@ -2,14 +2,14 @@ import { NextApiRequest, NextApiResponse } from "next";
 import TodoRepository from "../../../api/repositories/todo.repository";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const method;
+  const { method } = req;
 
   switch (method) {
+    case "GET":
+      return getHandler(req, res);
     default:
       return res.status(500).json({ message: "Not implemented" });
   }
-  return getHandler(req, res);
-  res.status(500).json({ message: "Not implemented" });
 }
 
 async function getHandler(req: NextApiRequest, res: NextApiResponse) {

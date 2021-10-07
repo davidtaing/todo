@@ -1,6 +1,5 @@
 import handler from "./";
 import { createMocks } from "node-mocks-http";
-import { Todo } from "../../../api/models";
 
 describe("api/todos", () => {
   describe("GET api/todos", () => {
