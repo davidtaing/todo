@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { postHandler } from "./postHandler";
+import postHandler from "./postHandler";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse): void {
   const { method } = req;

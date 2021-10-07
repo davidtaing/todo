@@ -1,5 +1,5 @@
 import handler from "./";
-import { postHandler } from "./postHandler";
+import postHandler from "./postHandler";
 import { createMocks } from "node-mocks-http";
 
 jest.mock("./postHandler");
