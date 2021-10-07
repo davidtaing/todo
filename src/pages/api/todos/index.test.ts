@@ -1,4 +1,4 @@
-import handler from "./";
+import { getHandler } from "./";
 import { createMocks } from "node-mocks-http";
 
 describe("api/todos", () => {
@@ -10,7 +10,7 @@ describe("api/todos", () => {
       }
     });
 
-    beforeAll(() => handler(req, res));
+    beforeAll(() => getHandler(req, res));
 
     test("Returns An Array of Todos", () => {
       const result = res._getJSONData();

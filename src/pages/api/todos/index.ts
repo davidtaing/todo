@@ -12,7 +12,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-async function getHandler(req: NextApiRequest, res: NextApiResponse) {
+export async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   const { uid } = req.body
 
   const todoRepo = new TodoRepository();
