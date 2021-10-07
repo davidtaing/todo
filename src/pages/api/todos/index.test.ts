@@ -12,7 +12,7 @@ describe("api/todos", () => {
 
     beforeAll(() => getHandler(req, res));
 
-    test("Returns An Array of Todos", () => {
+    test("Returns An Array", () => {
       const result = res._getJSONData();
       expect(result).toBeInstanceOf(Array);
     });
