@@ -1,5 +1,6 @@
 import handler from "./";
 import { createMocks } from "node-mocks-http";
+import { Todo } from "../../../api/models";
 
 describe("api/todos", () => {
   describe("GET api/todos", () => {
@@ -14,7 +15,7 @@ describe("api/todos", () => {
 
     test("Returns An Array of Todos", () => {
       const result = res._getJSONData();
-      expect(Array.isArray(result)).toBeTruthy();
+      expect(result).toBeInstanceOf(Array<Todo>());
     });
   });
 });
