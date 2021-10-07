@@ -1,6 +1,5 @@
 import { createMocks } from "node-mocks-http";
 import handler from "./index";
-import { httpErrorCodes, usersErrorCodes } from "../../../../api/utils/errors/codes";
 import { FirebaseError } from "firebase/app";
 
 let mockResponse = () => ({});

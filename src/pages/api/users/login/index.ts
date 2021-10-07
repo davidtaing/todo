@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword,
 } from "../../../../api/firebase/auth";
 
-import { httpErrorCodes } from "../../../../api/utils/errors/codes";
+import { httpErrorCode } from "../../../../api/utils/errors/codes";
 import errorHandler from "../../../../api/middlewares/errorHandler";
 import ApiErrorFactory from "../../../../api/utils/errors/ApiErrorFactory";
 import authErrorConverter from "../../../../api/firebase/authErrors";
@@ -19,7 +19,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (method === "POST") {
       return postHandler(req, res);
     } else {
-      throw ApiErrorFactory(httpErrorCodes.METHOD_NOT_ALLOWED);
+      throw ApiErrorFactory(httpErrorCode.METHOD_NOT_ALLOWED);
     }
   } catch (err: any) {
     errorHandler(req, res, err);
@@ -55,6 +55,6 @@ export async function postHandler(
  */
 function validateInput(email: string, password: string) {
   if (!email || !password) {
-    throw ApiErrorFactory(httpErrorCodes.BAD_REQUEST);
+    throw ApiErrorFactory(httpErrorCode.BAD_REQUEST);
   }
 }

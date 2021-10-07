@@ -7,7 +7,7 @@ import {
   createUserWithEmailAndPassword,
 } from "../../../../api/firebase/auth";
 
-import { httpErrorCodes, usersErrorCodes } from "../../../../api/utils/errors/codes";
+import { httpErrorCode, usersErrorCode } from "../../../../api/utils/errors/codes";
 import ApiErrorFactory from "../../../../api/utils/errors/ApiErrorFactory";
 import errorHandler from "../../../../api/middlewares/errorHandler";
 import authErrorConverter from "../../../../api/firebase/authErrors";
@@ -20,7 +20,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (method === "POST") {
       return postHandler(req, res);
     } else {
-      throw ApiErrorFactory(httpErrorCodes.METHOD_NOT_ALLOWED);
+      throw ApiErrorFactory(httpErrorCode.METHOD_NOT_ALLOWED);
     }
   } catch (err: any) {
     errorHandler(req, res, err);
@@ -76,8 +76,8 @@ function validateInput(
   confirmPassword: string
 ) {
   if (!fullname || !email || !password || !confirmPassword) {
-    throw ApiErrorFactory(httpErrorCodes.BAD_REQUEST);
+    throw ApiErrorFactory(httpErrorCode.BAD_REQUEST);
   } else if (password !== confirmPassword) {
-    throw ApiErrorFactory(usersErrorCodes.PASSWORDS_DO_NOT_MATCH);
+    throw ApiErrorFactory(usersErrorCode.PASSWORDS_DO_NOT_MATCH);
   }
 }

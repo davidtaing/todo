@@ -1,4 +1,4 @@
-const usersErrorCodes = {
+export const usersErrorCode = {
   PASSWORDS_DO_NOT_MATCH: {
     status: 403,
     message: "Password and Confirm Password do not match",
@@ -8,5 +8,3 @@ const usersErrorCodes = {
     message: "Unauthorized: Invalid Email or Password",
   },
 };
-
-export default usersErrorCodes;

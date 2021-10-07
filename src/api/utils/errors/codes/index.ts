@@ -1,4 +1,2 @@
-import httpErrorCodes from "./httpErrorCode";
-import usersErrorCodes from "./usersErrorCode";
-
-export { httpErrorCodes, usersErrorCodes }
+export * from "./httpErrorCode";
+export * from "./usersErrorCode";
