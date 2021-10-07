@@ -5,6 +5,6 @@ describe("TodoRepository", () => {
 
   test("Returns Todos Array", async () => {
     const result = await todoRepository.getAll("gKl5yZeYDXzQ6mYzRZsIfq7JqNta");
-    expect(Array.isArray(result)).toBeTruthy();
+    expect(result).toBeInstanceOf(Array);
   });
 });
