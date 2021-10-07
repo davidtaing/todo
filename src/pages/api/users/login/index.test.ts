@@ -1,16 +1,8 @@
-import handler, { postHandler } from "./";
+import handler from "./";
+import { postHandler } from "./postHandler";
 import { createMocks } from "node-mocks-http";
 
-
-jest.mock("./", () => {
-  const originalModule = jest.requireActual("./");
-
-  return {
-    __esModule: true,
-    ...originalModule,
-    postHandler: jest.fn(),
-  }
-});
+jest.mock("./postHandler");
 
 describe("/api/users/login", () => {
   describe("Root Handler", () => {

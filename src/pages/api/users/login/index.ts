@@ -1,9 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { postHandler } from "./postHandler";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse): void {
-  res.status(405).json({ message: "Method Not Allowed" });
+  const { method } = req;
+
+  if (method !== "POST")
+    return res.status(405).json({ message: "Method Not Allowed" });
+  
+  return postHandler(req, res);
 };
 
-export function postHandler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(501).json({ message: "Not Implemented" });
-}
