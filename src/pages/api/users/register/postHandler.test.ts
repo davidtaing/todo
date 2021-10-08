@@ -17,8 +17,10 @@ describe("POST api/users/register", () => {
     describe("Firebase Auth throws 'auth/invalid-email' error", () => {
       // set valid email & password to bypass local input validation
       const { req, res } = createMocks({
-        email: "test@test.com",
-        password: "12345678",
+        body: {
+          email: "test@test.com",
+          password: "12345678",
+        },
       });
 
       beforeAll(() => {
@@ -48,8 +50,10 @@ describe("POST api/users/register", () => {
     describe("Firebase Auth throws 'auth/weak-password' error", () => {
       // set valid email & password to bypass local input validation
       const { req, res } = createMocks({
-        email: "test@test.com",
-        password: "12345678",
+        body: {
+          email: "test@test.com",
+          password: "12345678",
+        },
       });
 
       beforeAll(() => {
@@ -79,9 +83,11 @@ describe("POST api/users/register", () => {
     describe("Password and Confirm Password do not match", () => {
       // set valid email & password to bypass local input validation
       const { req, res } = createMocks({
-        email: "test@test.com",
-        password: "12345678",
-        confirmPassword: "1234567",
+        body: {
+          email: "test@test.com",
+          password: "12345678",
+          confirmPassword: "1234567",
+        },
       });
 
       beforeAll(() => {
