@@ -16,12 +16,14 @@ export default async function postHandler(
 ): Promise<void> {
   const { email, password } = req.body;
   try {
-    const userCredential = await signInWithEmailAndPassword(
+    const userCredential: any = await signInWithEmailAndPassword(
       auth,
       email,
       password
     );
-    return res.status(200).json(userCredential);
+
+    const { _tokenResponse } = userCredential;
+    return res.status(200).json(_tokenResponse);
   } catch (err: any) {
     switch (err.code) {
       case "auth/invalid-email":
