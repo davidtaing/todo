@@ -30,7 +30,7 @@ describe("POST api/users/login", () => {
     });
   });
 
-  describe("Firebase Auth throws error: auth/invalid-email", () => {
+  describe("Firebase Auth throws auth/invalid-email error", () => {
     const { req, res } = createMocks({
       email: "test@test.com",
       password: "12345678",
