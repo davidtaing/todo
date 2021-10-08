@@ -5,7 +5,7 @@ import config from "../../utils/config";
 export const auth = getAuth(firebaseApp);
 
 if (config.NODE_ENV !== "production") {
-  const { FIREBASE_EMULATOR_HOST: host, FIREBASE_AUTH_EMULATOR_PORT: port } = config;
-  const emulatorUrl = `http://${host}:${port}/`;
+  const { host, authPort } = config.firebaseEmulator;
+  const emulatorUrl = `http://${host}:${authPort}/`;
   connectAuthEmulator(auth, emulatorUrl);
 }
