@@ -17,5 +17,9 @@ describe("POST api/users/login", () => {
     test("Response status is 200 OK", () => {
       expect(res._getStatusCode()).toBe(200);
     });
+
+    test("Responds with JSON", () => {
+      expect(res._isJSON()).toBeTruthy();
+    });
   });
 });
