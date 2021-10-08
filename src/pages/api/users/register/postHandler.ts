@@ -23,6 +23,12 @@ export default async function postHandler(
 ): Promise<void> {
   const { fullName, email, password, confirmPassword } = req.body;
   try {
+    if (password !== confirmPassword) {
+      return res
+        .status(400)
+        .json({ message: "Password and Confirm Password do not match." });
+    }
+
     const userCredential: any = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -36,7 +42,7 @@ export default async function postHandler(
       case "auth/invalid-email":
         return res.status(400).json({ message: "Email is Invalid." });
       case "auth/weak-password":
-          return res.status(400).json({ message: "Password is too weak." });
+        return res.status(400).json({ message: "Password is too weak." });
       default:
         return res.status(500).json({ message: "Internal Server Error" });
     }

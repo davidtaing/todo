@@ -20,6 +20,7 @@ describe("POST api/users/register", () => {
         body: {
           email: "test@test.com",
           password: "12345678",
+          confirmPassword: "12345678",
         },
       });
 
@@ -53,6 +54,7 @@ describe("POST api/users/register", () => {
         body: {
           email: "test@test.com",
           password: "12345678",
+          confirmPassword: "12345678",
         },
       });
 
