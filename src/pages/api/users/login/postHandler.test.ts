@@ -56,4 +56,31 @@ describe("POST api/users/login", () => {
       expect(message).toBe("Bad Request");
     });
   });
+
+  describe("Firebase Auth throws auth/user-disabled error", () => {
+    const { req, res } = createMocks({
+      email: "test@test.com",
+      password: "12345678",
+    });
+
+    beforeAll(() => {
+      mockSignInWithEmailAndPassword = (req: any, res: any) => {
+        throw new FirebaseError("auth/user-disabled", "mocked firebase error");
+      }
+      postHandler(req, res);
+    });
+
+    test("Response status is 401 Unauthorized", () => {
+      expect(res._getStatusCode()).toBe(401);
+    });
+
+    test("Responds with JSON", () => {
+      expect(res._isJSON()).toBeTruthy();
+    });
+
+    test("Responds with message: 'Invalid Email or Password'", () => {
+      const { message } = res._getJSONData();
+      expect(message).toBe('Invalid Email or Password');
+    });
+  });
 });
