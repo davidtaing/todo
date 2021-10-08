@@ -29,22 +29,22 @@ export default async function postHandler(
         .json({ message: "Password and Confirm Password do not match." });
     }
 
-    await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    await createUserWithEmailAndPassword(auth, email, password);
 
     res.setHeader("location", "http://localhost:3000/login");
 
-    return res
-      .status(303)
-      .json({
-        message:
-          "A link to activate your account has been emailed to the address provided.",
-      });
+    return res.status(303).json({
+      message:
+        "A link to activate your account has been emailed to the address provided.",
+    });
   } catch (err: any) {
     switch (err.code) {
+      case "auth/email-already-in-use":
+        res.setHeader("location", "http://localhost:3000/login");
+        return res.status(303).json({
+          message:
+            "A link to activate your account has been emailed to the address provided.",
+        });
       case "auth/invalid-email":
         return res.status(400).json({ message: "Email is Invalid." });
       case "auth/weak-password":
