@@ -14,6 +14,7 @@ jest.mock("../../../../api/firebase", () => {
 
 describe("POST api/users/login", () => {
   describe("User successfully logs in", () => {
+    // set valid email & password to bypass local input validation
     const { req, res } = createMocks({
       email: "test@test.com",
       password: "12345678",
@@ -30,7 +31,8 @@ describe("POST api/users/login", () => {
     });
   });
 
-  describe("Firebase Auth throws auth/invalid-email error", () => {
+  describe("Firebase Auth throws 'auth/invalid-email' error", () => {
+    // set valid email & password to bypass local input validation
     const { req, res } = createMocks({
       email: "test@test.com",
       password: "12345678",
@@ -57,7 +59,8 @@ describe("POST api/users/login", () => {
     });
   });
 
-  describe("Firebase Auth throws auth/user-disabled error", () => {
+  describe("Firebase Auth throws 'auth/user-disabled' error", () => {
+    // set valid email & password to bypass local input validation
     const { req, res } = createMocks({
       email: "test@test.com",
       password: "12345678",
@@ -85,6 +88,7 @@ describe("POST api/users/login", () => {
   });
 
   describe("Firebase Auth throws 'auth/user-not-found' error", () => {
+    // set valid email & password to bypass local input validation
     const { req, res } = createMocks({
       email: "test@test.com",
       password: "12345678",
