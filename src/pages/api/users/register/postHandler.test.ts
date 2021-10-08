@@ -107,7 +107,7 @@ describe("POST api/users/register", () => {
 
       test("Error Message: 'Password and Confirm Password do not match.'", () => {
         const { message } = res._getJSONData();
-        expect(message).toBe("Password and Confirm Password do not match.");
+        expect(message).toBe('Password and Confirm Password do not match.');
       });
     });
   });
