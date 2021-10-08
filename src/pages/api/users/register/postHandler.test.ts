@@ -13,6 +13,44 @@ jest.mock("../../../../api/firebase", () => {
 });
 
 describe("POST api/users/register", () => {
+  describe("303 - See Other Responses", () => {
+    describe("Successful login response", () => {
+      // set valid email & password to bypass local input validation
+      const { req, res } = createMocks({
+        body: {
+          email: "test@test.com",
+          password: "12345678",
+          confirmPassword: "12345678",
+        },
+      });
+
+      beforeAll(() => {
+        mockCreateUserWithEmailAndPassword = jest.fn((req: any, res: any) => {});
+        postHandler(req, res);
+      });
+
+      test("Response status is 303 Internal Server Error", () => {
+        expect(res._getStatusCode()).toBe(303);
+      });
+
+      test("Responds with JSON", () => {
+        expect(res._isJSON()).toBeTruthy();
+      });
+
+      test("Response Header: 'Location: http://localhost:3000/login'", () => {
+        const headers = res._getHeaders();
+        expect(headers).toHaveProperty("Location", "http://localhost:3000/login");
+      });
+
+      test("Response message: 'A link to activate your account has been emailed to the address provided.'", () => {
+        const { message } = res._getJSONData();
+        expect(message).toBe(
+          "A link to activate your account has been emailed to the address provided."
+        );
+      });
+    });
+  });
+
   describe("400 - Bad Request Responses", () => {
     describe("Firebase Auth throws 'auth/invalid-email' error", () => {
       // set valid email & password to bypass local input validation
@@ -107,7 +145,7 @@ describe("POST api/users/register", () => {
 
       test("Error Message: 'Password and Confirm Password do not match.'", () => {
         const { message } = res._getJSONData();
-        expect(message).toBe('Password and Confirm Password do not match.');
+        expect(message).toBe("Password and Confirm Password do not match.");
       });
     });
   });
@@ -119,7 +157,7 @@ describe("POST api/users/register", () => {
         email: "test@test.com",
         password: "12345678",
         confirmPassword: "12345678",
-      }
+      },
     });
 
     beforeAll(() => {
