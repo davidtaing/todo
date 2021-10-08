@@ -32,19 +32,11 @@ export default async function postHandler(
 
     await createUserWithEmailAndPassword(auth, email, password);
 
-    res.setHeader("location", "http://localhost:3000/login");
-    return res.status(StatusCodes.SEE_OTHER).json({
-      message:
-        "A link to activate your account has been emailed to the address provided.",
-    });
+    return successResponse(res);
   } catch (err: any) {
     switch (err.code) {
       case "auth/email-already-in-use":
-        res.setHeader("location", "http://localhost:3000/login");
-        return res.status(StatusCodes.SEE_OTHER).json({
-          message:
-            "A link to activate your account has been emailed to the address provided.",
-        });
+        return successResponse(res);
       case "auth/invalid-email":
         return res
           .status(StatusCodes.BAD_REQUEST)
@@ -60,3 +52,11 @@ export default async function postHandler(
     }
   }
 }
+
+const successResponse = (res: NextApiResponse) => {
+  res.setHeader("location", "http://localhost:3000/login");
+  return res.status(StatusCodes.SEE_OTHER).json({
+    message:
+      "A link to activate your account has been emailed to the address provided.",
+  });
+};
