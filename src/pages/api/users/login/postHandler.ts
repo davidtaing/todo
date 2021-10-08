@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { auth, signInWithEmailAndPassword } from "../../../../api/firebase";
+import { StatusCodes, ReasonPhrases } from "http-status-codes";
 
 /**
  * POST api/users/login
@@ -23,16 +24,22 @@ export default async function postHandler(
     );
 
     const { _tokenResponse } = userCredential;
-    return res.status(200).json(_tokenResponse);
+    return res.status(StatusCodes.OK).json(_tokenResponse);
   } catch (err: any) {
     switch (err.code) {
       case "auth/invalid-email":
-        return res.status(400).json({ message: "Bad Request" });
+        return res
+          .status(StatusCodes.BAD_REQUEST)
+          .json({ message: ReasonPhrases.BAD_REQUEST });
       case "auth/user-disabled":
       case "auth/user-not-found":
-        return res.status(401).json({ message: "Invalid Email or Password" });
+        return res
+          .status(StatusCodes.UNAUTHORIZED)
+          .json({ message: "Invalid Email or Password" });
       default:
-        return res.status(500).json({ message: "Internal Server Error" });
+        return res
+          .status(StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: ReasonPhrases.INTERNAL_SERVER_ERROR });
     }
   }
 }

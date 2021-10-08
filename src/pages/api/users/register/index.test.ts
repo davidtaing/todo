@@ -9,7 +9,7 @@ jest.mock("./postHandler", () => {
   }
 });
 
-describe("/api/users/login", () => {
+describe("/api/users/register", () => {
   describe("Root Handler", () => {
     describe("POST (Allowed)", () => {
       const { req, res } = createMocks({

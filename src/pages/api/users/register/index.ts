@@ -1,12 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import postHandler from "./postHandler";
+import { StatusCodes, ReasonPhrases } from "http-status-codes";
 
-export default function handler(req: NextApiRequest, res: NextApiResponse): void {
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+): void {
   const { method } = req;
 
   if (method !== "POST")
-    return res.status(405).json({ message: "Method Not Allowed" });
-  
-  return postHandler(req, res);
-};
+    return res
+      .status(StatusCodes.METHOD_NOT_ALLOWED)
+      .json({ message: ReasonPhrases.METHOD_NOT_ALLOWED });
 
+  return postHandler(req, res);
+}

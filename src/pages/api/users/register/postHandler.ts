@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { auth, createUserWithEmailAndPassword } from "../../../../api/firebase";
+import { StatusCodes, ReasonPhrases } from "http-status-codes";
 
 /**
  * POST api/users/register
@@ -25,15 +26,14 @@ export default async function postHandler(
   try {
     if (password !== confirmPassword) {
       return res
-        .status(400)
+        .status(StatusCodes.BAD_REQUEST)
         .json({ message: "Password and Confirm Password do not match." });
     }
 
     await createUserWithEmailAndPassword(auth, email, password);
 
     res.setHeader("location", "http://localhost:3000/login");
-
-    return res.status(303).json({
+    return res.status(StatusCodes.SEE_OTHER).json({
       message:
         "A link to activate your account has been emailed to the address provided.",
     });
@@ -41,16 +41,22 @@ export default async function postHandler(
     switch (err.code) {
       case "auth/email-already-in-use":
         res.setHeader("location", "http://localhost:3000/login");
-        return res.status(303).json({
+        return res.status(StatusCodes.SEE_OTHER).json({
           message:
             "A link to activate your account has been emailed to the address provided.",
         });
       case "auth/invalid-email":
-        return res.status(400).json({ message: "Email is Invalid." });
+        return res
+          .status(StatusCodes.BAD_REQUEST)
+          .json({ message: "Email is Invalid." });
       case "auth/weak-password":
-        return res.status(400).json({ message: "Password is too weak." });
+        return res
+          .status(StatusCodes.BAD_REQUEST)
+          .json({ message: "Password is too weak." });
       default:
-        return res.status(500).json({ message: "Internal Server Error" });
+        return res
+          .status(StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: ReasonPhrases.INTERNAL_SERVER_ERROR });
     }
   }
 }
