@@ -12,7 +12,7 @@ jest.mock("@firebase/auth", () => {
 describe("Firebase Auth", () => {
   describe("NODE_ENV='test'", () => {
     beforeAll(() => {
-      auth; // trigger loading depencies
+      auth; // trigger loading dependencies
     })
     test("Connects to Auth Emulator", () => {
       expect(connectAuthEmulator).toBeCalled();
