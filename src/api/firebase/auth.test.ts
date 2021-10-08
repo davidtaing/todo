@@ -1,7 +1,8 @@
-import { auth } from "./auth";
 // module dependencies
 import { connectAuthEmulator } from "@firebase/auth";
 import config from "../../utils/config";
+import { auth } from "./auth";
+
 
 jest.mock("@firebase/auth", () => {
   return {
