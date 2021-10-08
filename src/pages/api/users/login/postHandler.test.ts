@@ -46,7 +46,7 @@ describe("POST api/users/login", () => {
         postHandler(req, res);
       });
 
-      test("Status: 400 OK", () => {
+      test("Status: 400 Bad Request", () => {
         expect(res._getStatusCode()).toBe(400);
       });
 
