@@ -13,7 +13,7 @@ jest.mock("../../../../api/firebase", () => {
 });
 
 describe("POST api/users/login", () => {
-  describe("User successfully logs in", () => {
+  describe("200 - OK Reponses", () => {
     // set valid email & password to bypass local input validation
     const { req, res } = createMocks({
       email: "test@test.com",
@@ -22,100 +22,104 @@ describe("POST api/users/login", () => {
 
     beforeAll(() => postHandler(req, res))
 
-    test("Response status is 200 OK", () => {
+    test("Status: 200 OK", () => {
       expect(res._getStatusCode()).toBe(200);
     });
 
-    test("Responds with JSON", () => {
+    test("JSON Response", () => {
       expect(res._isJSON()).toBeTruthy();
     });
   });
 
-  describe("Firebase Auth throws 'auth/invalid-email' error", () => {
-    // set valid email & password to bypass local input validation
-    const { req, res } = createMocks({
-      email: "test@test.com",
-      password: "12345678",
-    });
+  describe("400 - Bad Request Responses", () => {
+    describe("Firebase Auth throws 'auth/invalid-email' error", () => {
+      // set valid email & password to bypass local input validation
+      const { req, res } = createMocks({
+        email: "test@test.com",
+        password: "12345678",
+      });
 
-    beforeAll(() => {
-      mockSignInWithEmailAndPassword = (req: any, res: any) => {
-        throw new FirebaseError("auth/invalid-email", "mocked firebase error");
-      }
-      postHandler(req, res);
-    });
+      beforeAll(() => {
+        mockSignInWithEmailAndPassword = (req: any, res: any) => {
+          throw new FirebaseError("auth/invalid-email", "mocked firebase error");
+        }
+        postHandler(req, res);
+      });
 
-    test("Response status is 400 OK", () => {
-      expect(res._getStatusCode()).toBe(400);
-    });
+      test("Status: 400 OK", () => {
+        expect(res._getStatusCode()).toBe(400);
+      });
 
-    test("Responds with JSON", () => {
-      expect(res._isJSON()).toBeTruthy();
-    });
+      test("JSON Response", () => {
+        expect(res._isJSON()).toBeTruthy();
+      });
 
-    test("Responds with message: 'Bad Request'", () => {
-      const { message } = res._getJSONData();
-      expect(message).toBe("Bad Request");
-    });
-  });
-
-  describe("Firebase Auth throws 'auth/user-disabled' error", () => {
-    // set valid email & password to bypass local input validation
-    const { req, res } = createMocks({
-      email: "test@test.com",
-      password: "12345678",
-    });
-
-    beforeAll(() => {
-      mockSignInWithEmailAndPassword = (req: any, res: any) => {
-        throw new FirebaseError("auth/user-disabled", "mocked firebase error");
-      }
-      postHandler(req, res);
-    });
-
-    test("Response status is 401 Unauthorized", () => {
-      expect(res._getStatusCode()).toBe(401);
-    });
-
-    test("Responds with JSON", () => {
-      expect(res._isJSON()).toBeTruthy();
-    });
-
-    test("Responds with message: 'Invalid Email or Password'", () => {
-      const { message } = res._getJSONData();
-      expect(message).toBe('Invalid Email or Password');
+      test("Error Message: 'Bad Request'", () => {
+        const { message } = res._getJSONData();
+        expect(message).toBe("Bad Request");
+      });
     });
   });
 
-  describe("Firebase Auth throws 'auth/user-not-found' error", () => {
-    // set valid email & password to bypass local input validation
-    const { req, res } = createMocks({
-      email: "test@test.com",
-      password: "12345678",
+  describe("401 - Invalid Email or Password Responses", () => {
+    describe("Firebase Auth throws 'auth/user-not-found' error", () => {
+      // set valid email & password to bypass local input validation
+      const { req, res } = createMocks({
+        email: "test@test.com",
+        password: "12345678",
+      });
+  
+      beforeAll(() => {
+        mockSignInWithEmailAndPassword = (req: any, res: any) => {
+          throw new FirebaseError("auth/user-not-found", "mocked firebase error");
+        }
+        postHandler(req, res);
+      });
+  
+      test("Status: 401 Unauthorized", () => {
+        expect(res._getStatusCode()).toBe(401);
+      });
+  
+      test("JSON Response", () => {
+        expect(res._isJSON()).toBeTruthy();
+      });
+  
+      test("Error Message: 'Invalid Email or Password'", () => {
+        const { message } = res._getJSONData();
+        expect(message).toBe('Invalid Email or Password');
+      });
     });
 
-    beforeAll(() => {
-      mockSignInWithEmailAndPassword = (req: any, res: any) => {
-        throw new FirebaseError("auth/user-not-found", "mocked firebase error");
-      }
-      postHandler(req, res);
-    });
-
-    test("Response status is 401 Unauthorized", () => {
-      expect(res._getStatusCode()).toBe(401);
-    });
-
-    test("Responds with JSON", () => {
-      expect(res._isJSON()).toBeTruthy();
-    });
-
-    test("Responds with message: 'Invalid Email or Password'", () => {
-      const { message } = res._getJSONData();
-      expect(message).toBe('Invalid Email or Password');
+    describe("Firebase Auth throws 'auth/user-disabled' error", () => {
+      // set valid email & password to bypass local input validation
+      const { req, res } = createMocks({
+        email: "test@test.com",
+        password: "12345678",
+      });
+  
+      beforeAll(() => {
+        mockSignInWithEmailAndPassword = (req: any, res: any) => {
+          throw new FirebaseError("auth/user-disabled", "mocked firebase error");
+        }
+        postHandler(req, res);
+      });
+  
+      test("Status: 401 Unauthorized", () => {
+        expect(res._getStatusCode()).toBe(401);
+      });
+  
+      test("JSON Response", () => {
+        expect(res._isJSON()).toBeTruthy();
+      });
+  
+      test("Error Message: 'Invalid Email or Password'", () => {
+        const { message } = res._getJSONData();
+        expect(message).toBe('Invalid Email or Password');
+      });
     });
   });
 
-  describe("500 - Internal Server Error Response", () => {
+  describe("500 - Internal Server Error Responses", () => {
     // set valid email & password to bypass local input validation
     const { req, res } = createMocks({
       email: "test@test.com",
