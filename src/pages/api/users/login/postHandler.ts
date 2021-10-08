@@ -10,12 +10,24 @@ import { auth, signInWithEmailAndPassword } from "../../../../api/firebase";
  * @responses 401 Unauthorized - "Invalid Email or Password"
  * @responses 500 Internal Server Error
  */
-export default async function postHandler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
+export default async function postHandler(
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> {
   const { email, password } = req.body;
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     return res.status(200).json(userCredential);
-  } catch (err) {
-    return res.status(500).json({ message: "Internal Server Error" });
+  } catch (err: any) {
+    switch (err.code) {
+      case "auth/invalid-email":
+        return res.status(400).json({ message: "Bad Request" });
+      default:
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
   }
 }
