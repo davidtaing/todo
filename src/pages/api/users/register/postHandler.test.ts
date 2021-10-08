@@ -75,5 +75,32 @@ describe("POST api/users/register", () => {
         expect(message).toBe("Password is too weak.");
       });
     });
+
+    describe("Password and Confirm Password do not match", () => {
+      // set valid email & password to bypass local input validation
+      const { req, res } = createMocks({
+        email: "test@test.com",
+        password: "12345678",
+        confirmPassword: "1234567",
+      });
+
+      beforeAll(() => {
+        mockCreateUserWithEmailAndPassword = (req: any, res: any) => {};
+        postHandler(req, res);
+      });
+
+      test("Status: 400 Bad Request", () => {
+        expect(res._getStatusCode()).toBe(400);
+      });
+
+      test("JSON Response", () => {
+        expect(res._isJSON()).toBeTruthy();
+      });
+
+      test("Error Message: 'Password and Confirm Password do not match.'", () => {
+        const { message } = res._getJSONData();
+        expect(message).toBe("Password and Confirm Password do not match.");
+      });
+    });
   });
 });
