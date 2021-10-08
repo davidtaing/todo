@@ -35,8 +35,14 @@ export default async function postHandler(
       password
     );
 
-    const { _tokenResponse } = userCredential;
-    return res.status(303).json(_tokenResponse);
+    res.setHeader("location", "http://localhost:3000/login");
+
+    return res
+      .status(303)
+      .json({
+        message:
+          "A link to activate your account has been emailed to the address provided.",
+      });
   } catch (err: any) {
     switch (err.code) {
       case "auth/invalid-email":

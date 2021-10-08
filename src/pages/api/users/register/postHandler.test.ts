@@ -37,9 +37,9 @@ describe("POST api/users/register", () => {
         expect(res._isJSON()).toBeTruthy();
       });
 
-      test("Response Header: 'Location: http://localhost:3000/login'", () => {
+      test("Response Header: 'location: http://localhost:3000/login'", () => {
         const headers = res._getHeaders();
-        expect(headers).toHaveProperty("Location", "http://localhost:3000/login");
+        expect(headers).toHaveProperty("location", "http://localhost:3000/login");
       });
 
       test("Response message: 'A link to activate your account has been emailed to the address provided.'", () => {
