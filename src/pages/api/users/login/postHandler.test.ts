@@ -114,4 +114,32 @@ describe("POST api/users/login", () => {
       expect(message).toBe('Invalid Email or Password');
     });
   });
+
+  describe("500 - Internal Server Error Response", () => {
+    // set valid email & password to bypass local input validation
+    const { req, res } = createMocks({
+      email: "test@test.com",
+      password: "12345678",
+    });
+
+    beforeAll(() => {
+      mockSignInWithEmailAndPassword = (req: any, res: any) => {
+        throw new Error("mocked base Error");
+      }
+      postHandler(req, res);
+    });
+
+    test("Response status is 500 Internal Server Error", () => {
+      expect(res._getStatusCode()).toBe(500);
+    });
+
+    test("Responds with JSON", () => {
+      expect(res._isJSON()).toBeTruthy();
+    });
+
+    test("Responds with message: 'Internal Server Error'", () => {
+      const { message } = res._getJSONData();
+      expect(message).toBe('Internal Server Error');
+    });
+  });
 });
