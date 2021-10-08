@@ -34,7 +34,7 @@ export default async function postHandler(
   } catch (err: any) {
     switch (err.code) {
       case "auth/invalid-email":
-        return res.status(400).json({ message: "Bad Request" });
+        return res.status(400).json({ message: "Email is Invalid." });
       default:
         return res.status(500).json({ message: "Internal Server Error" });
     }

@@ -39,9 +39,9 @@ describe("POST api/users/register", () => {
         expect(res._isJSON()).toBeTruthy();
       });
 
-      test("Error Message: 'Bad Request'", () => {
+      test("Error Message: 'Email is Invalid.'", () => {
         const { message } = res._getJSONData();
-        expect(message).toBe("Bad Request");
+        expect(message).toBe("Email is Invalid.");
       });
     });
   });
