@@ -35,6 +35,7 @@ export default async function postHandler(
     return successResponse(res);
   } catch (err: any) {
     switch (err.code) {
+      // Returns success response so that we don't expose emails with existing accounts
       case "auth/email-already-in-use":
         return successResponse(res);
       case "auth/invalid-email":
