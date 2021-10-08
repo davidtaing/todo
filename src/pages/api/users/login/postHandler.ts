@@ -27,6 +27,7 @@ export default async function postHandler(
       case "auth/invalid-email":
         return res.status(400).json({ message: "Bad Request" });
       case "auth/user-disabled":
+      case "auth/user-not-found":
         return res.status(401).json({ message: "Invalid Email or Password" });
       default:
         return res.status(500).json({ message: "Internal Server Error" });
