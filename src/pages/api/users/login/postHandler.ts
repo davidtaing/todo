@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { auth, signInWithEmailAndPassword } from "../../../../api/firebase";
 
 /**
  * POST api/users/login
@@ -9,7 +10,12 @@ import { NextApiRequest, NextApiResponse } from "next";
  * @responses 401 Unauthorized - "Invalid Email or Password"
  * @responses 500 Internal Server Error
  */
-export default function postHandler(req: NextApiRequest, res: NextApiResponse) {
-  console.log("Called actual post handler");
-  res.status(200).json({ message: "Not Implemented" });
+export default async function postHandler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
+  const { email, password } = req.body;
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return res.status(200).json(userCredential);
+  } catch (err) {
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
 }
