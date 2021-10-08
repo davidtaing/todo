@@ -1,4 +1,4 @@
-import { getAuth, connectAuthEmulator } from "@firebase/auth";
+import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "@firebase/auth";
 import config from "../../utils/config";
 import { firebaseApp } from "./";
 
@@ -9,3 +9,5 @@ if (config.NODE_ENV !== "production") {
   const emulatorUrl = `http://${host}:${authPort}/`;
   connectAuthEmulator(auth, emulatorUrl);
 }
+
+export { signInWithEmailAndPassword, createUserWithEmailAndPassword };
