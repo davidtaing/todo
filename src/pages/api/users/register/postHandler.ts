@@ -23,13 +23,14 @@ export default async function postHandler(
   res: NextApiResponse
 ): Promise<void> {
   const { fullName, email, password, confirmPassword } = req.body;
-  try {
-    if (password !== confirmPassword) {
-      return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ message: "Password and Confirm Password do not match." });
-    }
 
+  if (password !== confirmPassword) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Password and Confirm Password do not match." });
+  }
+
+  try {
     await createUserWithEmailAndPassword(auth, email, password);
 
     return successResponse(res);
