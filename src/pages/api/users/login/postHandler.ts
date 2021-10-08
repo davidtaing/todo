@@ -11,5 +11,5 @@ import { NextApiRequest, NextApiResponse } from "next";
  */
 export default function postHandler(req: NextApiRequest, res: NextApiResponse) {
   console.log("Called actual post handler");
-  res.status(501).json({ message: "Not Implemented" });
+  res.status(200).json({ message: "Not Implemented" });
 }
