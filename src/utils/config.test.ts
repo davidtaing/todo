@@ -6,7 +6,7 @@ describe("Loads from process.env", () => {
   });
 
   test("config.NODE_ENV is not null", () => {
-    expect(config.NODE_ENV).toBeNull();
+    expect(config.NODE_ENV).toBeTruthy();
   });
 
   test("config.NODE_ENV is 'test'", () => {
