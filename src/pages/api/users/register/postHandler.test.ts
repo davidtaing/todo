@@ -44,5 +44,36 @@ describe("POST api/users/register", () => {
         expect(message).toBe("Email is Invalid.");
       });
     });
+
+    describe("Firebase Auth throws 'auth/weak-password' error", () => {
+      // set valid email & password to bypass local input validation
+      const { req, res } = createMocks({
+        email: "test@test.com",
+        password: "12345678",
+      });
+
+      beforeAll(() => {
+        mockCreateUserWithEmailAndPassword = (req: any, res: any) => {
+          throw new FirebaseError(
+            "auth/weak-password",
+            "mocked firebase error"
+          );
+        };
+        postHandler(req, res);
+      });
+
+      test("Status: 400 Bad Request", () => {
+        expect(res._getStatusCode()).toBe(400);
+      });
+
+      test("JSON Response", () => {
+        expect(res._isJSON()).toBeTruthy();
+      });
+
+      test("Error Message: 'Password is too weak.'", () => {
+        const { message } = res._getJSONData();
+        expect(message).toBe("Password is too weak.");
+      });
+    });
   });
 });
