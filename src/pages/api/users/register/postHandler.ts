@@ -29,7 +29,7 @@ export default async function postHandler(
         .json({ message: "Password and Confirm Password do not match." });
     }
 
-    const userCredential: any = await createUserWithEmailAndPassword(
+    await createUserWithEmailAndPassword(
       auth,
       email,
       password
