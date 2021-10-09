@@ -1,13 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import postHandler from "./postHandler";
-import { StatusCodes, ReasonPhrases } from "http-status-codes";
+import handlerImplementation from "../../../../backend/api/users/login";
 
-export default function handler(req: NextApiRequest, res: NextApiResponse): void {
-  const { method } = req;
+const handler = handlerImplementation;
 
-  if (method !== "POST")
-    return res.status(StatusCodes.METHOD_NOT_ALLOWED).json({ message: ReasonPhrases.METHOD_NOT_ALLOWED });
-  
-  return postHandler(req, res);
-};
-
+export default handler;

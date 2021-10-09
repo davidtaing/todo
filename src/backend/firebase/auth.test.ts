@@ -1,8 +1,6 @@
 // module dependencies
 import { connectAuthEmulator } from "@firebase/auth";
-import config from "../utils/config";
 import { auth } from "./auth";
-
 
 jest.mock("@firebase/auth", () => {
   return {
@@ -11,12 +9,11 @@ jest.mock("@firebase/auth", () => {
   };
 });
 
-
 describe("Firebase Auth", () => {
   describe("NODE_ENV='test'", () => {
     beforeAll(() => {
       auth; // trigger loading dependencies
-    })
+    });
     test("Connects to Auth Emulator", () => {
       expect(connectAuthEmulator).toBeCalled();
     });
