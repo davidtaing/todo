@@ -5,7 +5,7 @@ import { FirebaseError } from "@firebase/util";
 
 let mockSignInWithEmailAndPassword: any = () => ({});
 
-jest.mock("../../../../api/firebase", () => {
+jest.mock("../../../../backend/firebase", () => {
   return {
     auth: jest.fn(),
     signInWithEmailAndPassword: () => mockSignInWithEmailAndPassword(),
