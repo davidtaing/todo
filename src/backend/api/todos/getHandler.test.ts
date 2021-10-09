@@ -41,8 +41,11 @@ const mockedResponse = [
 ];
 
 describe("GET api/todos", () => {
-  describe("Status: 200 OK", () => {
-    const { req, res } = createMocks();
+  describe("200 OK Responses", () => {
+    const { req, res } = createMocks({
+      body: {
+      }
+    });
 
     beforeAll(() => getHandler(req, res));
 
@@ -58,5 +61,15 @@ describe("GET api/todos", () => {
       const { todos } = res._getJSONData();
       expect(todos).toBeInstanceOf(Array);
     });
-  })
+  });
+
+  describe("401 Unauthorized Responses", () => {
+    const { req, res } = createMocks();
+
+    beforeAll(() => getHandler(req, res));
+
+    test("Status Code: 401 Unauthorized", () => {
+      expect(res._getStatusCode()).toBe(401);
+    });
+  });
 });
