@@ -4,25 +4,18 @@ import postHandler from "./postHandler";
 import putHandler from "./putHandler";
 import deleteHandler from "./deleteHandler";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
+import { rootHandler } from "./rootHandler";
+
+const methodHandlers = {
+  getHandler,
+  postHandler,
+  putHandler,
+  deleteHandler,
+};
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): void {
-  const { method } = req;
-
-  switch (method) {
-    case "GET":
-      return getHandler(req, res);
-    case "POST":
-      return postHandler(req, res);
-    case "PUT":
-      return putHandler(req, res);
-    case "DELETE":
-      return deleteHandler(req, res);
-    default:
-      return res
-        .status(StatusCodes.METHOD_NOT_ALLOWED)
-        .json({ message: ReasonPhrases.METHOD_NOT_ALLOWED });
-  }
+  rootHandler(req, res, methodHandlers);
 }
