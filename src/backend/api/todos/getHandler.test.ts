@@ -53,5 +53,10 @@ describe("GET api/todos", () => {
     test("Returns JSON", () => {
       expect(res._isJSON()).toBeTruthy();
     });
+
+    test("Returns Array as 'todos' property", () => {
+      const { todos } = res._getJSONData();
+      expect(todos).toBeInstanceOf(Array);
+    });
   })
 });

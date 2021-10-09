@@ -4,7 +4,7 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 function getHandler(req: NextApiRequest, res: NextApiResponse): void {
   return res
   .status(StatusCodes.OK)
-  .json({ message: ReasonPhrases.OK });
+  .json({ todos: [] });
   
   return res
   .status(StatusCodes.NOT_IMPLEMENTED)
