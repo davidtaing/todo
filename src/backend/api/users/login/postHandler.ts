@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { auth, signInWithEmailAndPassword } from "../../../../api/firebase";
+import { auth, signInWithEmailAndPassword } from "../../../firebase";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
 
 /**
