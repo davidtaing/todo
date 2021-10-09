@@ -1,6 +1,6 @@
 // module dependencies
 import { connectAuthEmulator } from "@firebase/auth";
-import config from "../../utils/config";
+import config from "../utils/config";
 import { auth } from "./auth";
 
 
