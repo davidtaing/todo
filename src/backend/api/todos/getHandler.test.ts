@@ -49,5 +49,9 @@ describe("GET api/todos", () => {
     test("Status Code: 200 OK", () => {
       expect(res._getStatusCode()).toBe(200);
     });
+
+    test("Returns JSON", () => {
+      expect(res._isJSON()).toBeTruthy();
+    });
   })
 });
