@@ -1,6 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
 
+/**
+ * Acts as the root handler at an API endpoint
+ * @param req 
+ * @param res 
+ * @param methodHandlers 
+ * @returns 
+ */
 export function router(
   req: NextApiRequest,
   res: NextApiResponse,

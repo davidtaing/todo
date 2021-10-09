@@ -4,7 +4,7 @@ import postHandler from "./postHandler";
 import putHandler from "./putHandler";
 import deleteHandler from "./deleteHandler";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
-import { router } from "./router";
+import { router } from "../../../api/router";
 
 const methodHandlers = {
   getHandler,
