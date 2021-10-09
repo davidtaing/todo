@@ -24,6 +24,9 @@ export default async function postHandler(
     );
 
     const { _tokenResponse } = userCredential;
+
+    res.setHeader("cache-control", "no-store");
+    res.setHeader("pragma", "no-store");
     return res.status(StatusCodes.OK).json(_tokenResponse);
   } catch (err: any) {
     switch (err.code) {

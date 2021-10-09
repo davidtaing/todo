@@ -17,15 +17,25 @@ describe("POST api/users/login", () => {
     // set valid email & password to bypass local input validation
     const { req, res } = createMocks({
       body: {
-      email: "test@test.com",
-      password: "12345678",
-    }
+        email: "test@test.com",
+        password: "12345678",
+      },
     });
 
     beforeAll(() => postHandler(req, res));
 
     test("Status: 200 OK", () => {
       expect(res._getStatusCode()).toBe(200);
+    });
+
+    test("Response Header: 'cache-control: no-store'", () => {
+      const headers = res._getHeaders();
+      expect(headers).toHaveProperty("cache-control", "no-store");
+    });
+
+    test("Response Header: 'pragma: no-store'", () => {
+      const headers = res._getHeaders();
+      expect(headers).toHaveProperty("pragma", "no-store");
     });
 
     test("JSON Response", () => {
@@ -40,7 +50,7 @@ describe("POST api/users/login", () => {
         body: {
           email: "test@test.com",
           password: "12345678",
-        }
+        },
       });
 
       beforeAll(() => {
@@ -108,7 +118,7 @@ describe("POST api/users/login", () => {
         body: {
           email: "test@test.com",
           password: "12345678",
-        }
+        },
       });
 
       beforeAll(() => {
@@ -142,7 +152,7 @@ describe("POST api/users/login", () => {
       body: {
         email: "test@test.com",
         password: "12345678",
-      }
+      },
     });
 
     beforeAll(() => {
