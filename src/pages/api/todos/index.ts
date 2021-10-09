@@ -3,8 +3,7 @@ import getHandler from "./getHandler";
 import postHandler from "./postHandler";
 import putHandler from "./putHandler";
 import deleteHandler from "./deleteHandler";
-import { StatusCodes, ReasonPhrases } from "http-status-codes";
-import { router } from "../../../api/router";
+import { router } from "../../../backend/router";
 
 const methodHandlers = {
   getHandler,

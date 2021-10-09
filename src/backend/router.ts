@@ -6,7 +6,8 @@ import { StatusCodes, ReasonPhrases } from "http-status-codes";
  * @param req 
  * @param res 
  * @param methodHandlers 
- * @returns 
+ * @remarks 
+ * Do not unit test. Test coverage is provided by the API endpoints.
  */
 export function router(
   req: NextApiRequest,

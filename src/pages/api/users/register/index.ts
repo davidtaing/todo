@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import postHandler from "./postHandler";
-import { router } from "../../../../api/router";
+import { router } from "../../../../backend/router";
 
 const methodHandlers = { postHandler };
 
