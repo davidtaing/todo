@@ -3,7 +3,7 @@ import getHandler from "./getHandler";
 import postHandler from "./postHandler";
 import putHandler from "./putHandler";
 import deleteHandler from "./deleteHandler";
-import { router } from "../../../backend/router";
+import { router } from "../../router";
 
 const methodHandlers = {
   getHandler,

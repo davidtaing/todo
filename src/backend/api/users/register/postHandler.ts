@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { auth, createUserWithEmailAndPassword } from "../../../../backend/firebase";
+import { auth, createUserWithEmailAndPassword } from "../../../firebase";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
 
 /**

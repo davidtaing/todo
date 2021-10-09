@@ -1,4 +1,4 @@
-import handler from "./";
+import handler from ".";
 import getHandler from "./getHandler";
 import postHandler from "./postHandler";
 import putHandler from "./putHandler";
