@@ -4,7 +4,7 @@ import postHandler from "./postHandler";
 import putHandler from "./putHandler";
 import deleteHandler from "./deleteHandler";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
-import { rootHandler } from "./rootHandler";
+import { router } from "./router";
 
 const methodHandlers = {
   getHandler,
@@ -17,5 +17,5 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): void {
-  rootHandler(req, res, methodHandlers);
+  router(req, res, methodHandlers);
 }

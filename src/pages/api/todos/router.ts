@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
 
-export function rootHandler(
+export function router(
   req: NextApiRequest,
   res: NextApiResponse,
   methodHandlers: {
