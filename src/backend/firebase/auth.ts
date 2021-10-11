@@ -1,8 +1,8 @@
 import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "@firebase/auth";
 import config from "../utils/config";
-import { firebaseApp } from ".";
+import { getFirebaseApp } from "./";
 
-export const auth = getAuth(firebaseApp);
+export const auth = getAuth(getFirebaseApp());
 
 if (config.NODE_ENV !== "production") {
   // check _canInitEmulator to stop attempting to reconnect emulators
