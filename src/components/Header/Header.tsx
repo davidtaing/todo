@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import Link from "next/link";
+
 const StyledHeader = styled.header`
   width: 100%;
   font-family: "Montserrat", sans-serif;
@@ -26,11 +28,13 @@ const StyledHeader = styled.header`
 const Header = () => {
   return (
     <StyledHeader>
-      <div className="wrapper">
+      <nav className="wrapper">
         <ul>
           <li>
             <h1>
-              <a href="">TODO</a>
+              <Link href="/">
+                <a>TODO</a>
+              </Link>
             </h1>
           </li>
           <li className="search-container">
@@ -40,13 +44,17 @@ const Header = () => {
             </form>
           </li>
           <li>
-            <a href="login">login</a>
+            <Link href="/login">
+              <a>login</a>
+            </Link>
           </li>
           <li>
-            <a href="register">register</a>
+            <Link href="/register">
+              <a>register</a>
+            </Link>
           </li>
         </ul>
-      </div>
+      </nav>
     </StyledHeader>
   );
 };
