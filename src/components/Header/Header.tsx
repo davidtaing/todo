@@ -1,14 +1,34 @@
+import styled from "styled-components";
+const StyledHeader = styled.header`
+  ul {
+    display: flex;
+  }
+
+  li {
+    list-style-type: none;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+`;
+
 const Header = () => {
   return (
-    <header>
+    <StyledHeader>
       <ul>
-        <li>TODO</li>
-        <div className="search-container">
+        <li>
+          <h1>
+            <a href="">TODO</a>
+          </h1>
+        </li>
+        <li className="search-container">
           <form>
             <input type="text" placeholder="Search" name="search" />
             <button type="submit">Search</button>
           </form>
-        </div>
+        </li>
         <li>
           <a href="login">login</a>
         </li>
@@ -16,7 +36,7 @@ const Header = () => {
           <a href="register">register</a>
         </li>
       </ul>
-    </header>
+    </StyledHeader>
   );
 };
 
