@@ -1,3 +1,5 @@
+import Todo from "../Todo/Todo";
+
 const sampleData = [
   {
     id: 1,
@@ -20,12 +22,7 @@ const TodosContainer = () => {
   return (
     <div>
       {sampleData.map(({ id, title, completed }) => {
-        return (
-          <div key={id}>
-            <input type="checkbox" checked={completed} />
-            <h3>{title}</h3>
-          </div>
-        );
+        return <Todo key={id} title={title} completed={completed} />;
       })}
     </div>
   );
