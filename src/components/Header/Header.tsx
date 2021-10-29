@@ -13,6 +13,10 @@ const StyledHeader = styled.header`
     padding: 1rem;
   }
 
+  h1 {
+    margin: 0;
+  }
+
   a {
     color: black;
     text-decoration: none;
