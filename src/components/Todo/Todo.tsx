@@ -53,7 +53,7 @@ const Todo = ({ title, completed }: any) => {
           value={titleText}
           onChange={onTextboxChange}
         />
-        <DeleteButton />
+        <DeleteButton completed={checked} />
       </form>
     </StyleDiv>
   );
