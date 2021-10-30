@@ -3,7 +3,14 @@ import styled from "styled-components";
 import AddButton from "../AddButton/AddButton";
 
 const StyledFooter = styled.footer`
-  width: 100%;
+  position: fixed;
+  background-color: #0c0c0c40;
+  padding: 1rem;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 50px;
+  margin-bottom: 0px;
 
   form {
     display: flex;
@@ -27,12 +34,14 @@ const Footer = () => {
   };
 
   return (
-    <StyledFooter className="wrapper">
-      <div className="addTodo">
-        <form onSubmit={onSubmitHandler}>
-          <input type="text" placeholder="I want to..." />
-          <AddButton />
-        </form>
+    <StyledFooter>
+      <div className="wrapper">
+        <div className="addTodo">
+          <form onSubmit={onSubmitHandler}>
+            <input type="text" placeholder="I want to..." />
+            <AddButton />
+          </form>
+        </div>
       </div>
     </StyledFooter>
   );
