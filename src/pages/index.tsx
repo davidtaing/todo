@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <Header />
-      <main>
+      <main className="wrapper">
         <TodosContainer />
       </main>
       <footer></footer>
