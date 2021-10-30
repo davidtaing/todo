@@ -4,7 +4,7 @@ import AddButton from "../AddButton/AddButton";
 
 const StyledFooter = styled.footer`
   position: fixed;
-  background-color: #0c0c0c40;
+  background-color: ${(props) => props.theme.overlay};
   padding: 1rem;
   bottom: 0px;
   left: 0px;

@@ -4,6 +4,7 @@ import Link from "next/link";
 const StyledHeader = styled.header`
   width: 100%;
   font-family: "Montserrat", sans-serif;
+  background-color: ${(props) => props.theme.overlay};
 
   ul {
     display: flex;
