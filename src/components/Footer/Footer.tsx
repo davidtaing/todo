@@ -1,5 +1,6 @@
 import { SyntheticEvent } from "react";
 import styled from "styled-components";
+import AddButton from "../AddButton/AddButton";
 
 const StyledFooter = styled.footer`
   width: 100%;
@@ -31,7 +32,7 @@ const Footer = () => {
       <div className="addTodo">
         <form onSubmit={onSubmitHandler}>
           <input type="text" placeholder="I want to..." />
-          <button type="submit">Add</button>
+          <AddButton />
         </form>
       </div>
     </StyledFooter>
