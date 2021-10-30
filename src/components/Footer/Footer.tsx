@@ -15,16 +15,16 @@ const StyledFooter = styled.footer`
   form {
     display: flex;
     height: 2rem;
-  }
 
-  input {
-    width: 100%;
-    font-size: 1.5em;
-  }
+    input {
+      width: 100%;
+      font-size: 1.5em;
+    }
 
-  button {
-    background-color: ${(props) => props.theme.primary};
-    color: ${(props) => props.theme.text_light};
+    button {
+      background-color: ${(props) => props.theme.primary};
+      color: ${(props) => props.theme.text_light};
+    }
   }
 `;
 
