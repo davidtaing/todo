@@ -9,6 +9,10 @@ const StyleDiv = styled.div`
     height: 2rem;
   }
 
+  .checkbox {
+    height: 100%;
+  }
+
   .textbox {
     width: 100%;
     font-size: 1.5em;
