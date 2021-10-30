@@ -11,7 +11,7 @@ const StyleDiv = styled.div`
 
   .textbox {
     width: 100%;
-    font-size: 2em;
+    font-size: 1.5em;
   }
 
   button {
@@ -48,7 +48,7 @@ const Todo = ({ title, completed }: any) => {
           value={titleText}
           onChange={onTextboxChange}
         />
-        <button className="delete" type="button">
+        <button className="delete" type="button" hidden={!checked}>
           Delete
         </button>
       </form>
