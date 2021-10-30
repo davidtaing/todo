@@ -1,5 +1,6 @@
 import React, { SyntheticEvent, useState } from "react";
 import styled from "styled-components";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 const StyleDiv = styled.div`
   margin: 0.5rem auto;
@@ -52,9 +53,7 @@ const Todo = ({ title, completed }: any) => {
           value={titleText}
           onChange={onTextboxChange}
         />
-        <button className="delete" type="button" hidden={!checked}>
-          Delete
-        </button>
+        <DeleteButton />
       </form>
     </StyleDiv>
   );
