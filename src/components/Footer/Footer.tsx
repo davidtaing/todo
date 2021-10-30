@@ -4,7 +4,6 @@ import AddButton from "../AddButton/AddButton";
 
 const StyledFooter = styled.footer`
   width: 100%;
-  grid-template-columns: 1fr auto;
 
   form {
     display: flex;
