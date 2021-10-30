@@ -4,9 +4,19 @@ import styled from "styled-components";
 const StyleDiv = styled.div`
   margin: 0.5rem auto;
 
+  form {
+    display: flex;
+    height: 2rem;
+  }
+
   .textbox {
     width: 100%;
     font-size: 2em;
+  }
+
+  button {
+    background-color: ${(props) => props.theme.danger};
+    color: ${(props) => props.theme.text_light};
   }
 `;
 
@@ -27,17 +37,20 @@ const Todo = ({ title, completed }: any) => {
     <StyleDiv>
       <form onSubmit={onSubmitHandler}>
         <input
-          className="textbox"
-          type="text"
-          value={titleText}
-          onChange={onTextboxChange}
-        />
-        <input
           className="checkbox"
           type="checkbox"
           checked={checked}
           onChange={onCheckHandler}
         />
+        <input
+          className="textbox"
+          type="text"
+          value={titleText}
+          onChange={onTextboxChange}
+        />
+        <button className="delete" type="button">
+          Delete
+        </button>
       </form>
     </StyleDiv>
   );
