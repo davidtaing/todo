@@ -7,6 +7,8 @@ const StyledHeader = styled.header`
   background-color: ${(props) => props.theme.overlay};
 
   ul {
+    margin: 0;
+    padding: 0;
     display: flex;
     margin: 0px auto 0px auto;
   }
@@ -20,9 +22,23 @@ const StyledHeader = styled.header`
     margin: 0;
   }
 
+  .search-container {
+    width: 100%;
+
+    form {
+      display: flex;
+      height: 2rem;
+    }
+
+    input {
+      width: 100%;
+    }
+  }
+
   a {
     color: black;
     text-decoration: none;
+    margin: auto;
   }
 `;
 
