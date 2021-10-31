@@ -38,7 +38,11 @@ export const todosSlice = createSlice({
         return { ...todoItem, completed: !todoItem.completed };
       });
     },
-    updateTodo: (state) => state,
+    updateTodo: (state, action: PayloadAction<TodoObject>) => {
+      return state.map((todoItem) => {
+        return todoItem.id === action.payload.id ? action.payload : todoItem;
+      });
+    },
     deleteTodo: (state, action: PayloadAction<number>) => {
       console.log(action.payload);
       return state.filter((item) => item.id !== action.payload);
