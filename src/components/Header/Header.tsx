@@ -11,34 +11,34 @@ const StyledHeader = styled.header`
     padding: 0;
     display: flex;
     margin: 0px auto 0px auto;
-  }
 
-  li {
-    list-style-type: none;
-    padding: 1rem;
-  }
+    li {
+      list-style-type: none;
+      padding: 1rem;
 
-  h1 {
-    margin: 0;
-  }
+      h1 {
+        margin: 0;
+      }
 
-  .search-container {
-    width: 100%;
-
-    form {
-      display: flex;
-      height: 2rem;
+      a {
+        color: black;
+        text-decoration: none;
+        margin: auto;
+      }
     }
 
-    input {
+    .search-container {
       width: 100%;
-    }
-  }
 
-  a {
-    color: black;
-    text-decoration: none;
-    margin: auto;
+      form {
+        display: flex;
+        height: 2rem;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
   }
 `;
 

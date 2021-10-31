@@ -18,11 +18,6 @@ const StyleDiv = styled.div`
     width: 100%;
     font-size: 1.5em;
   }
-
-  button {
-    background-color: ${(props) => props.theme.danger};
-    color: ${(props) => props.theme.text_light};
-  }
 `;
 
 const Todo = ({ title, completed }: any) => {
