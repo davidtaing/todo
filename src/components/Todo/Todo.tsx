@@ -32,10 +32,10 @@ const Todo = ({ id, title, completed }: any) => {
   const onSubmitHandler = (event: SyntheticEvent) => {
     event.preventDefault();
   };
-  const onTextboxChange = (event: SyntheticEvent) => {
+  const onTextChangeHandler = (event: SyntheticEvent) => {
     setTitleText((event.target as HTMLTextAreaElement).value);
   };
-  const onDeleteClick = (event: SyntheticEvent) => {
+  const onDeleteClickHandler = (event: SyntheticEvent) => {
     dispatch(deleteTodo(id));
   };
   const onCheckHandler = (event: SyntheticEvent) => {
@@ -55,9 +55,12 @@ const Todo = ({ id, title, completed }: any) => {
           className="textbox"
           type="text"
           value={titleText}
-          onChange={onTextboxChange}
+          onChange={onTextChangeHandler}
         />
-        <DeleteButton onClickHandler={onDeleteClick} completed={checked} />
+        <DeleteButton
+          onClickHandler={onDeleteClickHandler}
+          completed={checked}
+        />
       </form>
     </StyleDiv>
   );
