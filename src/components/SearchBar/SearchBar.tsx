@@ -15,7 +15,6 @@ const SearchBar = () => {
   return (
     <StyledForm onSubmit={(event) => event.preventDefault()}>
       <input type="text" placeholder="Search" name="search" />
-      <button type="submit">Search</button>
     </StyledForm>
   );
 };
