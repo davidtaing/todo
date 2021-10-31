@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   addTodo,
   toggleCompleted,
+  updateTodo,
   deleteTodo,
 } from "../../features/todos/todosSlice";
 import styled from "styled-components";
@@ -34,15 +35,22 @@ const Todo = ({ id, title, completed }: any) => {
   // Handlers
   const onSubmitHandler = (event: SyntheticEvent) => {
     event.preventDefault();
-  };
-  const onTextChangeHandler = (event: SyntheticEvent) => {
-    setTitleText((event.target as HTMLTextAreaElement).value);
+    dispatch(
+      updateTodo({
+        id: id,
+        title: titleText,
+        completed: completed,
+      })
+    );
   };
   const onDeleteClickHandler = (event: SyntheticEvent) => {
     dispatch(deleteTodo(id));
   };
   const onCheckHandler = (event: SyntheticEvent) => {
     dispatch(toggleCompleted(id));
+  };
+  const onTextChangeHandler = (event: SyntheticEvent) => {
+    setTitleText((event.target as HTMLTextAreaElement).value);
   };
 
   return (
