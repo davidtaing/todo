@@ -1,19 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { nanoid } from "@reduxjs/toolkit";
 import TodoObject from "./TodoObject";
 
 const initialState: Array<TodoObject> = [
   {
-    id: 1,
+    id: nanoid(),
     title: "finish this project",
     completed: false,
   },
   {
-    id: 2,
+    id: nanoid(),
     title: "go to sleep",
     completed: false,
   },
   {
-    id: 3,
+    id: nanoid(),
     title: "go to work",
     completed: true,
   },
@@ -25,13 +26,13 @@ export const todosSlice = createSlice({
   reducers: {
     addTodo: (state, action: PayloadAction<string>) => {
       const todo: TodoObject = {
-        id: state.length + 1,
+        id: nanoid(),
         title: action.payload,
         completed: false,
       };
       state.push(todo);
     },
-    toggleCompleted: (state, action: PayloadAction<number>) => {
+    toggleCompleted: (state, action: PayloadAction<string>) => {
       return state.map((todoItem) => {
         if (todoItem.id !== action.payload) return todoItem;
 
@@ -43,7 +44,7 @@ export const todosSlice = createSlice({
         return todoItem.id === action.payload.id ? action.payload : todoItem;
       });
     },
-    deleteTodo: (state, action: PayloadAction<number>) => {
+    deleteTodo: (state, action: PayloadAction<string>) => {
       console.log(action.payload);
       return state.filter((item) => item.id !== action.payload);
     },
