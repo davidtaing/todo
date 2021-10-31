@@ -18,6 +18,7 @@ const initialState: Array<TodoObject> = [
     completed: true,
   },
 ];
+
 export const todosSlice = createSlice({
   name: "todos",
   initialState,
@@ -32,7 +33,10 @@ export const todosSlice = createSlice({
     },
     completeTodo: (state) => state,
     updateTodo: (state) => state,
-    deleteTodo: (state) => state,
+    deleteTodo: (state, action: PayloadAction<number>) => {
+      console.log(action.payload);
+      return state.filter((item) => item.id !== action.payload);
+    },
   },
 });
 

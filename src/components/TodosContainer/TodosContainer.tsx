@@ -10,8 +10,8 @@ const TodosContainer = () => {
 
   return (
     <div>
-      {todos.map(({ id, title, completed }) => {
-        return <Todo key={id} title={title} completed={completed} />;
+      {todos.map((props) => {
+        return <Todo key={props.id} {...props} />;
       })}
     </div>
   );
