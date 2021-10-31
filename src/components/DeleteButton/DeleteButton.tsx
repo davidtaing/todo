@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledButton = styled.button.attrs((props) => ({ type: "submit" }))`
+const StyledButton = styled.button`
   background-color: ${(props) => props.theme.danger};
   color: ${(props) => props.theme.text_light};
 `;
