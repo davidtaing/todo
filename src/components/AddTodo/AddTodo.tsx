@@ -31,7 +31,10 @@ const AddTodo = () => {
 
   const onSubmitHandler = (event: SyntheticEvent) => {
     event.preventDefault();
-    if (title !== "") dispatch(addTodo(title));
+    if (title !== "") {
+      dispatch(addTodo(title));
+      setTitle("");
+    }
   };
 
   return (
