@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../../features/todos/todosSlice";
 import AddButton from "../AddButton/AddButton";
 
 const StyledDiv = styled.div`
@@ -20,14 +22,28 @@ const StyledDiv = styled.div`
 `;
 
 const AddTodo = () => {
+  const [title, setTitle] = useState("");
+  const dispatch = useDispatch();
+
+  const onTextInput = (event: SyntheticEvent) => {
+    setTitle((event.target as HTMLTextAreaElement).value);
+  };
+
   const onSubmitHandler = (event: SyntheticEvent) => {
     event.preventDefault();
+    dispatch(addTodo(title));
   };
 
   return (
     <StyledDiv className="addTodo">
       <form onSubmit={onSubmitHandler}>
-        <input type="text" placeholder="I want to..." />
+        <input
+          className="todo-title"
+          type="text"
+          placeholder="I want to..."
+          value={title}
+          onChange={onTextInput}
+        />
         <AddButton />
       </form>
     </StyledDiv>

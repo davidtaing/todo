@@ -22,7 +22,14 @@ export const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    addTodo: (state) => state,
+    addTodo: (state, action: PayloadAction<string>) => {
+      const todo: TodoObject = {
+        id: state.length,
+        title: action.payload,
+        completed: false,
+      };
+      state.push(todo);
+    },
     completeTodo: (state) => state,
     updateTodo: (state) => state,
     deleteTodo: (state) => state,
