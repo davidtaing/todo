@@ -42,7 +42,7 @@ const Header = () => {
           <li>
             <h1>
               <Link href="/">
-                <a>TODO</a>
+                <a>TODOLIST</a>
               </Link>
             </h1>
           </li>
