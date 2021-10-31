@@ -18,14 +18,25 @@ const initialState: Array<TodoObject> = [
     completed: true,
   },
 ];
+
 export const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    addTodo: (state) => state,
+    addTodo: (state, action: PayloadAction<string>) => {
+      const todo: TodoObject = {
+        id: state.length + 1,
+        title: action.payload,
+        completed: false,
+      };
+      state.push(todo);
+    },
     completeTodo: (state) => state,
     updateTodo: (state) => state,
-    deleteTodo: (state) => state,
+    deleteTodo: (state, action: PayloadAction<number>) => {
+      console.log(action.payload);
+      return state.filter((item) => item.id !== action.payload);
+    },
   },
 });
 

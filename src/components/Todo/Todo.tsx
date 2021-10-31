@@ -1,4 +1,6 @@
 import React, { SyntheticEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo, deleteTodo } from "../../features/todos/todosSlice";
 import styled from "styled-components";
 import DeleteButton from "../DeleteButton/DeleteButton";
 
@@ -20,14 +22,21 @@ const StyleDiv = styled.div`
   }
 `;
 
-const Todo = ({ title, completed }: any) => {
+const Todo = ({ id, title, completed }: any) => {
+  // State & Dispatch
   const [titleText, setTitleText] = useState(title);
   const [checked, setChecked] = useState(completed);
+  const dispatch = useDispatch();
+
+  // Handlers
   const onSubmitHandler = (event: SyntheticEvent) => {
     event.preventDefault();
   };
   const onTextboxChange = (event: SyntheticEvent) => {
     setTitleText((event.target as HTMLTextAreaElement).value);
+  };
+  const onDeleteClick = (event: SyntheticEvent) => {
+    dispatch(deleteTodo(id));
   };
   const onCheckHandler = (event: SyntheticEvent) => {
     setChecked(!checked);
@@ -48,7 +57,7 @@ const Todo = ({ title, completed }: any) => {
           value={titleText}
           onChange={onTextboxChange}
         />
-        <DeleteButton completed={checked} />
+        <DeleteButton onClickHandler={onDeleteClick} completed={checked} />
       </form>
     </StyleDiv>
   );
