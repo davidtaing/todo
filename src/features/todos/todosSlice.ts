@@ -31,7 +31,13 @@ export const todosSlice = createSlice({
       };
       state.push(todo);
     },
-    completeTodo: (state) => state,
+    toggleCompleted: (state, action: PayloadAction<number>) => {
+      return state.map((todoItem) => {
+        if (todoItem.id !== action.payload) return todoItem;
+
+        return { ...todoItem, completed: !todoItem.completed };
+      });
+    },
     updateTodo: (state) => state,
     deleteTodo: (state, action: PayloadAction<number>) => {
       console.log(action.payload);
@@ -40,7 +46,7 @@ export const todosSlice = createSlice({
   },
 });
 
-export const { addTodo, completeTodo, updateTodo, deleteTodo } =
+export const { addTodo, toggleCompleted, updateTodo, deleteTodo } =
   todosSlice.actions;
 
 export default todosSlice.reducer;

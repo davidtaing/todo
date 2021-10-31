@@ -1,6 +1,10 @@
 import React, { SyntheticEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo, deleteTodo } from "../../features/todos/todosSlice";
+import {
+  addTodo,
+  toggleCompleted,
+  deleteTodo,
+} from "../../features/todos/todosSlice";
 import styled from "styled-components";
 import DeleteButton from "../DeleteButton/DeleteButton";
 
@@ -25,7 +29,6 @@ const StyleDiv = styled.div`
 const Todo = ({ id, title, completed }: any) => {
   // State & Dispatch
   const [titleText, setTitleText] = useState(title);
-  const [checked, setChecked] = useState(completed);
   const dispatch = useDispatch();
 
   // Handlers
@@ -39,7 +42,7 @@ const Todo = ({ id, title, completed }: any) => {
     dispatch(deleteTodo(id));
   };
   const onCheckHandler = (event: SyntheticEvent) => {
-    setChecked(!checked);
+    dispatch(toggleCompleted(id));
   };
 
   return (
@@ -48,7 +51,7 @@ const Todo = ({ id, title, completed }: any) => {
         <input
           className="checkbox"
           type="checkbox"
-          checked={checked}
+          checked={completed}
           onChange={onCheckHandler}
         />
         <input
@@ -59,7 +62,7 @@ const Todo = ({ id, title, completed }: any) => {
         />
         <DeleteButton
           onClickHandler={onDeleteClickHandler}
-          completed={checked}
+          completed={completed}
         />
       </form>
     </StyleDiv>
