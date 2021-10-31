@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
+import SearchBar from "../SearchBar/SearchBar";
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -29,15 +30,6 @@ const StyledHeader = styled.header`
 
     .search-container {
       width: 100%;
-
-      form {
-        display: flex;
-        height: 2rem;
-      }
-
-      input {
-        width: 100%;
-      }
     }
   }
 `;
@@ -55,10 +47,7 @@ const Header = () => {
             </h1>
           </li>
           <li className="search-container">
-            <form>
-              <input type="text" placeholder="Search" name="search" />
-              <button type="submit">Search</button>
-            </form>
+            <SearchBar />
           </li>
         </ul>
       </nav>
