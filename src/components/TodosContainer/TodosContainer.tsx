@@ -1,12 +1,15 @@
-import Todo from "../Todo/Todo";
-import { RootState } from "../../redux/store";
+import { useContext } from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { SearchContext } from "../../context/SearchContext";
+import Todo from "../Todo/Todo";
 import TodoObject from "../../features/todos/TodoObject";
 
-const TodosContainer = ({ searchFilter = "" }: any) => {
+const TodosContainer = () => {
   const todos: Array<TodoObject> = useSelector(
     (state: RootState) => state.todos
   );
+  const { searchFilter } = useContext(SearchContext);
 
   return (
     <div>

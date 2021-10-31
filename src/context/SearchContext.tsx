@@ -1,11 +1,11 @@
 import { createContext, useState } from "react";
 
-const SearchContext = createContext({
+export const SearchContext = createContext({
   searchFilter: "",
   setSearchFilter: (searchFilter: string) => {},
 });
 
-const SearchProvider = ({ children }: any) => {
+export const SearchProvider = ({ children }: any) => {
   const [searchFilter, setSearchFilter] = useState("");
 
   return (
@@ -14,5 +14,3 @@ const SearchProvider = ({ children }: any) => {
     </SearchContext.Provider>
   );
 };
-
-export default SearchProvider;
