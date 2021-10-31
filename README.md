@@ -3,10 +3,13 @@
 Bootstrapped using the create-next-app CLI.
 
 ## Featuring:
-
 - TypeScript
 - Next.js
-- React & Redux
+- React
+- Redux Toolkit
+- Styled Components
+
+Version 0.2.X and Below:
 - Travis CI & Appveyor CI
-- Jest (Not yet implemented)
-- Firebase (Not yet implemented in v0.3.0 but in v0.2.X and earlier)
+- Jest
+- Firebase Auth
