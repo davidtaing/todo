@@ -14,7 +14,9 @@ const TodosContainer = () => {
   return (
     <div>
       {todos
-        .filter((props) => props.title.includes(searchFilter))
+        .filter((props) =>
+          props.title.toLowerCase().includes(searchFilter.toLowerCase())
+        )
         .map((props) => {
           return <Todo key={props.id} {...props} />;
         })}
