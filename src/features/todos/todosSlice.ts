@@ -24,7 +24,7 @@ export const todosSlice = createSlice({
   reducers: {
     addTodo: (state, action: PayloadAction<string>) => {
       const todo: TodoObject = {
-        id: state.length,
+        id: state.length + 1,
         title: action.payload,
         completed: false,
       };
