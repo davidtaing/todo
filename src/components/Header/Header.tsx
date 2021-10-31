@@ -60,16 +60,6 @@ const Header = () => {
               <button type="submit">Search</button>
             </form>
           </li>
-          <li>
-            <Link href="/login">
-              <a>login</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/register">
-              <a>register</a>
-            </Link>
-          </li>
         </ul>
       </nav>
     </StyledHeader>
