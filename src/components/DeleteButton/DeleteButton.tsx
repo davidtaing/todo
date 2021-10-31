@@ -6,7 +6,7 @@ const StyledButton = styled.button`
 `;
 
 const DeleteButton = ({ completed, onClickHandler }: any) => (
-  <StyledButton hidden={!completed} onClick={onClickHandler}>
+  <StyledButton type="button" hidden={!completed} onClick={onClickHandler}>
     Delete
   </StyledButton>
 );
