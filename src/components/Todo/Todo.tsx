@@ -1,6 +1,11 @@
 import React, { SyntheticEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo, deleteTodo } from "../../features/todos/todosSlice";
+import {
+  addTodo,
+  toggleCompleted,
+  updateTodo,
+  deleteTodo,
+} from "../../features/todos/todosSlice";
 import styled from "styled-components";
 import DeleteButton from "../DeleteButton/DeleteButton";
 
@@ -25,21 +30,27 @@ const StyleDiv = styled.div`
 const Todo = ({ id, title, completed }: any) => {
   // State & Dispatch
   const [titleText, setTitleText] = useState(title);
-  const [checked, setChecked] = useState(completed);
   const dispatch = useDispatch();
 
   // Handlers
   const onSubmitHandler = (event: SyntheticEvent) => {
     event.preventDefault();
+    dispatch(
+      updateTodo({
+        id: id,
+        title: titleText,
+        completed: completed,
+      })
+    );
   };
-  const onTextboxChange = (event: SyntheticEvent) => {
-    setTitleText((event.target as HTMLTextAreaElement).value);
-  };
-  const onDeleteClick = (event: SyntheticEvent) => {
+  const onDeleteClickHandler = (event: SyntheticEvent) => {
     dispatch(deleteTodo(id));
   };
   const onCheckHandler = (event: SyntheticEvent) => {
-    setChecked(!checked);
+    dispatch(toggleCompleted(id));
+  };
+  const onTextChangeHandler = (event: SyntheticEvent) => {
+    setTitleText((event.target as HTMLTextAreaElement).value);
   };
 
   return (
@@ -48,16 +59,19 @@ const Todo = ({ id, title, completed }: any) => {
         <input
           className="checkbox"
           type="checkbox"
-          checked={checked}
+          checked={completed}
           onChange={onCheckHandler}
         />
         <input
           className="textbox"
           type="text"
           value={titleText}
-          onChange={onTextboxChange}
+          onChange={onTextChangeHandler}
         />
-        <DeleteButton onClickHandler={onDeleteClick} completed={checked} />
+        <DeleteButton
+          onClickHandler={onDeleteClickHandler}
+          completed={completed}
+        />
       </form>
     </StyleDiv>
   );

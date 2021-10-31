@@ -25,13 +25,13 @@ const AddTodo = () => {
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
 
-  const onTextInput = (event: SyntheticEvent) => {
+  const onTextChangeHandler = (event: SyntheticEvent) => {
     setTitle((event.target as HTMLTextAreaElement).value);
   };
 
   const onSubmitHandler = (event: SyntheticEvent) => {
     event.preventDefault();
-    dispatch(addTodo(title));
+    if (title !== "") dispatch(addTodo(title));
   };
 
   return (
@@ -42,7 +42,7 @@ const AddTodo = () => {
           type="text"
           placeholder="I want to..."
           value={title}
-          onChange={onTextInput}
+          onChange={onTextChangeHandler}
         />
         <AddButton />
       </form>
